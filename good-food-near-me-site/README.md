@@ -7,8 +7,9 @@ weathercrab's food-loving sibling: a little crab shows you the top restaurants i
 - **Pick a cuisine** next to the city: pizza, tacos, sushi, bbq, delis and 20 more.
 - **Swipe the menu**: each dish has its price, a tag (the signature, spicy, vegetarian…) and a short description. The crab holds up each dish and reacts to it: it hops for the signature, sweats for spicy food and gets nervous holding crab claws.
 - **Every storefront is different**: brick in New York, pastel with a palm tree in Miami, iron balconies in New Orleans, stone in Paris, adobe in Santa Fe. Lanterns, string lights, a chimney for bbq or a life ring for seafood depend on the cuisine.
-- **View more top spots** opens a grid of mini storefronts. The dice button picks a random spot.
-- On phones it can be added to the home screen. It opens full screen like an app and works offline.
+- **Use my location** in the city picker finds where you are and opens the nearest saved city, labeled "near you" (or "closest to you, 40 mi" when you're far from all of them). It uses the browser's location if you allow it, otherwise a rough guess from your network via [BigDataCloud](https://www.bigdatacloud.com)'s free lookup. If you used it last time, the site opens near you again.
+- **View more top spots** opens a grid of mini storefronts.
+- **The crab button** at the top left adds the app to your home screen: Android and Chrome show their install prompt, iPhone gets three quick steps (Share → Add to Home Screen → Add), and computers get the steps for Chrome, Edge and Safari. It opens full screen like an app and works offline.
 
 It is one static `index.html` with no build step and no dependencies.
 
@@ -21,6 +22,11 @@ The saved picks come from Claude's own knowledge, not from a live data source. C
 - Prices come from Claude's latest menu info and are before taxes, tips and fees. Menus change and places close, so check before you go.
 
 The page also explains this behind the **?** button.
+
+## What only works where
+
+- **Use my location** works on this standalone site. Inside a Claude artifact the browser blocks location, so the button is hidden there.
+- **Live scouting** only works inside Claude (see below).
 
 ## Live scouting only works inside Claude
 

@@ -86,6 +86,25 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
 }
 .round:hover { background: var(--chip-hover); color: var(--ink); }
 .round svg { width: 15px; height: 15px; }
+.install { position: relative; }
+.round .app-glyph { width: 26px; height: 21px; }
+.install .badge {
+  position: absolute; right: -3px; bottom: -3px;
+  width: 14px; height: 14px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--ink); color: var(--bg);
+  font-size: 12px; font-weight: 700; line-height: 1;
+}
+.install-app { display: flex; align-items: center; gap: 14px; padding: 4px 2px; flex: none; }
+.install-app .icon { width: 60px; height: 60px; flex: none; border-radius: 14px; background: #1b1918; box-shadow: inset 0 0 0 1px var(--line); display: grid; place-items: center; overflow: hidden; }
+.install-app .icon svg { width: 86%; height: 86%; }
+.install-app b { display: block; font-size: 16px; }
+.install-app small { font-size: 13px; color: var(--muted); }
+.steps { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; counter-reset: step; }
+.steps li { counter-increment: step; display: flex; align-items: center; gap: 12px; font-size: 15px; line-height: 1.35; }
+.steps li::before { content: counter(step); flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--chip); color: var(--ink); font-weight: 700; font-size: 13px; }
+.steps .ic { display: inline-grid; place-items: center; vertical-align: -4px; width: 22px; height: 22px; border-radius: 6px; background: var(--chip); margin-inline: 2px; }
+.steps .ic svg { width: 14px; height: 14px; }
 .round[disabled] { opacity: .35; pointer-events: none; }
 .city {
   justify-self: center;
@@ -325,6 +344,10 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
 .search svg { width: 15px; height: 15px; flex: none; }
 .search input { border: 0; background: transparent; font: inherit; font-size: 16px; color: var(--ink); width: 100%; min-width: 0; outline: none; }
 .search input::placeholder { color: var(--faint); }
+.loc-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-weight: 700; font-size: 14px; padding: 4px 6px; align-self: flex-start; flex: none; border-radius: 10px; }
+.loc-btn:hover { color: var(--ink); }
+.loc-btn[disabled] { opacity: .5; cursor: default; }
+.loc-btn svg { width: 12px; height: 12px; }
 
 .cz-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; overflow-y: auto; min-height: 0; }
 .cz { min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 8px 4px 9px; border-radius: 14px; }
@@ -396,8 +419,9 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
       <button class="round" id="howBtn" aria-haspopup="dialog" aria-label="how the crab ranks" title="how the crab ranks">
         <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M6.2 6.3a1.9 1.9 0 1 1 2.6 1.8c-.6.3-.8.7-.8 1.3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="8" cy="11.6" r="1" fill="currentColor"/></svg>
       </button>
-      <button class="round" id="diceBtn" aria-label="surprise me with a random spot" title="surprise me">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="1.5" width="13" height="13" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="5.2" cy="5.2" r="1.3" fill="currentColor"/><circle cx="8" cy="8" r="1.3" fill="currentColor"/><circle cx="10.8" cy="10.8" r="1.3" fill="currentColor"/></svg>
+      <button class="round install" id="installBtn" aria-haspopup="dialog" aria-label="add good food near me to your home screen" title="add to home screen">
+        <svg class="app-glyph" viewBox="4 -6 260 206" aria-hidden="true"><g><g><g><g><g><rect x="60" y="156" width="12" height="32" rx="2" fill="#d97757" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect><rect x="56.5" y="183" width="19" height="11" rx="5" fill="#3b3330" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect></g><g><rect x="84" y="156" width="12" height="32" rx="2" fill="#d97757" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect><rect x="80.5" y="183" width="19" height="11" rx="5" fill="#3b3330" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect></g><g><rect x="144" y="156" width="12" height="32" rx="2" fill="#d97757" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect><rect x="140.5" y="183" width="19" height="11" rx="5" fill="#3b3330" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect></g><g><rect x="168" y="156" width="12" height="32" rx="2" fill="#d97757" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect><rect x="164.5" y="183" width="19" height="11" rx="5" fill="#3b3330" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect></g><rect x="18" y="118" width="36" height="24" rx="4" fill="#d97757" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect><path d="M186 118 L198 118 L198 70 L222 70 L222 142 L186 142 Z" fill="#d97757" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></path><rect x="48" y="70" width="144" height="96" rx="5" fill="#d97757" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect><g><rect x="72" y="94" width="12" height="24" rx="2.5" fill="#2b2522"></rect><rect x="156" y="94" width="12" height="24" rx="2.5" fill="#2b2522"></rect></g><path d="M110 115 Q120 123 130 115" fill="none" stroke="#2b2522" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path><path d="M68 128 L172 128 L178 176 L62 176 Z" fill="#4f7a52" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></path><path d="M74 128 L58 96 M166 128 L182 96" fill="none" stroke="#2b2522" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path><rect x="104" y="146" width="32" height="18" rx="3" fill="#3f6242" stroke="#2b2522" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"></rect><path d="M62 136 L50 140 M178 136 L190 140" fill="none" stroke="#2b2522" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path><rect x="74" y="52" width="92" height="22" rx="6" fill="#f8f4ec" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect><path d="M76 55 Q62 32 84 25 Q90 6 112 11 Q124 -1 140 11 Q164 6 160 28 Q178 36 164 55 Z" fill="#f8f4ec" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></path><path d="M98 52 L96 30 M120 52 L120 24 M142 52 L144 30" fill="none" stroke="#d8cfc2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><g><ellipse cx="210" cy="66" rx="46" ry="8" fill="#f4efe6" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></ellipse><path d="M176 65 Q210 70 244 65" fill="none" stroke="#d8cfc2" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path><g transform="translate(210 64) scale(.95)"><path d="M-29 -15 Q-27 0 0 0 Q27 0 29 -15 Z" fill="#f4efe6" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></path><path d="M-24 -15 Q-21 -31 0 -33 Q21 -31 24 -15 Z" fill="#f3d27a" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></path><path d="M-16 -17 Q-10 -28 -2 -20 Q4 -14 10 -24 Q14 -29 18 -19 M-8 -27 Q0 -32 8 -27" fill="none" stroke="#c99a3e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path><path d="M-7 -29 Q0 -37 7 -29 Q3 -26 0 -27 Q-3 -26 -7 -29 Z" fill="#c84b3c" stroke="#2b2522" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path><path d="M5 -33 Q11 -39 15 -34 Q11 -30 5 -33 Z" fill="#6f9a55" stroke="#2b2522" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M-29 -15 Q0 -11 29 -15" fill="none" stroke="#2b2522" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></g></g></g></g></g></g></svg>
+        <span class="badge" aria-hidden="true">+</span>
       </button>
     </div>
     <button class="city" id="cityBtn" aria-haspopup="dialog">
@@ -477,6 +501,17 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
   </div>
 </div>
 
+<div class="sheet-wrap" id="installSheet" hidden>
+  <div class="backdrop" data-close></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="installTitle">
+    <div class="grab"></div>
+    <div class="sheet-head"><h2 id="installTitle">put good food near me on your phone</h2><button class="round" data-close aria-label="close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="install-app"><div class="icon"><svg viewBox="4 -6 260 206" aria-hidden="true"><g><g><g><g><g><rect x="60" y="156" width="12" height="32" rx="2" fill="#d97757" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect><rect x="56.5" y="183" width="19" height="11" rx="5" fill="#3b3330" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect></g><g><rect x="84" y="156" width="12" height="32" rx="2" fill="#d97757" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect><rect x="80.5" y="183" width="19" height="11" rx="5" fill="#3b3330" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect></g><g><rect x="144" y="156" width="12" height="32" rx="2" fill="#d97757" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect><rect x="140.5" y="183" width="19" height="11" rx="5" fill="#3b3330" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect></g><g><rect x="168" y="156" width="12" height="32" rx="2" fill="#d97757" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect><rect x="164.5" y="183" width="19" height="11" rx="5" fill="#3b3330" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect></g><rect x="18" y="118" width="36" height="24" rx="4" fill="#d97757" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect><path d="M186 118 L198 118 L198 70 L222 70 L222 142 L186 142 Z" fill="#d97757" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></path><rect x="48" y="70" width="144" height="96" rx="5" fill="#d97757" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect><g><rect x="72" y="94" width="12" height="24" rx="2.5" fill="#2b2522"></rect><rect x="156" y="94" width="12" height="24" rx="2.5" fill="#2b2522"></rect></g><path d="M110 115 Q120 123 130 115" fill="none" stroke="#2b2522" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path><path d="M68 128 L172 128 L178 176 L62 176 Z" fill="#4f7a52" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></path><path d="M74 128 L58 96 M166 128 L182 96" fill="none" stroke="#2b2522" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path><rect x="104" y="146" width="32" height="18" rx="3" fill="#3f6242" stroke="#2b2522" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"></rect><path d="M62 136 L50 140 M178 136 L190 140" fill="none" stroke="#2b2522" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path><rect x="74" y="52" width="92" height="22" rx="6" fill="#f8f4ec" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></rect><path d="M76 55 Q62 32 84 25 Q90 6 112 11 Q124 -1 140 11 Q164 6 160 28 Q178 36 164 55 Z" fill="#f8f4ec" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></path><path d="M98 52 L96 30 M120 52 L120 24 M142 52 L144 30" fill="none" stroke="#d8cfc2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><g><ellipse cx="210" cy="66" rx="46" ry="8" fill="#f4efe6" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></ellipse><path d="M176 65 Q210 70 244 65" fill="none" stroke="#d8cfc2" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path><g transform="translate(210 64) scale(.95)"><path d="M-29 -15 Q-27 0 0 0 Q27 0 29 -15 Z" fill="#f4efe6" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></path><path d="M-24 -15 Q-21 -31 0 -33 Q21 -31 24 -15 Z" fill="#f3d27a" stroke="#2b2522" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"></path><path d="M-16 -17 Q-10 -28 -2 -20 Q4 -14 10 -24 Q14 -29 18 -19 M-8 -27 Q0 -32 8 -27" fill="none" stroke="#c99a3e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path><path d="M-7 -29 Q0 -37 7 -29 Q3 -26 0 -27 Q-3 -26 -7 -29 Z" fill="#c84b3c" stroke="#2b2522" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path><path d="M5 -33 Q11 -39 15 -34 Q11 -30 5 -33 Z" fill="#6f9a55" stroke="#2b2522" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M-29 -15 Q0 -11 29 -15" fill="none" stroke="#2b2522" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></g></g></g></g></g></g></svg></div><div><b>good food near me</b><small>opens full screen from your home screen, like an app</small></div></div>
+    <ol class="steps" id="installSteps"></ol>
+    <p class="sheet-note" id="installNote" hidden></p>
+  </div>
+</div>
+
 <div class="sheet-wrap" id="cuisineSheet" hidden>
   <div class="backdrop" data-close></div>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="czTitle">
@@ -496,6 +531,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input id="citySearch" type="search" placeholder="search any city" autocomplete="off" spellcheck="false">
     </label>
+    <button class="loc-btn" id="locBtn" hidden><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 3 3 10.5l7.6 2.9L13.5 21z"/></svg>use my location</button>
     <ul class="list" id="cityList"></ul>
     <p class="sheet-note" id="cityMsg"></p>
   </div>
@@ -527,7 +563,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
      menu item: [dish, price (number, "mp" market price, "set" part of a set menu), what it is, tag, icon override] */
   const PRICE_NOTE = "prices from claude's latest menu info, before taxes & fees · ★ estimated from online reviews";
   const SAVED = {
-    "manhattan": { g: "nyc", st: "new york city", ab: "ny", look: "brick", spots: [
+    "manhattan": { g: "nyc", st: "new york city", ab: "ny", look: "brick", ll: [40.78, -73.97], spots: [
       ["katz's delicatessen", "lower east side", "deli", 1888, 2, 4.5, "hand-carved pastrami, a paper ticket and a line that moves", [
         ["pastrami on rye", 30, "hand-sliced, piled high, brown mustard", "sig"],
         ["matzo ball soup", 11, "one big fluffy matzo ball in chicken broth", ""],
@@ -646,7 +682,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["curry goat patties", 26, "flaky and rich", "", "beignet"]]]
     ] },
 
-    "brooklyn": { g: "nyc", st: "new york city", ab: "ny", look: "brick", spots: [
+    "brooklyn": { g: "nyc", st: "new york city", ab: "ny", look: "brick", ll: [40.65, -73.95], spots: [
       ["peter luger steak house", "williamsburg", "steak", 1887, 4, 4.4, "dry-aged porterhouse, sliced and sizzling in butter", [
         ["porterhouse for two", 140, "dry-aged in house, sliced, sizzling on the plate", "sig"],
         ["thick-cut bacon", 10, "one slab per order. get one each", ""],
@@ -730,7 +766,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["crown of duck for two", 110, "dry-aged, crisp skin", "sig", "chicken"],
         ["agnolotti", 32, "rich, buttery", "", "pasta"]]]
     ] },
-    "queens": { g: "nyc", st: "new york city", ab: "ny", look: "brick", spots: [
+    "queens": { g: "nyc", st: "new york city", ab: "ny", look: "brick", ll: [40.73, -73.79], spots: [
       ["sripraphai", "woodside", "thai", 1990, 2, 4.4, "the thai restaurant that taught new york to eat thai", [
         ["crispy watercress salad", 15, "fried watercress, shrimp, squid", "sig", "salad"],
         ["green curry", 16, "fiery and fragrant", "spicy", "curry"]]],
@@ -775,7 +811,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["sicilian square", 4, "thin, sauce-forward", "sig", "pizza"]]]
     ] },
 
-    "the bronx": { g: "nyc", st: "new york city", ab: "ny", look: "brick", spots: [
+    "the bronx": { g: "nyc", st: "new york city", ab: "ny", look: "brick", ll: [40.84, -73.86], spots: [
       ["mike's deli", "arthur avenue market", "deli", 1951, 1, 4.6, "giant heroes inside the arthur avenue market", [
         ["eggplant parm hero", 14, "fried eggplant, mozzarella, sauce", "sig", "sandwich"],
         ["italian combo", 16, "cured meats and provolone", "", "sandwich"]]],
@@ -798,7 +834,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["matzo ball soup", 10, "classic", "", "soup"]]]
     ] },
 
-    "staten island": { g: "nyc", st: "new york city", ab: "ny", look: "clap", spots: [
+    "staten island": { g: "nyc", st: "new york city", ab: "ny", look: "clap", ll: [40.58, -74.15], spots: [
       ["denino's pizzeria & tavern", "port richmond", "pizza", 1937, 1, 4.6, "a tavern pie institution since 1937", [
         ["m.o.r. pie", 26, "meatballs, onions, ricotta", "sig", "pizza"],
         ["clam pie", 26, "garlic and clams", "", "pizza"]]],
@@ -814,7 +850,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["creme ice", 4, "creamy flavors", "sweet", "icecream"]]]
     ] },
 
-    "los angeles": { g: "big", st: "california", ab: "ca", look: "stucco", spots: [
+    "los angeles": { g: "big", st: "california", ab: "ca", look: "stucco", ll: [34.05, -118.24], spots: [
       ["langer's delicatessen", "westlake", "deli", 1947, 2, 4.6, "what plenty of people call the best pastrami in america", [
         ["#19 pastrami sandwich", 25, "pastrami, swiss, coleslaw, russian dressing on rye", "sig"],
         ["hot pastrami on rye", 23, "hand-cut, on twice-baked rye with a crackly crust", ""],
@@ -928,7 +964,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["onion rings", 6, "battered and golden", ""]]]
     ] },
 
-    "chicago": { g: "big", st: "illinois", ab: "il", look: "brick", spots: [
+    "chicago": { g: "big", st: "illinois", ab: "il", look: "brick", ll: [41.88, -87.63], spots: [
       ["lou malnati's", "river north", "pizza", 1971, 2, 4.5, "buttercrust deep dish, chicago's hometown pie", [
         ["malnati chicago classic", 30, "deep dish, a lean sausage layer, vine-ripened tomatoes", "sig"],
         ["the lou", 30, "spinach, mushrooms, tomatoes, three cheeses", "veg", "pizza"],
@@ -1032,7 +1068,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["nihari", 12, "slow-cooked beef stew", "spicy", "curry"]]]
     ] },
 
-    "new orleans": { g: "big", st: "louisiana", ab: "la", look: "creole", spots: [
+    "new orleans": { g: "big", st: "louisiana", ab: "la", look: "creole", ll: [29.95, -90.07], spots: [
       ["commander's palace", "garden district", "southern", 1893, 4, 4.7, "the blue-and-white creole grand dame", [
         ["turtle soup", 13, "finished tableside with sherry", "sig"],
         ["pecan-crusted gulf fish", 42, "crushed pecans, crabmeat, brown butter", ""],
@@ -1136,7 +1172,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["whole pie", 24, "18 inches", "share", "pizza"]]]
     ] },
 
-    "miami": { g: "fl", st: "florida", ab: "fl", look: "deco", spots: [
+    "miami": { g: "fl", st: "florida", ab: "fl", look: "deco", ll: [25.76, -80.19], spots: [
       ["joe's stone crab", "south beach", "seafood", 1913, 4, 4.6, "stone crab claws and key lime pie since 1913", [
         ["stone crab claws", "mp", "chilled, cracked, with mustard sauce", "sig"],
         ["key lime pie", 11, "graham crust, tart and sweet", "sweet"],
@@ -1240,7 +1276,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["fried chicken & waffle", 17, "crisp and sweet", "", "waffle"],
         ["salmon croquettes", 14, "a southern breakfast classic", "", "fish"]]]
     ] },
-    "delray beach": { g: "fl", st: "florida", ab: "fl", look: "deco", spots: [
+    "delray beach": { g: "fl", st: "florida", ab: "fl", look: "deco", ll: [26.46, -80.07], spots: [
       ["elisabetta's ristorante", "atlantic avenue", "italian", 2016, 3, 4.6, "a big, buzzy italian dining room on the ave", [
         ["meatball", 16, "one giant meatball, ricotta, tomato", "sig", "pasta"],
         ["margherita pizza", 19, "wood-fired", "veg", "pizza"],
@@ -1328,7 +1364,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["patty melt", 13, "on rye with onions", "", "sandwich"]]]
     ] },
 
-    "boca raton": { g: "fl", st: "florida", ab: "fl", look: "deco", spots: [
+    "boca raton": { g: "fl", st: "florida", ab: "fl", look: "deco", ll: [26.37, -80.13], spots: [
       ["casa d'angelo", "federal highway", "italian", 2006, 4, 4.6, "angelo elia's polished tuscan dining room", [
         ["veal chop", 62, "grilled, with sage", "sig", "steak"],
         ["handmade pasta", 32, "seasonal", "", "pasta"],
@@ -1405,7 +1441,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["branzino", 48, "whole", "", "fish"]]]
     ] },
 
-    "fort lauderdale": { g: "fl", st: "florida", ab: "fl", look: "deco", spots: [
+    "fort lauderdale": { g: "fl", st: "florida", ab: "fl", look: "deco", ll: [26.12, -80.14], spots: [
       ["the floridian", "las olas", "american", 1937, 1, 4.4, "a 24-hour diner on las olas since 1937", [
         ["breakfast", 14, "all day and night", "sig", "egg"],
         ["french toast", 13, "thick", "sweet", "pancake"]]],
@@ -1450,7 +1486,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["oysters", 3, "raw bar", "", "oyster"]]]
     ] },
 
-    "west palm beach": { g: "fl", st: "florida", ab: "fl", look: "deco", spots: [
+    "west palm beach": { g: "fl", st: "florida", ab: "fl", look: "deco", ll: [26.72, -80.05], spots: [
       ["buccan", "palm beach", "american", 2011, 3, 4.6, "clay conley's small plates on the island", [
         ["hot dog panini", 18, "a cult favorite", "sig", "hotdog"],
         ["wood-fired pizza", 22, "creative", "", "pizza"]]],
@@ -1498,7 +1534,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["candy", 6, "by the bag", "sweet", "cookie"]]]
     ] },
 
-    "stamford": { g: "tri", st: "connecticut", ab: "ct", look: "brick", spots: [
+    "stamford": { g: "tri", st: "connecticut", ab: "ct", look: "brick", ll: [41.05, -73.54], spots: [
       ["colony grill", "the original, stamford", "pizza", 1935, 1, 4.6, "thin bar pies with hot oil since 1935", [
         ["hot oil pie", 17, "thin crust, cheese, hot oil with peppers", "sig", "pizza"],
         ["stinger pie", 18, "hot oil plus sausage", "spicy", "pizza"]]],
@@ -1531,7 +1567,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["meatballs", 16, "in sauce", "", "pasta"]]]
     ] },
 
-    "mission viejo": { g: "socal", st: "rancho mission viejo, san juan capistrano & around, california", ab: "ca", look: "adobe", spots: [
+    "mission viejo": { g: "socal", st: "rancho mission viejo, san juan capistrano & around, california", ab: "ca", look: "adobe", ll: [33.6, -117.67], spots: [
       ["heritage barbecue", "san juan capistrano", "bbq", 2019, 2, 4.8, "michelin-recognized central texas barbecue", [
         ["brisket", 34, "per pound, oak-smoked", "sig", "ribs"],
         ["beef rib", 42, "huge and peppery", "share", "ribs"],
@@ -1558,7 +1594,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["poke", 18, "fresh ahi", "sig", "rice"],
         ["loco moco", 17, "rice, patty, egg, gravy", "", "egg"]]]
     ] },
-    "washington": { g: "cap", st: "district of columbia", ab: "dc", look: "brick", spots: [
+    "washington": { g: "cap", st: "district of columbia", ab: "dc", look: "brick", ll: [38.91, -77.04], spots: [
       ["ben's chili bowl", "u street", "american", 1958, 1, 4.4, "the half-smoke stand on u street since 1958", [
         ["chili half-smoke", 9, "smoky sausage, chili, mustard, onions", "sig", "hotdog"],
         ["chili cheese fries", 8, "crinkle fries under chili and cheese", ""],
@@ -1643,7 +1679,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["fried oysters", 16, "crisp, with remoulade", ""]]]
     ] },
 
-    "montgomery": { g: "cap", st: "alabama", ab: "al", look: "brick", spots: [
+    "montgomery": { g: "cap", st: "alabama", ab: "al", look: "brick", ll: [32.38, -86.3], spots: [
       ["chris' hot dogs", "dexter avenue", "american", 1917, 1, 4.5, "a downtown hot dog counter since 1917", [
         ["hot dog all the way", 4, "sauerkraut, onions, chili sauce, mustard", "sig"],
         ["cheeseburger", 6, "griddled and simple", ""]]],
@@ -1664,7 +1700,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["vintage burger", 18, "on a brioche bun", ""]]]
     ] },
 
-    "juneau": { g: "cap", st: "alaska", ab: "ak", look: "clap", spots: [
+    "juneau": { g: "cap", st: "alaska", ab: "ak", look: "clap", ll: [58.3, -134.42], spots: [
       ["tracy's king crab shack", "downtown waterfront", "seafood", 2005, 3, 4.6, "giant alaska king crab legs by the cruise docks", [
         ["king crab legs", 85, "steamed alaska red king crab, butter", "sig"],
         ["crab bisque", 12, "rich and creamy", "", "soup"],
@@ -1688,7 +1724,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["affogato", 7, "espresso over ice cream", "sweet", "icecream"]]]
     ] },
 
-    "phoenix": { g: "cap", st: "arizona", ab: "az", look: "adobe", spots: [
+    "phoenix": { g: "cap", st: "arizona", ab: "az", look: "adobe", ll: [33.45, -112.07], spots: [
       ["pizzeria bianco", "heritage square", "pizza", 1988, 2, 4.5, "chris bianco's pies that changed american pizza", [
         ["rosa", 20, "red onion, parmigiano, rosemary, pistachios", "sig", "pizza"],
         ["wiseguy", 21, "wood-roasted onion, smoked mozzarella, fennel sausage", "", "pizza"],
@@ -1740,7 +1776,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["rotisserie chicken", 24, "half bird, sides", ""]]]
     ] },
 
-    "little rock": { g: "cap", st: "arkansas", ab: "ar", look: "brick", spots: [
+    "little rock": { g: "cap", st: "arkansas", ab: "ar", look: "brick", ll: [34.75, -92.29], spots: [
       ["the root cafe", "south main", "american", 2008, 1, 4.6, "local farm-to-table breakfast and burgers", [
         ["root burger", 14, "local beef, house toppings", "sig", "burger"],
         ["banh mi", 12, "local pork, pickled vegetables", "", "sandwich"]]],
@@ -1767,7 +1803,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["sundae", 9, "house toppings", "sweet", "icecream"]]]
     ] },
 
-    "sacramento": { g: "cap", st: "california", ab: "ca", look: "stucco", spots: [
+    "sacramento": { g: "cap", st: "california", ab: "ca", look: "stucco", ll: [38.58, -121.49], spots: [
       ["the waterboy", "midtown", "french", 1996, 3, 4.6, "california-provençal in the farm-to-fork capital", [
         ["roasted chicken", 34, "seasonal sides", "sig"],
         ["veal sweetbreads", 18, "crisp, with a pan sauce", "", "cloche"]]],
@@ -1799,7 +1835,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["seasonal vegetable plate", 16, "local produce", "veg", "salad"]]]
     ] },
 
-    "denver": { g: "cap", st: "colorado", ab: "co", look: "brick", spots: [
+    "denver": { g: "cap", st: "colorado", ab: "co", look: "brick", ll: [39.74, -104.99], spots: [
       ["buckhorn exchange", "lincoln park", "steak", 1893, 3, 4.5, "denver's oldest restaurant, full of taxidermy", [
         ["buffalo prime rib", 58, "slow-roasted bison", "sig", "steak"],
         ["rocky mountain oysters", 18, "fried, with cocktail sauce", "", "fries"]]],
@@ -1845,7 +1881,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["shrimp cocktail", 18, "chilled, cocktail sauce", ""]]]
     ] },
 
-    "hartford": { g: "cap", st: "connecticut", ab: "ct", look: "brick", spots: [
+    "hartford": { g: "cap", st: "connecticut", ab: "ct", look: "brick", ll: [41.76, -72.68], spots: [
       ["first & last tavern", "south end", "pizza", 1936, 2, 4.5, "a hartford pizza institution since 1936", [
         ["plain pizza", 16, "thin, coal-oven style", "sig", "pizza"],
         ["clam pizza", 22, "garlic, clams, olive oil", "", "pizza"]]],
@@ -1869,7 +1905,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["stuffed french toast", 15, "sweet and loaded", "sweet", "pancake"]]]
     ] },
 
-    "dover": { g: "cap", st: "delaware", ab: "de", look: "brick", spots: [
+    "dover": { g: "cap", st: "delaware", ab: "de", look: "brick", ll: [39.16, -75.52], spots: [
       ["sambo's tavern", "leipsic", "seafood", 1953, 2, 4.6, "steamed blue crabs on the leipsic river", [
         ["steamed blue crabs", "mp", "by the dozen, old bay seasoned", "sig", "claw"],
         ["crab cake sandwich", 18, "lump crab on a roll", "", "sandwich"]]],
@@ -1884,7 +1920,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["burger", 15, "with fries", "", "burger"]]]
     ] },
 
-    "tallahassee": { g: "cap", st: "florida", ab: "fl", look: "deco", spots: [
+    "tallahassee": { g: "cap", st: "florida", ab: "fl", look: "deco", ll: [30.44, -84.28], spots: [
       ["the edison", "cascades park", "american", 2015, 3, 4.5, "dining in a restored 1920s power plant", [
         ["shrimp & grits", 26, "gulf shrimp, cheddar grits", "sig", "shrimp"],
         ["burger", 18, "with fries", "", "burger"]]],
@@ -1905,7 +1941,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["boiled shrimp", 14, "a half pound", "", "shrimp"]]]
     ] },
 
-    "atlanta": { g: "cap", st: "georgia", ab: "ga", look: "brick", spots: [
+    "atlanta": { g: "cap", st: "georgia", ab: "ga", look: "brick", ll: [33.75, -84.39], spots: [
       ["the varsity", "midtown", "american", 1928, 1, 4.2, "what'll ya have? chili dogs since 1928", [
         ["chili dog", 4, "with mustard and onions", "sig", "hotdog"],
         ["onion rings", 5, "big and greasy", "", "fries"],
@@ -1968,7 +2004,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["hashbrowns scattered, smothered & covered", 5, "with onions and cheese", "", "fries"]]]
     ] },
 
-    "honolulu": { g: "cap", st: "hawaii", ab: "hi", look: "deco", spots: [
+    "honolulu": { g: "cap", st: "hawaii", ab: "hi", look: "deco", ll: [21.31, -157.86], spots: [
       ["helena's hawaiian food", "kalihi", "american", 1946, 1, 4.6, "james beard-honored hawaiian plates", [
         ["pipikaula short ribs", 16, "dried, then fried", "sig", "ribs"],
         ["kalua pig", 12, "smoky, shredded pork", "", "ribs"],
@@ -2018,7 +2054,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["spam egg musubi", 4, "spam, egg, rice, nori", "sig", "sushi"],
         ["salmon onigiri", 4, "rice ball with salmon", "", "sushi"]]]
     ] },
-    "boise": { g: "cap", st: "idaho", ab: "id", look: "brick", spots: [
+    "boise": { g: "cap", st: "idaho", ab: "id", look: "brick", ll: [43.62, -116.2], spots: [
       ["fork", "downtown", "american", 2009, 2, 4.5, "local-first comfort food downtown", [
         ["asparagus fries", 12, "tempura-battered, a boise favorite", "sig", "fries"],
         ["idaho trout", 26, "local fish, seasonal sides", "", "fish"]]],
@@ -2048,7 +2084,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["bittercreek burger", 17, "local beef", "sig", "burger"]]]
     ] },
 
-    "springfield": { g: "cap", st: "illinois", ab: "il", look: "brick", spots: [
+    "springfield": { g: "cap", st: "illinois", ab: "il", look: "brick", ll: [39.8, -89.64], spots: [
       ["cozy dog drive in", "route 66", "american", 1949, 1, 4.6, "the route 66 stop that claims the corn dog on a stick", [
         ["cozy dog", 3, "the original corn dog on a stick", "sig", "hotdog"],
         ["fries", 3, "crinkle-cut", "", "fries"]]],
@@ -2066,7 +2102,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["pretzel", 9, "with beer cheese", "share", "bread"]]]
     ] },
 
-    "indianapolis": { g: "cap", st: "indiana", ab: "in", look: "brick", spots: [
+    "indianapolis": { g: "cap", st: "indiana", ab: "in", look: "brick", ll: [39.77, -86.16], spots: [
       ["st. elmo steak house", "downtown", "steak", 1902, 4, 4.7, "the shrimp cocktail that clears your sinuses", [
         ["shrimp cocktail", 24, "with fiery horseradish cocktail sauce", "sig", "shrimp"],
         ["filet mignon", 70, "aged, broiled", "", "steak"]]],
@@ -2099,7 +2135,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["grilled salmon", 32, "seasonal sides", "", "fish"]]]
     ] },
 
-    "des moines": { g: "cap", st: "iowa", ab: "ia", look: "brick", spots: [
+    "des moines": { g: "cap", st: "iowa", ab: "ia", look: "brick", ll: [41.59, -93.62], spots: [
       ["zombie burger + drink lab", "east village", "burgers", 2011, 2, 4.5, "horror-themed burgers and boozy shakes", [
         ["the walking ched", 16, "burger with mac and cheese buns", "sig", "burger"],
         ["spiked shake", 12, "boozy and thick", "sweet", "drink"]]],
@@ -2122,7 +2158,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["gumbo", 10, "cajun-style", "", "soup"]]]
     ] },
 
-    "topeka": { g: "cap", st: "kansas", ab: "ks", look: "brick", spots: [
+    "topeka": { g: "cap", st: "kansas", ab: "ks", look: "brick", ll: [39.05, -95.68], spots: [
       ["bobo's drive-in", "huntoon street", "burgers", 1948, 1, 4.6, "a drive-in classic with car hops", [
         ["spanish burger", 6, "sloppy joe-style, a bobo's original", "sig", "burger"],
         ["onion rings", 4, "golden", "", "fries"]]],
@@ -2137,7 +2173,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["duck fat fries", 6, "crisp and rich", "", "fries"]]]
     ] },
 
-    "frankfort": { g: "cap", st: "kentucky", ab: "ky", look: "brick", spots: [
+    "frankfort": { g: "cap", st: "kentucky", ab: "ky", look: "brick", ll: [38.2, -84.87], spots: [
       ["serafini", "downtown", "italian", 2007, 3, 4.6, "a downtown dining room near the capitol", [
         ["hot brown", 18, "kentucky's open-faced turkey sandwich", "sig", "sandwich"],
         ["pasta bolognese", 22, "slow-simmered", "", "pasta"]]],
@@ -2152,7 +2188,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["bourbon barrel ale", 7, "aged in kentucky barrels", "drink", "cocktail"]]]
     ] },
 
-    "baton rouge": { g: "cap", st: "louisiana", ab: "la", look: "creole", spots: [
+    "baton rouge": { g: "cap", st: "louisiana", ab: "la", look: "creole", ll: [30.45, -91.19], spots: [
       ["the chimes", "lsu", "southern", 1983, 2, 4.5, "an lsu institution with fried alligator", [
         ["blackened alligator", 16, "a local favorite starter", "sig", "chicken"],
         ["crawfish étouffée", 22, "smothered over rice", "", "curry"]]],
@@ -2176,7 +2212,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["po' boys", 12, "from the deli counter", "", "sandwich"]]]
     ] },
 
-    "augusta": { g: "cap", st: "maine", ab: "me", look: "clap", spots: [
+    "augusta": { g: "cap", st: "maine", ab: "me", look: "clap", ll: [44.31, -69.78], spots: [
       ["the red barn", "riverside drive", "seafood", 1977, 1, 4.6, "fried clams and chicken by the kennebec", [
         ["fried clams", 22, "whole-belly, golden", "sig", "oyster"],
         ["fried chicken", 13, "crisp and juicy", "", "chicken"],
@@ -2192,7 +2228,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["house beer", 7, "brewed on site", "drink", "drink"]]]
     ] },
 
-    "annapolis": { g: "cap", st: "maryland", ab: "md", look: "brick", spots: [
+    "annapolis": { g: "cap", st: "maryland", ab: "md", look: "brick", ll: [38.98, -76.49], spots: [
       ["cantler's riverside inn", "mill creek", "seafood", 1974, 2, 4.5, "pick crabs on the dock by the water", [
         ["steamed blue crabs", "mp", "by the dozen, old bay", "sig", "claw"],
         ["crab cake", 30, "maryland lump", "", "claw"]]],
@@ -2219,7 +2255,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["shepherd's pie", 18, "lamb and potatoes", "", "cloche"]]]
     ] },
 
-    "boston": { g: "cap", st: "massachusetts", ab: "ma", look: "brick", spots: [
+    "boston": { g: "cap", st: "massachusetts", ab: "ma", look: "brick", ll: [42.36, -71.06], spots: [
       ["neptune oyster", "north end", "seafood", 2004, 3, 4.6, "a tiny bar with a legendary warm lobster roll", [
         ["warm lobster roll", 42, "drenched in butter on brioche", "sig", "sandwich"],
         ["oysters", 4, "a huge selection, by the piece", "", "oyster"],
@@ -2290,7 +2326,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["fried calamari", 18, "crisp", "", "fish"]]]
     ] },
 
-    "lansing": { g: "cap", st: "michigan", ab: "mi", look: "brick", spots: [
+    "lansing": { g: "cap", st: "michigan", ab: "mi", look: "brick", ll: [42.73, -84.56], spots: [
       ["eastside fish fry", "east side", "seafood", 2010, 1, 4.6, "fried fish and chicken with a diners, drive-ins fame", [
         ["fried catfish", 14, "cornmeal-crusted", "sig", "fish"],
         ["fried chicken", 12, "crisp", "", "chicken"]]],
@@ -2308,7 +2344,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["mac & cheese", 6, "creamy", "veg", "pasta"]]]
     ] },
 
-    "saint paul": { g: "cap", st: "minnesota", ab: "mn", look: "brick", spots: [
+    "saint paul": { g: "cap", st: "minnesota", ab: "mn", look: "brick", ll: [44.95, -93.09], spots: [
       ["mickey's diner", "downtown", "american", 1939, 1, 4.5, "a 1939 dining car open 24 hours", [
         ["mulligan stew", 10, "hearty beef stew", "sig", "soup"],
         ["pancakes", 8, "griddle-fresh", "", "pancake"]]],
@@ -2337,7 +2373,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["malted waffle cone", 7, "with a malted milk ball in the tip", "sweet", "icecream"]]]
     ] },
 
-    "jackson": { g: "cap", st: "mississippi", ab: "ms", look: "brick", spots: [
+    "jackson": { g: "cap", st: "mississippi", ab: "ms", look: "brick", ll: [32.3, -90.18], spots: [
       ["bully's restaurant", "west jackson", "southern", 1982, 1, 4.6, "a james beard classic for soul food", [
         ["smothered oxtails", 18, "rich gravy", "sig", "curry"],
         ["fried chicken", 12, "crisp", "", "chicken"]]],
@@ -2358,7 +2394,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["tamales", 10, "delta-style", "spicy", "wrap"]]]
     ] },
 
-    "jefferson city": { g: "cap", st: "missouri", ab: "mo", look: "brick", spots: [
+    "jefferson city": { g: "cap", st: "missouri", ab: "mo", look: "brick", ll: [38.58, -92.17], spots: [
       ["madison's cafe", "downtown", "italian", 1993, 2, 4.6, "the capitol crowd's italian favorite", [
         ["toasted ravioli", 10, "missouri's fried ravioli", "sig", "beignet"],
         ["lasagna", 18, "layered and baked", "", "pasta"]]],
@@ -2373,7 +2409,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["house beer", 6, "brewed on site", "drink", "drink"]]]
     ] },
 
-    "helena": { g: "cap", st: "montana", ab: "mt", look: "brick", spots: [
+    "helena": { g: "cap", st: "montana", ab: "mt", look: "brick", ll: [46.59, -112.04], spots: [
       ["the windbag saloon", "last chance gulch", "american", 1950, 2, 4.4, "a historic saloon with a colorful past", [
         ["windbag burger", 15, "big and juicy", "sig", "burger"],
         ["prime rib", 34, "weekend special", "", "steak"]]],
@@ -2391,7 +2427,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["soup & salad", 14, "fresh daily", "veg", "salad"]]]
     ] },
 
-    "lincoln": { g: "cap", st: "nebraska", ab: "ne", look: "brick", spots: [
+    "lincoln": { g: "cap", st: "nebraska", ab: "ne", look: "brick", ll: [40.81, -96.7], spots: [
       ["runza", "the original, lincoln", "american", 1949, 1, 4.3, "nebraska's beef-and-cabbage sandwich", [
         ["original runza", 6, "beef, cabbage, onions in baked bread", "sig", "dumpling"],
         ["frings", 4, "half fries, half onion rings", "", "fries"]]],
@@ -2409,7 +2445,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["cinnamon dessert pizza", "incl", "part of the buffet", "sweet", "pizza"]]]
     ] },
 
-    "carson city": { g: "cap", st: "nevada", ab: "nv", look: "brick", spots: [
+    "carson city": { g: "cap", st: "nevada", ab: "nv", look: "brick", ll: [39.16, -119.77], spots: [
       ["adele's restaurant & lounge", "downtown", "american", 1977, 3, 4.6, "fine dining in a victorian house", [
         ["rack of lamb", 52, "herb-crusted", "sig", "steak"],
         ["fresh fish", 38, "chef's preparation", "", "fish"]]],
@@ -2424,7 +2460,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["house beer", 7, "brewed on site", "drink", "drink"]]]
     ] },
 
-    "concord": { g: "cap", st: "new hampshire", ab: "nh", look: "clap", spots: [
+    "concord": { g: "cap", st: "new hampshire", ab: "nh", look: "clap", ll: [43.21, -71.54], spots: [
       ["the barley house", "main street", "american", 1998, 2, 4.4, "the pub across from the state house", [
         ["burger", 16, "with fries", "sig", "burger"],
         ["fish & chips", 20, "haddock", "", "fish"]]],
@@ -2441,7 +2477,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["burger", 15, "with fries", "", "burger"]]]
     ] },
 
-    "trenton": { g: "cap", st: "new jersey", ab: "nj", look: "brick", spots: [
+    "trenton": { g: "cap", st: "new jersey", ab: "nj", look: "brick", ll: [40.22, -74.76], spots: [
       ["de lorenzo's tomato pies", "robbinsville", "pizza", 1947, 2, 4.7, "the trenton tomato pie, sauce on top", [
         ["tomato pie", 20, "thin crust, cheese under the sauce", "sig", "pizza"],
         ["clam pie", 24, "fresh clams, garlic", "", "pizza"]]],
@@ -2453,7 +2489,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["pork roll sandwich", 8, "new jersey's breakfast meat", "", "sandwich"]]]
     ] },
 
-    "santa fe": { g: "cap", st: "new mexico", ab: "nm", look: "adobe", spots: [
+    "santa fe": { g: "cap", st: "new mexico", ab: "nm", look: "adobe", ll: [35.69, -105.94], spots: [
       ["the shed", "the plaza", "mexican", 1953, 2, 4.6, "red chile enchiladas off the plaza since 1953", [
         ["red chile enchiladas", 18, "blue corn tortillas, red chile", "sig", "taco"],
         ["mocha cake", 9, "a house legend", "sweet", "cake"]]],
@@ -2491,7 +2527,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["goat curry", 18, "jamaican-style", "sig", "curry"],
         ["coconut lentil soup", 9, "warming", "veg", "soup"]]]
     ] },
-    "albany": { g: "cap", st: "new york", ab: "ny", look: "brick", spots: [
+    "albany": { g: "cap", st: "new york", ab: "ny", look: "brick", ll: [42.65, -73.76], spots: [
       ["jack's oyster house", "state street", "seafood", 1913, 3, 4.5, "albany's classic seafood house since 1913", [
         ["oysters rockefeller", 18, "baked with spinach and pernod", "sig"],
         ["lobster bisque", 12, "rich and creamy", "", "soup"]]],
@@ -2512,7 +2548,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["shepherd's pie", 17, "lamb and potatoes", "", "cloche"]]]
     ] },
 
-    "raleigh": { g: "cap", st: "north carolina", ab: "nc", look: "brick", spots: [
+    "raleigh": { g: "cap", st: "north carolina", ab: "nc", look: "brick", ll: [35.78, -78.64], spots: [
       ["poole's diner", "downtown", "southern", 2007, 3, 4.6, "ashley christensen's luncheonette with famous mac", [
         ["macaroni au gratin", 16, "three cheeses, crisp top", "sig", "pasta"],
         ["poole's burger", 18, "on a sesame bun", "", "burger"]]],
@@ -2544,7 +2580,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["seasonal tasting", 80, "chef's selection", "sig", "cloche"]]]
     ] },
 
-    "bismarck": { g: "cap", st: "north dakota", ab: "nd", look: "brick", spots: [
+    "bismarck": { g: "cap", st: "north dakota", ab: "nd", look: "brick", ll: [46.81, -100.78], spots: [
       ["kroll's diner", "bismarck", "american", 1972, 1, 4.4, "a retro diner known for knoephla soup", [
         ["knoephla soup", 7, "chicken and dumpling soup, a nd classic", "sig", "soup"],
         ["fleischkuekle", 10, "deep-fried meat pie", "", "dumpling"]]],
@@ -2565,7 +2601,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["pretzel", 9, "with beer cheese", "share", "bread"]]]
     ] },
 
-    "columbus": { g: "cap", st: "ohio", ab: "oh", look: "brick", spots: [
+    "columbus": { g: "cap", st: "ohio", ab: "oh", look: "brick", ll: [39.96, -83.0], spots: [
       ["schmidt's sausage haus", "german village", "european", 1886, 2, 4.6, "german sausages and half-pound cream puffs", [
         ["bahama mama", 15, "spicy smoked sausage", "sig", "hotdog"],
         ["jumbo cream puff", 8, "half-pound, filled with cream", "sweet", "beignet"]]],
@@ -2598,7 +2634,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["chicken shawarma bowl", 13, "with salads", "", "rice"]]]
     ] },
 
-    "oklahoma city": { g: "cap", st: "oklahoma", ab: "ok", look: "brick", spots: [
+    "oklahoma city": { g: "cap", st: "oklahoma", ab: "ok", look: "brick", ll: [35.47, -97.52], spots: [
       ["cattlemen's steakhouse", "stockyards city", "steak", 1910, 3, 4.5, "steaks in the stockyards since 1910", [
         ["t-bone steak", 46, "a cattlemen's classic", "sig", "steak"],
         ["lamb fries", 14, "fried lamb testicles, for the brave", "", "fries"]]],
@@ -2627,7 +2663,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["karaage", 9, "japanese fried chicken", "", "chicken"]]]
     ] },
 
-    "salem": { g: "cap", st: "oregon", ab: "or", look: "clap", spots: [
+    "salem": { g: "cap", st: "oregon", ab: "or", look: "clap", ll: [44.94, -123.04], spots: [
       ["bentley's grill", "downtown", "american", 1998, 3, 4.5, "pacific northwest cooking downtown", [
         ["cedar plank salmon", 32, "northwest classic", "sig", "fish"],
         ["burger", 17, "with fries", "", "burger"]]],
@@ -2642,7 +2678,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["soup", 7, "made daily", "", "soup"]]]
     ] },
 
-    "harrisburg": { g: "cap", st: "pennsylvania", ab: "pa", look: "brick", spots: [
+    "harrisburg": { g: "cap", st: "pennsylvania", ab: "pa", look: "brick", ll: [40.27, -76.88], spots: [
       ["the millworks", "midtown", "american", 2013, 2, 4.5, "a brewery, restaurant and art studios", [
         ["wood-fired pizza", 16, "seasonal", "sig", "pizza"],
         ["house beer", 6, "brewed on site", "drink", "drink"]]],
@@ -2657,7 +2693,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["pastries", 4, "from the bakers", "sweet", "croissant"]]]
     ] },
 
-    "providence": { g: "cap", st: "rhode island", ab: "ri", look: "clap", spots: [
+    "providence": { g: "cap", st: "rhode island", ab: "ri", look: "clap", ll: [41.82, -71.41], spots: [
       ["al forno", "fox point", "italian", 1980, 3, 4.6, "the birthplace of grilled pizza", [
         ["grilled pizza", 24, "charred thin crust, tomato, cheese", "sig", "pizza"],
         ["baked pasta", 26, "creamy, crusty, rich", "", "pasta"]]],
@@ -2690,7 +2726,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["fried chicken", 24, "crisp", "", "chicken"]]]
     ] },
 
-    "columbia": { g: "cap", st: "south carolina", ab: "sc", look: "brick", spots: [
+    "columbia": { g: "cap", st: "south carolina", ab: "sc", look: "brick", ll: [34.0, -81.03], spots: [
       ["motor supply co. bistro", "the vista", "american", 1989, 3, 4.6, "a seasonal menu that changes twice a day", [
         ["seasonal entrée", 30, "local ingredients", "sig", "cloche"],
         ["shrimp & grits", 26, "lowcountry classic", "", "shrimp"]]],
@@ -2714,7 +2750,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["seasonal fish", 34, "chef's preparation", "", "fish"]]]
     ] },
 
-    "pierre": { g: "cap", st: "south dakota", ab: "sd", look: "brick", spots: [
+    "pierre": { g: "cap", st: "south dakota", ab: "sd", look: "brick", ll: [44.37, -100.35], spots: [
       ["cattleman's club steakhouse", "east of pierre", "steak", 1983, 3, 4.6, "big steaks on the missouri river", [
         ["ribeye", 42, "south dakota beef", "sig", "steak"],
         ["prime rib", 38, "slow-roasted", "", "steak"]]],
@@ -2729,7 +2765,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["burger", 14, "with fries", "", "burger"]]]
     ] },
 
-    "nashville": { g: "cap", st: "tennessee", ab: "tn", look: "brick", spots: [
+    "nashville": { g: "cap", st: "tennessee", ab: "tn", look: "brick", ll: [36.16, -86.78], spots: [
       ["prince's hot chicken shack", "south nashville", "southern", 1945, 1, 4.6, "the family that invented nashville hot chicken", [
         ["hot chicken quarter", 13, "cayenne-fired, on white bread with pickles", "sig", "chicken"],
         ["extra hot tenders", 14, "you've been warned", "spicy", "chicken"]]],
@@ -2785,7 +2821,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["cocktail", 14, "inventive", "drink", "cocktail"]]]
     ] },
 
-    "austin": { g: "cap", st: "texas", ab: "tx", look: "stucco", spots: [
+    "austin": { g: "cap", st: "texas", ab: "tx", look: "stucco", ll: [30.27, -97.74], spots: [
       ["franklin barbecue", "east 11th", "bbq", 2009, 2, 4.7, "the brisket people wait hours for", [
         ["brisket", 34, "per pound, peppery bark, post oak smoke", "sig"],
         ["pork ribs", 28, "per pound", "", "ribs"],
@@ -2864,7 +2900,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["smothered pork chop", 18, "with sides", "", "steak"]]]
     ] },
 
-    "salt lake city": { g: "cap", st: "utah", ab: "ut", look: "brick", spots: [
+    "salt lake city": { g: "cap", st: "utah", ab: "ut", look: "brick", ll: [40.76, -111.89], spots: [
       ["red iguana", "north temple", "mexican", 1985, 2, 4.6, "a mole menu worth the line", [
         ["mole sampler", 14, "taste several moles", "sig", "curry"],
         ["puntas de filete", 22, "beef tips in a smoky sauce", "", "steak"]]],
@@ -2899,7 +2935,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["frites", 6, "with mayo", "veg", "fries"]]]
     ] },
 
-    "montpelier": { g: "cap", st: "vermont", ab: "vt", look: "clap", spots: [
+    "montpelier": { g: "cap", st: "vermont", ab: "vt", look: "clap", ll: [44.26, -72.58], spots: [
       ["positive pie", "state street", "pizza", 2003, 2, 4.5, "wood-fired pizza and live music", [
         ["wood-fired pizza", 18, "vermont toppings", "sig", "pizza"],
         ["local beer", 7, "vermont craft", "drink", "drink"]]],
@@ -2920,7 +2956,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["burrito", 12, "big", "", "wrap"]]]
     ] },
 
-    "richmond": { g: "cap", st: "virginia", ab: "va", look: "brick", spots: [
+    "richmond": { g: "cap", st: "virginia", ab: "va", look: "brick", ll: [37.54, -77.44], spots: [
       ["l'opossum", "oregon hill", "french", 2015, 3, 4.6, "david shannon's witty french-american", [
         ["beef wellington", 52, "a famous signature", "sig", "steak"],
         ["escargot", 18, "garlic butter", "", "cloche"]]],
@@ -2961,7 +2997,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["dry-fried eggplant", 15, "crisp, sweet and spicy", "spicy", "salad"]]]
     ] },
 
-    "olympia": { g: "cap", st: "washington", ab: "wa", look: "clap", spots: [
+    "olympia": { g: "cap", st: "washington", ab: "wa", look: "clap", ll: [47.04, -122.9], spots: [
       ["chelsea farms oyster bar", "downtown", "seafood", 2016, 3, 4.7, "oysters from their own farm", [
         ["oysters on the half shell", 3, "from eld inlet", "sig", "oyster"],
         ["clam chowder", 12, "creamy", "", "soup"]]],
@@ -2979,7 +3015,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["salad bar", 9, "fresh", "veg", "salad"]]]
     ] },
 
-    "charleston, wv": { g: "cap", st: "west virginia", ab: "wv", look: "brick", spots: [
+    "charleston, wv": { g: "cap", st: "west virginia", ab: "wv", look: "brick", ll: [38.35, -81.63], spots: [
       ["southern kitchen", "kanawha city", "southern", 1949, 1, 4.4, "a 24-hour diner with pepperoni rolls", [
         ["country breakfast", 12, "biscuits, gravy, eggs", "sig", "egg"],
         ["fried chicken", 13, "crisp", "", "chicken"]]],
@@ -3000,7 +3036,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["ramen", 14, "rich broth", "", "noodles"]]]
     ] },
 
-    "madison": { g: "cap", st: "wisconsin", ab: "wi", look: "brick", spots: [
+    "madison": { g: "cap", st: "wisconsin", ab: "wi", look: "brick", ll: [43.07, -89.4], spots: [
       ["the old fashioned", "capitol square", "american", 2005, 2, 4.6, "a wisconsin tavern on the square", [
         ["cheese curds", 10, "fried, squeaky", "sig", "fries"],
         ["brandy old fashioned", 10, "wisconsin's cocktail", "drink", "cocktail"],
@@ -3036,7 +3072,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["steak frites", 32, "classic", "", "steak"]]]
     ] },
 
-    "cheyenne": { g: "cap", st: "wyoming", ab: "wy", look: "brick", spots: [
+    "cheyenne": { g: "cap", st: "wyoming", ab: "wy", look: "brick", ll: [41.14, -104.82], spots: [
       ["the albany", "downtown", "american", 1942, 2, 4.4, "a historic downtown bar and restaurant", [
         ["prime rib", 30, "slow-roasted", "sig", "steak"],
         ["burger", 13, "with fries", "", "burger"]]],
@@ -3053,7 +3089,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["burger", 12, "juicy", "sig", "burger"],
         ["fries", 4, "crisp", "", "fries"]]]
     ] },
-    "houston": { g: "big", st: "texas", ab: "tx", look: "stucco", spots: [
+    "houston": { g: "big", st: "texas", ab: "tx", look: "stucco", ll: [29.76, -95.37], spots: [
       ["truth bbq", "washington avenue", "bbq", 2015, 2, 4.7, "central texas brisket and towering cakes", [
         ["brisket", 32, "per pound, post oak", "sig", "ribs"],
         ["tres leches cake", 8, "a giant slice", "sweet", "cake"]]],
@@ -3103,7 +3139,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["chicken biryani", 16, "fragrant", "", "rice"]]]
     ] },
 
-    "philadelphia": { g: "big", st: "pennsylvania", ab: "pa", look: "brick", spots: [
+    "philadelphia": { g: "big", st: "pennsylvania", ab: "pa", look: "brick", ll: [39.95, -75.17], spots: [
       ["pat's king of steaks", "south philly", "deli", 1930, 1, 4.2, "the cheesesteak's birthplace, open 24 hours", [
         ["cheesesteak wit whiz", 15, "chopped steak, cheez whiz, onions", "sig", "sandwich"],
         ["cheese fries", 7, "with whiz", "", "fries"]]],
@@ -3165,7 +3201,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["brisket cheesesteak", 15, "a philly twist", "", "sandwich"]]]
     ] },
 
-    "san antonio": { g: "big", st: "texas", ab: "tx", look: "stucco", spots: [
+    "san antonio": { g: "big", st: "texas", ab: "tx", look: "stucco", ll: [29.42, -98.49], spots: [
       ["mi tierra café y panadería", "market square", "mexican", 1941, 2, 4.6, "a 24-hour tex-mex fiesta with a bakery", [
         ["enchiladas", 16, "cheese and chili gravy", "sig", "taco"],
         ["pan dulce", 2, "from the bakery case", "sweet", "croissant"]]],
@@ -3198,7 +3234,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["oxtails", 24, "rich", "", "curry"]]]
     ] },
 
-    "san diego": { g: "big", st: "california", ab: "ca", look: "stucco", spots: [
+    "san diego": { g: "big", st: "california", ab: "ca", look: "stucco", ll: [32.72, -117.16], spots: [
       ["las cuatro milpas", "barrio logan", "mexican", 1933, 1, 4.6, "handmade tortillas since 1933, cash only", [
         ["pork tamales", 3, "steamed in husks", "sig", "wrap"],
         ["chorizo con huevos", 8, "with fresh tortillas", "", "egg"]]],
@@ -3236,7 +3272,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["sandwich", 12, "on house bread", "", "sandwich"]]]
     ] },
 
-    "dallas": { g: "big", st: "texas", ab: "tx", look: "brick", spots: [
+    "dallas": { g: "big", st: "texas", ab: "tx", look: "brick", ll: [32.78, -96.8], spots: [
       ["pecan lodge", "deep ellum", "bbq", 2010, 2, 4.6, "barbecue in deep ellum", [
         ["the trifecta", 30, "brisket, sausage, pulled pork", "sig", "ribs"],
         ["hot mess", 18, "sweet potato stuffed with brisket", "", "ribs"]]],
@@ -3275,7 +3311,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["salumi", 18, "house-cured", "share", "cloche"]]]
     ] },
 
-    "san francisco": { g: "big", st: "california", ab: "ca", look: "clap", spots: [
+    "san francisco": { g: "big", st: "california", ab: "ca", look: "clap", ll: [37.77, -122.42], spots: [
       ["tartine bakery", "mission", "bakery", 2002, 2, 4.5, "the country loaf and morning buns", [
         ["morning bun", 6, "orange-scented, sugary", "sig", "croissant"],
         ["country bread", 14, "the famous loaf", "veg", "bread"],
@@ -3340,7 +3376,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["sourdough loaf", 8, "tangy", "veg", "bread"]]]
     ] },
 
-    "seattle": { g: "big", st: "washington", ab: "wa", look: "clap", spots: [
+    "seattle": { g: "big", st: "washington", ab: "wa", look: "clap", ll: [47.61, -122.33], spots: [
       ["the walrus and the carpenter", "ballard", "seafood", 2010, 3, 4.6, "renee erickson's oyster bar", [
         ["oysters", 4, "pacific northwest", "sig"],
         ["fried oysters", 16, "crisp", "", "oyster"]]],
@@ -3391,7 +3427,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["geoduck", "mp", "a northwest specialty", "", "oyster"]]]
     ] },
 
-    "portland": { g: "big", st: "oregon", ab: "or", look: "clap", spots: [
+    "portland": { g: "big", st: "oregon", ab: "or", look: "clap", ll: [45.52, -122.68], spots: [
       ["pok pok", "southeast", "thai", 2005, 2, 4.4, "andy ricker's thai street food", [
         ["ike's vietnamese fish sauce wings", 18, "the famous wings", "sig", "chicken"],
         ["khao soi", 18, "curry noodles", "", "noodles"]]],
@@ -3435,7 +3471,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["gyoza", 8, "pan-fried", "", "dumpling"]]]
     ] },
 
-    "las vegas": { g: "big", st: "nevada", ab: "nv", look: "deco", spots: [
+    "las vegas": { g: "big", st: "nevada", ab: "nv", look: "deco", ll: [36.17, -115.14], spots: [
       ["lotus of siam", "east flamingo", "thai", 1999, 2, 4.5, "northern thai once called america's best", [
         ["khao soi", 20, "curry noodles", "sig", "noodles"],
         ["nam kao tod", 16, "crispy rice salad", "spicy", "salad"]]],
@@ -3473,7 +3509,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["italian sub", 13, "classic", "", "sandwich"]]]
     ] },
 
-    "detroit": { g: "big", st: "michigan", ab: "mi", look: "brick", spots: [
+    "detroit": { g: "big", st: "michigan", ab: "mi", look: "brick", ll: [42.33, -83.05], spots: [
       ["buddy's pizza", "conant street", "pizza", 1946, 2, 4.5, "where detroit-style square pizza began", [
         ["the detroiter", 26, "pepperoni, crisp caramelized edges", "sig", "pizza"],
         ["cheese square pizza", 20, "classic", "veg", "pizza"]]],
@@ -3506,7 +3542,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["focaccia", 9, "airy", "veg", "bread"]]]
     ] },
 
-    "charlotte": { g: "big", st: "north carolina", ab: "nc", look: "brick", spots: [
+    "charlotte": { g: "big", st: "north carolina", ab: "nc", look: "brick", ll: [35.23, -80.84], spots: [
       ["price's chicken coop", "south end", "southern", 1962, 1, 4.6, "takeout fried chicken legend", [
         ["dark quarter", 10, "crisp fried chicken with sides", "sig", "chicken"],
         ["hush puppies", 3, "crisp", "veg", "beignet"]]],
@@ -3533,7 +3569,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["neckbone stew", 14, "rich", "", "soup"]]]
     ] },
 
-    "minneapolis": { g: "big", st: "minnesota", ab: "mn", look: "brick", spots: [
+    "minneapolis": { g: "big", st: "minnesota", ab: "mn", look: "brick", ll: [44.98, -93.27], spots: [
       ["matt's bar", "powderhorn", "burgers", 1954, 1, 4.6, "the jucy lucy's home", [
         ["jucy lucy", 10, "cheese-stuffed burger, molten inside", "sig", "burger"],
         ["fries", 4, "basket", "", "fries"]]],
@@ -3566,7 +3602,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["beef patty", 4, "flaky", "", "beignet"]]]
     ] },
 
-    "baltimore": { g: "big", st: "maryland", ab: "md", look: "brick", spots: [
+    "baltimore": { g: "big", st: "maryland", ab: "md", look: "brick", ll: [39.29, -76.61], spots: [
       ["faidley's seafood", "lexington market", "seafood", 1886, 2, 4.5, "the famous lump crab cake", [
         ["jumbo lump crab cake", 28, "barely held together", "sig", "claw"],
         ["oysters", 3, "raw bar", "", "oyster"]]],
@@ -3597,7 +3633,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["berger cookie", 2, "a thick blanket of chocolate", "sig", "cookie"]]]
     ] },
 
-    "kansas city": { g: "big", st: "missouri", ab: "mo", look: "brick", spots: [
+    "kansas city": { g: "big", st: "missouri", ab: "mo", look: "brick", ll: [39.1, -94.58], spots: [
       ["joe's kansas city bar-b-que", "gas station location", "bbq", 1996, 1, 4.6, "barbecue in a gas station", [
         ["z-man sandwich", 12, "brisket, provolone, onion rings", "sig", "sandwich"],
         ["burnt ends", 20, "sweet and smoky", "", "ribs"]]],
@@ -3624,7 +3660,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["frosty malt", 6, "thick", "sweet", "drink"]]]
     ] },
 
-    "st. louis": { g: "big", st: "missouri", ab: "mo", look: "brick", spots: [
+    "st. louis": { g: "big", st: "missouri", ab: "mo", look: "brick", ll: [38.63, -90.2], spots: [
       ["pappy's smokehouse", "midtown", "bbq", 2008, 2, 4.6, "memphis-style dry-rub ribs", [
         ["full slab ribs", 32, "dry rub", "sig", "ribs"],
         ["fried corn on the cob", 4, "a pappy's twist", "veg", "salad"]]],
@@ -3652,7 +3688,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["malt", 8, "thick", "sweet", "drink"]]]
     ] },
 
-    "pittsburgh": { g: "big", st: "pennsylvania", ab: "pa", look: "brick", spots: [
+    "pittsburgh": { g: "big", st: "pennsylvania", ab: "pa", look: "brick", ll: [40.44, -80.0], spots: [
       ["primanti bros.", "the strip district", "deli", 1933, 1, 4.4, "sandwiches stuffed with fries and slaw", [
         ["pitts-burger cheese steak", 12, "with fries and slaw inside", "sig", "sandwich"],
         ["capicola & cheese", 11, "fries, slaw, tomato", "", "sandwich"]]],
@@ -3678,7 +3714,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["borscht", 9, "beet soup", "veg", "soup"]]]
     ] },
 
-    "cleveland": { g: "big", st: "ohio", ab: "oh", look: "brick", spots: [
+    "cleveland": { g: "big", st: "ohio", ab: "oh", look: "brick", ll: [41.5, -81.69], spots: [
       ["slyman's", "st. clair-superior", "deli", 1964, 1, 4.6, "a corned beef sandwich the size of your head", [
         ["corned beef sandwich", 15, "piled high", "sig", "sandwich"],
         ["reuben", 16, "classic", "", "sandwich"]]],
@@ -3702,7 +3738,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["tomato soup", 5, "for dipping", "veg", "soup"]]]
     ] },
 
-    "milwaukee": { g: "big", st: "wisconsin", ab: "wi", look: "brick", spots: [
+    "milwaukee": { g: "big", st: "wisconsin", ab: "wi", look: "brick", ll: [43.04, -87.91], spots: [
       ["kopp's frozen custard", "multiple", "bakery", 1950, 1, 4.6, "flavor-of-the-day custard and burgers", [
         ["frozen custard", 5, "flavor of the day", "sig", "icecream"],
         ["jumbo burger", 7, "classic", "", "burger"]]],
@@ -3725,7 +3761,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["small plates", 16, "seasonal", "sig", "cloche"]]]
     ] },
 
-    "memphis": { g: "big", st: "tennessee", ab: "tn", look: "brick", spots: [
+    "memphis": { g: "big", st: "tennessee", ab: "tn", look: "brick", ll: [35.15, -90.05], spots: [
       ["charlie vergos' rendezvous", "downtown alley", "bbq", 1948, 2, 4.5, "dry-rub ribs in a basement off an alley", [
         ["dry rub ribs", 30, "charcoal-broiled, seasoned", "sig", "ribs"],
         ["red beans & rice", 5, "classic side", "", "rice"]]],
@@ -3750,7 +3786,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["bbq pizza", 18, "a memphis thing", "", "pizza"]]]
     ] },
 
-    "louisville": { g: "big", st: "kentucky", ab: "ky", look: "brick", spots: [
+    "louisville": { g: "big", st: "kentucky", ab: "ky", look: "brick", ll: [38.25, -85.76], spots: [
       ["the brown hotel", "downtown", "american", 1926, 3, 4.6, "birthplace of the hot brown", [
         ["hot brown", 22, "open-faced turkey, mornay, bacon, tomato", "sig", "sandwich"],
         ["bourbon", 14, "kentucky pours", "drink", "cocktail"]]],
@@ -3776,7 +3812,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["bourbon flight", 22, "three pours", "drink", "cocktail"]]]
     ] },
 
-    "tampa": { g: "big", st: "florida", ab: "fl", look: "deco", spots: [
+    "tampa": { g: "big", st: "florida", ab: "fl", look: "deco", ll: [27.95, -82.46], spots: [
       ["columbia restaurant", "ybor city", "spanish", 1905, 2, 4.6, "florida's oldest restaurant, with the 1905 salad", [
         ["1905 salad", 14, "tossed tableside, ham, swiss, olives", "sig", "salad"],
         ["cuban sandwich", 14, "tampa-style with salami", "", "sandwich"]]],
@@ -3803,7 +3839,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["bao", 9, "steamed buns", "", "dumpling"]]]
     ] },
 
-    "orlando": { g: "big", st: "florida", ab: "fl", look: "deco", spots: [
+    "orlando": { g: "big", st: "florida", ab: "fl", look: "deco", ll: [28.54, -81.38], spots: [
       ["kabooki sushi", "east colonial", "japanese", 2013, 3, 4.7, "creative sushi off the tourist path", [
         ["omakase", 90, "chef's selection", "sig", "sushi"],
         ["nigiri", 7, "torched and creative", "", "sushi"]]],
@@ -3828,7 +3864,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
       ["victoria & albert's", "grand floridian", "modern", 1988, 4, 4.8, "disney's michelin-starred dining room", [
         ["tasting menu", 375, "a formal multi-course experience", "sig", "cloche"]]]
     ] },
-    "london": { g: "world", st: "united kingdom", ab: "uk", look: "brick", k: "£", spots: [
+    "london": { g: "world", st: "united kingdom", ab: "uk", look: "brick", k: "£", ll: [51.51, -0.13], spots: [
       ["dishoom", "covent garden", "indian", 2010, 2, 4.7, "a bombay café with a cult black daal", [
         ["house black daal", 10, "simmered for over 24 hours", "sig", "curry"],
         ["bacon naan roll", 8, "the famous breakfast", "", "sandwich"],
@@ -3889,7 +3925,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["bread pudding", 4, "old-school", "sweet", "cake"]]]
     ] },
 
-    "paris": { g: "world", st: "france", ab: "fr", look: "stone", k: "€", spots: [
+    "paris": { g: "world", st: "france", ab: "fr", look: "stone", k: "€", ll: [48.86, 2.35], spots: [
       ["septime", "11th", "modern", 2011, 4, 4.7, "bertrand grébaut's seasonal tasting", [
         ["tasting menu", 135, "vegetables and seasons first", "sig", "cloche"]]],
       ["le relais de l'entrecôte", "saint-germain", "steak", 1959, 2, 4.4, "one dish only: steak, frites, secret sauce", [
@@ -3946,7 +3982,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["pizza", 16, "neapolitan", "", "pizza"]]]
     ] },
 
-    "tokyo": { g: "world", st: "japan", ab: "jp", look: "clap", k: "¥", spots: [
+    "tokyo": { g: "world", st: "japan", ab: "jp", look: "clap", k: "¥", ll: [35.68, 139.69], spots: [
       ["ichiran shibuya", "shibuya", "japanese", 1960, 1, 4.4, "solo-booth tonkotsu ramen", [
         ["tonkotsu ramen", 980, "customize every detail", "sig", "noodles"],
         ["kaedama", 210, "an extra serving of noodles", "", "noodles"]]],
@@ -3993,7 +4029,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["tempura soba", 2000, "hot", "", "noodles"]]]
     ] },
 
-    "rome": { g: "world", st: "italy", ab: "it", look: "stucco", k: "€", spots: [
+    "rome": { g: "world", st: "italy", ab: "it", look: "stucco", k: "€", ll: [41.9, 12.5], spots: [
       ["da enzo al 29", "trastevere", "italian", 1935, 2, 4.6, "a tiny trastevere trattoria with a line", [
         ["carbonara", 14, "guanciale, egg, pecorino", "sig", "pasta"],
         ["cacio e pepe", 12, "pecorino and pepper", "veg", "pasta"],
@@ -4032,7 +4068,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["fried zucchini flowers", 3, "with anchovy", "", "beignet"]]]
     ] },
 
-    "mexico city": { g: "world", st: "mexico", ab: "mx", look: "deco", k: "mx$", spots: [
+    "mexico city": { g: "world", st: "mexico", ab: "mx", look: "deco", k: "mx$", ll: [19.43, -99.13], spots: [
       ["pujol", "polanco", "modern", 2000, 4, 4.6, "enrique olvera's mole madre", [
         ["tasting menu", 4500, "with the aged mole madre", "sig", "cloche"]]],
       ["contramar", "roma", "seafood", 1998, 3, 4.6, "the lunch everyone wants", [
@@ -4066,7 +4102,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["chef's corn dishes", 600, "whatever the masa inspires", "sig", "taco"]]]
     ] },
 
-    "barcelona": { g: "world", st: "spain", ab: "es", look: "stone", k: "€", spots: [
+    "barcelona": { g: "world", st: "spain", ab: "es", look: "stone", k: "€", ll: [41.39, 2.17], spots: [
       ["cal pep", "el born", "spanish", 1979, 3, 4.6, "counter tapas with a line", [
         ["fried fish trifásico", 18, "mixed fried seafood", "sig", "fish"],
         ["tortilla", 12, "with chorizo", "", "egg"]]],
@@ -4099,7 +4135,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["croquetas", 3, "each", "", "beignet"]]]
     ] },
 
-    "madrid": { g: "world", st: "spain", ab: "es", look: "stone", k: "€", spots: [
+    "madrid": { g: "world", st: "spain", ab: "es", look: "stone", k: "€", ll: [40.42, -3.7], spots: [
       ["sobrino de botín", "la latina", "spanish", 1725, 3, 4.3, "the world's oldest restaurant, says guinness", [
         ["roast suckling pig", 29, "from the wood oven", "sig", "ribs"],
         ["roast lamb", 30, "classic", "", "steak"]]],
@@ -4125,7 +4161,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["tapas stalls", 4, "oysters, croquetas, ham, vermouth", "sig", "bread"]]]
     ] },
 
-    "lisbon": { g: "world", st: "portugal", ab: "pt", look: "deco", k: "€", spots: [
+    "lisbon": { g: "world", st: "portugal", ab: "pt", look: "deco", k: "€", ll: [38.72, -9.14], spots: [
       ["pastéis de belém", "belém", "bakery", 1837, 1, 4.6, "the original custard tart recipe since 1837", [
         ["pastel de belém", 1.5, "warm, with cinnamon and sugar", "sig", "cake"]]],
       ["manteigaria", "chiado", "bakery", 2014, 1, 4.7, "custard tarts hot from the oven", [
@@ -4148,7 +4184,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["sushi", 18, "with portuguese fish", "", "sushi"]]]
     ] },
 
-    "berlin": { g: "world", st: "germany", ab: "de", look: "stone", k: "€", spots: [
+    "berlin": { g: "world", st: "germany", ab: "de", look: "stone", k: "€", ll: [52.52, 13.4], spots: [
       ["mustafa's gemüse kebap", "kreuzberg", "mediterranean", 2006, 1, 4.6, "the vegetable kebab with a famous queue", [
         ["gemüse kebap", 6, "chicken, roasted veg, feta, lemon", "sig", "wrap"]]],
       ["curry 36", "kreuzberg", "european", 1981, 1, 4.4, "a classic currywurst stand", [
@@ -4173,7 +4209,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["tasting menu", 295, "marco müller's natural cuisine", "sig", "cloche"]]]
     ] },
 
-    "amsterdam": { g: "world", st: "netherlands", ab: "nl", look: "brick", k: "€", spots: [
+    "amsterdam": { g: "world", st: "netherlands", ab: "nl", look: "brick", k: "€", ll: [52.37, 4.9], spots: [
       ["winkel 43", "jordaan", "bakery", 1974, 1, 4.6, "the city's favorite apple pie", [
         ["apple pie", 5, "tall, with whipped cream", "sig", "cake"]]],
       ["the pancake bakery", "prinsengracht", "european", 1973, 2, 4.4, "dutch pancakes in a canal house", [
@@ -4195,7 +4231,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["kroketten", 3, "shrimp or veal croquettes", "sig", "beignet"]]]
     ] },
 
-    "copenhagen": { g: "world", st: "denmark", ab: "dk", look: "clap", k: "kr", spots: [
+    "copenhagen": { g: "world", st: "denmark", ab: "dk", look: "clap", k: "kr", ll: [55.68, 12.57], spots: [
       ["schønnemann", "inner city", "european", 1877, 3, 4.6, "smørrebrød and schnapps since 1877", [
         ["smørrebrød", 150, "open sandwiches", "sig", "bread"],
         ["aquavit", 70, "a schnapps", "drink", "cocktail"]]],
@@ -4218,7 +4254,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
       ["torvehallerne", "nørreport", "european", 2011, 2, 4.6, "two glass market halls", [
         ["smørrebrød & coffee", 90, "from the stalls", "sig", "bread"]]]
     ] },
-    "istanbul": { g: "world", st: "türkiye", ab: "tr", look: "stone", k: "₺", spots: [
+    "istanbul": { g: "world", st: "türkiye", ab: "tr", look: "stone", k: "₺", ll: [41.01, 28.98], spots: [
       ["çiya sofrası", "kadıköy", "mediterranean", 1987, 2, 4.5, "anatolian home cooking from musa dağdeviren", [
         ["kebab of the day", 650, "regional anatolian recipes", "sig", "kebab"],
         ["stuffed vegetables", 350, "seasonal dolma", "veg", "salad"]]],
@@ -4248,7 +4284,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["lamb", 900, "slow-cooked", "", "steak"]]]
     ] },
 
-    "dubai": { g: "world", st: "united arab emirates", ab: "ae", look: "stucco", k: "aed", spots: [
+    "dubai": { g: "world", st: "united arab emirates", ab: "ae", look: "stucco", k: "aed", ll: [25.2, 55.27], spots: [
       ["al ustad special kebab", "al fahidi", "mediterranean", 1978, 1, 4.6, "iranian kebabs since 1978", [
         ["chelo kebab", 40, "grilled meat with saffron rice", "sig", "kebab"]]],
       ["ravi restaurant", "satwa", "indian", 1978, 1, 4.4, "pakistani cooking, open late", [
@@ -4274,7 +4310,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["falafel wrap", 15, "crisp", "sig", "wrap"]]]
     ] },
 
-    "mumbai": { g: "world", st: "india", ab: "in", look: "deco", k: "₹", spots: [
+    "mumbai": { g: "world", st: "india", ab: "in", look: "deco", k: "₹", ll: [19.08, 72.88], spots: [
       ["britannia & co.", "ballard estate", "indian", 1923, 2, 4.5, "a parsi café famous for berry pulav", [
         ["berry pulav", 750, "rice with barberries and chicken", "sig", "rice"],
         ["caramel custard", 200, "classic", "sweet", "cake"]]],
@@ -4307,7 +4343,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["crab curry", 1500, "spicy", "", "claw"]]]
     ] },
 
-    "bangkok": { g: "world", st: "thailand", ab: "th", look: "deco", k: "฿", spots: [
+    "bangkok": { g: "world", st: "thailand", ab: "th", look: "deco", k: "฿", ll: [13.76, 100.5], spots: [
       ["jay fai", "old town", "thai", 1980, 3, 4.4, "the goggled street-food chef with a michelin star", [
         ["crab omelet", 1500, "a giant golden roll of crab", "sig", "egg"],
         ["drunken noodles", 600, "wok-charred", "spicy", "noodles"]]],
@@ -4340,7 +4376,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["thai whisky cocktail", 280, "local spirits", "drink", "cocktail"]]]
     ] },
 
-    "singapore": { g: "world", st: "singapore", ab: "sg", look: "deco", k: "s$", spots: [
+    "singapore": { g: "world", st: "singapore", ab: "sg", look: "deco", k: "s$", ll: [1.35, 103.82], spots: [
       ["tian tian hainanese chicken rice", "maxwell food centre", "chinese", 1986, 1, 4.4, "the hawker chicken rice", [
         ["hainanese chicken rice", 6, "poached chicken, fragrant rice, chili", "sig", "rice"]]],
       ["hill street tai hwa pork noodle", "crawford lane", "chinese", 1932, 1, 4.4, "a michelin-starred bak chor mee", [
@@ -4371,7 +4407,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["biryani", 7, "fragrant rice", "sig", "rice"]]]
     ] },
 
-    "hong kong": { g: "world", st: "china", ab: "hk", look: "brick", k: "hk$", spots: [
+    "hong kong": { g: "world", st: "china", ab: "hk", look: "brick", k: "hk$", ll: [22.32, 114.17], spots: [
       ["tim ho wan", "sham shui po", "chinese", 2009, 1, 4.2, "once the cheapest michelin-starred meal", [
         ["baked bbq pork buns", 28, "crisp top, sweet char siu", "sig", "dumpling"],
         ["har gow", 34, "shrimp dumplings", "", "dumpling"]]],
@@ -4402,7 +4438,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["char siu rice", 60, "honey-glazed pork", "sig", "rice"]]]
     ] },
 
-    "osaka": { g: "world", st: "japan", ab: "jp", look: "clap", k: "¥", spots: [
+    "osaka": { g: "world", st: "japan", ab: "jp", look: "clap", k: "¥", ll: [34.69, 135.5], spots: [
       ["kani doraku dotonbori", "dotonbori", "seafood", 1962, 3, 4.3, "under the giant moving crab sign", [
         ["crab course", 8000, "crab many ways", "sig", "claw"],
         ["grilled crab", 3000, "street-side", "", "claw"]]],
@@ -4425,7 +4461,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["okonomiyaki", 1400, "with pork", "sig", "pancake"]]]
     ] },
 
-    "seoul": { g: "world", st: "south korea", ab: "kr", look: "brick", k: "₩", spots: [
+    "seoul": { g: "world", st: "south korea", ab: "kr", look: "brick", k: "₩", ll: [37.57, 126.98], spots: [
       ["gwangjang market", "jongno", "korean", 1905, 1, 4.4, "korea's oldest market for street food", [
         ["bindaetteok", 5000, "mung bean pancake", "sig", "pancake"],
         ["mayak gimbap", 4000, "'addictive' mini rolls", "", "sushi"]]],
@@ -4451,7 +4487,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["galbi", 40000, "marinated short rib", "sig", "steak"]]]
     ] },
 
-    "sydney": { g: "world", st: "australia", ab: "au", look: "stucco", k: "a$", spots: [
+    "sydney": { g: "world", st: "australia", ab: "au", look: "stucco", k: "a$", ll: [-33.87, 151.21], spots: [
       ["quay", "circular quay", "modern", 1988, 4, 4.6, "views of the opera house and a famous snow egg", [
         ["tasting menu", 320, "peter gilmore's menu", "sig", "cloche"]]],
       ["harry's café de wheels", "woolloomooloo", "american", 1938, 1, 4.3, "the tiger pie cart since 1938", [
@@ -4481,7 +4517,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["pipis in xo sauce", 50, "a signature", "sig", "oyster"]]]
     ] },
 
-    "toronto": { g: "world", st: "canada", ab: "ca", look: "brick", k: "c$", spots: [
+    "toronto": { g: "world", st: "canada", ab: "ca", look: "brick", k: "c$", ll: [43.65, -79.38], spots: [
       ["carousel bakery", "st. lawrence market", "deli", 1977, 1, 4.6, "the peameal bacon sandwich", [
         ["peameal bacon sandwich", 10, "cornmeal-crusted back bacon on a bun", "sig", "sandwich"]]],
       ["pai northern thai kitchen", "entertainment district", "thai", 2014, 2, 4.6, "northern thai in a lively basement", [
@@ -4510,7 +4546,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["japanese cheesecake", 15, "whole cake", "sig", "cake"]]]
     ] },
 
-    "montreal": { g: "world", st: "canada", ab: "ca", look: "stone", k: "c$", spots: [
+    "montreal": { g: "world", st: "canada", ab: "ca", look: "stone", k: "c$", ll: [45.5, -73.57], spots: [
       ["schwartz's deli", "plateau", "deli", 1928, 1, 4.5, "montreal smoked meat since 1928", [
         ["smoked meat sandwich", 14, "medium fat, mustard, rye", "sig", "sandwich"],
         ["pickle", 3, "half sour", "veg", "salad"]]],
@@ -4540,7 +4576,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["beauty's special", 18, "bagel, lox, cream cheese", "sig", "bagel"]]]
     ] },
 
-    "lima": { g: "world", st: "peru", ab: "pe", look: "deco", k: "s/", spots: [
+    "lima": { g: "world", st: "peru", ab: "pe", look: "deco", k: "s/", ll: [-12.05, -77.04], spots: [
       ["central", "barranco", "modern", 2008, 4, 4.8, "virgilio martínez's journey through peru's altitudes", [
         ["tasting menu", 1200, "peru from sea to andes", "sig", "cloche"]]],
       ["maido", "miraflores", "modern", 2009, 4, 4.7, "nikkei cooking by mitsuharu tsumura", [
@@ -4563,7 +4599,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["ceviche", 60, "market fish", "sig", "fish"]]]
     ] },
 
-    "buenos aires": { g: "world", st: "argentina", ab: "ar", look: "stone", k: "us$", spots: [
+    "buenos aires": { g: "world", st: "argentina", ab: "ar", look: "stone", k: "us$", ll: [-34.6, -58.38], spots: [
       ["don julio", "palermo", "steak", 1999, 4, 4.7, "the parrilla atop latin america's best lists", [
         ["bife de chorizo", 40, "grilled strip steak", "sig", "steak"],
         ["provoleta", 12, "grilled cheese", "veg", "cloche"]]],
@@ -4585,7 +4621,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
       ["el ferroviario", "liniers", "steak", 1990, 2, 4.6, "a big, local parrilla", [
         ["parrillada", 30, "mixed grill for two", "sig", "steak"]]]
     ] },
-    "jupiter": { g: "fl", st: "florida", ab: "fl", look: "deco", spots: [
+    "jupiter": { g: "fl", st: "florida", ab: "fl", look: "deco", ll: [26.93, -80.09], spots: [
       ["guanabanas", "jupiter river", "seafood", 2004, 2, 4.5, "an island-style restaurant in a jungle garden on the water", [
         ["fish tacos", 19, "with mango salsa", "sig", "taco"],
         ["conch fritters", 15, "crisp", "", "beignet"]]],
@@ -4611,7 +4647,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["fish & chips", 18, "crisp", "", "fish"]]]
     ] },
 
-    "boynton beach": { g: "fl", st: "florida", ab: "fl", look: "deco", spots: [
+    "boynton beach": { g: "fl", st: "florida", ab: "fl", look: "deco", ll: [26.53, -80.07], spots: [
       ["banana boat", "intracoastal", "seafood", 1977, 2, 4.4, "boat-in waterfront dining since 1977", [
         ["coconut shrimp", 22, "with orange sauce", "sig", "shrimp"],
         ["fish tacos", 18, "fresh", "", "taco"]]],
@@ -4632,7 +4668,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["garlic rolls", 6, "warm", "veg", "bread"]]]
     ] },
 
-    "key west": { g: "fl", st: "florida", ab: "fl", look: "clap", spots: [
+    "key west": { g: "fl", st: "florida", ab: "fl", look: "clap", ll: [24.56, -81.78], spots: [
       ["blue heaven", "bahama village", "american", 1992, 2, 4.5, "breakfast under the trees with roaming chickens", [
         ["lobster benedict", 28, "a breakfast favorite", "sig", "egg"],
         ["key lime pie", 12, "with towering meringue", "sweet", "cake"]]],
@@ -4665,7 +4701,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["eggs benedict", 16, "classic", "", "egg"]]]
     ] },
 
-    "naples, fl": { g: "fl", st: "florida", ab: "fl", look: "deco", spots: [
+    "naples, fl": { g: "fl", st: "florida", ab: "fl", look: "deco", ll: [26.14, -81.79], spots: [
       ["the turtle club", "vanderbilt beach", "seafood", 1990, 3, 4.5, "gulf-front dining at sunset", [
         ["grouper", 42, "local", "sig", "fish"],
         ["key lime pie", 12, "tart", "sweet", "cake"]]],
@@ -4686,7 +4722,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["pizza", 20, "wood-fired", "sig", "pizza"]]]
     ] },
 
-    "st. petersburg": { g: "fl", st: "florida", ab: "fl", look: "deco", spots: [
+    "st. petersburg": { g: "fl", st: "florida", ab: "fl", look: "deco", ll: [27.77, -82.64], spots: [
       ["ted peters famous smoked fish", "south pasadena", "seafood", 1951, 1, 4.6, "smoked mullet and fish spread since 1951", [
         ["smoked mullet", 18, "smoked over red oak", "sig", "fish"],
         ["smoked fish spread", 10, "with crackers", "", "dip"]]],
@@ -4707,7 +4743,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["burnt ends", 18, "sweet and smoky", "", "ribs"]]]
     ] },
 
-    "sarasota": { g: "fl", st: "florida", ab: "fl", look: "deco", spots: [
+    "sarasota": { g: "fl", st: "florida", ab: "fl", look: "deco", ll: [27.34, -82.53], spots: [
       ["owen's fish camp", "burns court", "seafood", 2006, 2, 4.5, "an old florida fish camp under a banyan tree", [
         ["fried grouper", 28, "crisp", "sig", "fish"],
         ["shrimp & grits", 24, "creamy", "", "shrimp"]]],
@@ -4728,7 +4764,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["paella", 36, "seafood", "", "rice"]]]
     ] },
 
-    "irvine & costa mesa": { g: "socal", st: "orange county, california", ab: "ca", look: "stucco", spots: [
+    "irvine & costa mesa": { g: "socal", st: "orange county, california", ab: "ca", look: "stucco", ll: [33.68, -117.83], spots: [
       ["capital seafood", "irvine spectrum", "chinese", 2006, 2, 4.3, "dim sum carts in irvine", [
         ["har gow", 8, "shrimp dumplings", "sig", "dumpling"],
         ["peking duck", 60, "for the table", "share", "chicken"]]],
@@ -4754,7 +4790,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["live maine lobster", "mp", "by the pound", "", "claw"]]]
     ] },
 
-    "newport beach": { g: "socal", st: "orange county, california", ab: "ca", look: "clap", spots: [
+    "newport beach": { g: "socal", st: "orange county, california", ab: "ca", look: "clap", ll: [33.62, -117.93], spots: [
       ["the crab cooker", "balboa peninsula", "seafood", 1951, 2, 4.4, "paper plates and crab legs since 1951", [
         ["alaskan king crab legs", 60, "with butter", "sig", "claw"],
         ["manhattan clam chowder", 8, "tomato-based", "", "soup"]]],
@@ -4784,7 +4820,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["frozen banana", 5, "chocolate-dipped", "sweet", "icecream"]]]
     ] },
 
-    "laguna beach": { g: "socal", st: "orange county, california", ab: "ca", look: "clap", spots: [
+    "laguna beach": { g: "socal", st: "orange county, california", ab: "ca", look: "clap", ll: [33.54, -117.78], spots: [
       ["nick's laguna beach", "pacific coast highway", "american", 2007, 2, 4.6, "a lively american grill", [
         ["ahi tuna stack", 18, "a favorite", "sig", "fish"],
         ["skillet cornbread", 9, "with honey butter", "veg", "bread"]]],
@@ -4811,7 +4847,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["flatbread", 16, "small bites", "", "pizza"]]]
     ] },
 
-    "san clemente": { g: "socal", st: "orange county, california", ab: "ca", look: "adobe", spots: [
+    "san clemente": { g: "socal", st: "orange county, california", ab: "ca", look: "adobe", ll: [33.43, -117.61], spots: [
       ["nick's san clemente", "del mar", "american", 2010, 2, 4.6, "a lively american grill on del mar", [
         ["ahi tuna stack", 18, "a favorite", "sig", "fish"],
         ["burger", 20, "with fries", "", "burger"]]],
@@ -4829,7 +4865,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["tableside guacamole", 15, "made fresh", "veg", "dip"]]]
     ] },
 
-    "huntington beach": { g: "socal", st: "orange county, california", ab: "ca", look: "clap", spots: [
+    "huntington beach": { g: "socal", st: "orange county, california", ab: "ca", look: "clap", ll: [33.66, -118.0], spots: [
       ["duke's huntington beach", "the pier", "seafood", 1996, 3, 4.5, "surf-themed dining by the pier", [
         ["hula pie", 14, "macadamia ice cream pie", "sig", "cake"],
         ["fresh fish", 36, "island-style", "", "fish"]]],
@@ -4847,7 +4883,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["pulled pork", 12, "smoked", "", "ribs"]]]
     ] },
 
-    "long beach": { g: "socal", st: "california", ab: "ca", look: "stucco", spots: [
+    "long beach": { g: "socal", st: "california", ab: "ca", look: "stucco", ll: [33.77, -118.19], spots: [
       ["phnom penh noodle shack", "cambodia town", "asian", 1985, 1, 4.6, "cambodian noodle soups in cambodia town", [
         ["phnom penh noodle soup", 13, "rice noodles, pork, shrimp", "sig", "noodles"],
         ["fried rice", 13, "simple and great", "", "rice"]]],
@@ -4869,7 +4905,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["deep dish", 30, "buttery crust", "sig", "pizza"]]]
     ] },
 
-    "santa monica": { g: "socal", st: "california", ab: "ca", look: "stucco", spots: [
+    "santa monica": { g: "socal", st: "california", ab: "ca", look: "stucco", ll: [34.02, -118.49], spots: [
       ["father's office", "montana avenue", "burgers", 1953, 2, 4.4, "the office burger, no substitutions", [
         ["office burger", 19, "caramelized onion, gruyère, maytag blue, arugula", "sig", "burger"],
         ["sweet potato fries", 8, "with aioli", "veg", "fries"]]],
@@ -4897,7 +4933,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["corn ravioli", 38, "sweet corn, butter", "sig", "pasta"]]]
     ] },
 
-    "pasadena": { g: "socal", st: "california", ab: "ca", look: "stucco", spots: [
+    "pasadena": { g: "socal", st: "california", ab: "ca", look: "stucco", ll: [34.15, -118.14], spots: [
       ["the raymond 1886", "south pasadena", "american", 1886, 3, 4.6, "dining in a historic cottage with a speakeasy", [
         ["seasonal plates", 34, "american classics", "sig", "cloche"],
         ["cocktails", 16, "from the 1886 bar", "drink", "cocktail"]]],
@@ -4919,7 +4955,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["phosphate soda", 5, "old-fashioned", "drink", "drink"]]]
     ] },
 
-    "palm springs": { g: "socal", st: "california", ab: "ca", look: "deco", spots: [
+    "palm springs": { g: "socal", st: "california", ab: "ca", look: "deco", ll: [33.83, -116.55], spots: [
       ["workshop kitchen + bar", "uptown", "american", 2012, 3, 4.5, "a concrete cathedral of farm-to-table cooking", [
         ["seasonal plates", 34, "local produce", "sig", "cloche"]]],
       ["tyler's burgers", "la plaza", "burgers", 1996, 1, 4.6, "a tiny burger shack with a big following", [
@@ -4943,7 +4979,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["brunch", 16, "big plates", "sig", "egg"]]]
     ] },
 
-    "santa barbara": { g: "socal", st: "california", ab: "ca", look: "adobe", spots: [
+    "santa barbara": { g: "socal", st: "california", ab: "ca", look: "adobe", ll: [34.42, -119.7], spots: [
       ["la super-rica taqueria", "milpas street", "mexican", 1980, 1, 4.4, "julia child's favorite taco stand", [
         ["super-rica especial", 9, "pork, chile, cheese on fresh tortillas", "sig", "taco"],
         ["tamales", 8, "weekends", "", "wrap"]]],
@@ -4965,7 +5001,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
       ["lucky's steakhouse", "montecito", "steak", 2000, 4, 4.5, "montecito's classic steakhouse", [
         ["prime ribeye", 72, "classic", "sig", "steak"]]]
     ] },
-    "greenwich": { g: "tri", st: "connecticut", ab: "ct", look: "clap", spots: [
+    "greenwich": { g: "tri", st: "connecticut", ab: "ct", look: "clap", ll: [41.03, -73.63], spots: [
       ["l'escale", "greenwich harbor", "french", 2001, 4, 4.4, "provençal dining on the harbor", [
         ["bouillabaisse", 52, "seafood stew", "sig", "soup"],
         ["steak frites", 44, "classic", "", "steak"]]],
@@ -4989,7 +5025,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["grilled fish", 36, "simple", "", "fish"]]]
     ] },
 
-    "westport": { g: "tri", st: "connecticut", ab: "ct", look: "clap", spots: [
+    "westport": { g: "tri", st: "connecticut", ab: "ct", look: "clap", ll: [41.14, -73.36], spots: [
       ["the whelk", "saugatuck", "seafood", 2012, 3, 4.6, "bill taibe's seafood bar by the river", [
         ["fried oysters", 18, "crisp", "sig", "oyster"],
         ["clam chowder", 12, "creamy", "", "soup"]]],
@@ -5012,7 +5048,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["pizza", 20, "wood-fired", "sig", "pizza"]]]
     ] },
 
-    "new haven": { g: "tri", st: "connecticut", ab: "ct", look: "brick", spots: [
+    "new haven": { g: "tri", st: "connecticut", ab: "ct", look: "brick", ll: [41.31, -72.92], spots: [
       ["frank pepe pizzeria napoletana", "wooster square", "pizza", 1925, 2, 4.5, "the white clam pie, born here", [
         ["white clam pie", 30, "fresh clams, garlic, oregano, olive oil", "sig", "pizza"],
         ["tomato pie", 18, "no mozzarella, just sauce and grated cheese", "veg", "pizza"]]],
@@ -5042,7 +5078,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["falafel sandwich", 8, "classic", "sig", "wrap"]]]
     ] },
 
-    "norwalk": { g: "tri", st: "connecticut", ab: "ct", look: "brick", spots: [
+    "norwalk": { g: "tri", st: "connecticut", ab: "ct", look: "brick", ll: [41.12, -73.41], spots: [
       ["valencia luncheria", "norwalk", "latin", 1995, 1, 4.6, "venezuelan arepas and empanadas", [
         ["arepa", 10, "stuffed generously", "sig", "sandwich"],
         ["empanadas", 4, "crisp", "", "dumpling"]]],
@@ -5058,7 +5094,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["oysters", 3, "by the piece", "", "oyster"]]]
     ] },
 
-    "hoboken": { g: "tri", st: "new jersey", ab: "nj", look: "brick", spots: [
+    "hoboken": { g: "tri", st: "new jersey", ab: "nj", look: "brick", ll: [40.74, -74.03], spots: [
       ["carlo's bakery", "washington street", "bakery", 1910, 1, 4.3, "the cake boss bakery", [
         ["lobster tail", 6, "flaky pastry, cream", "sig", "croissant"],
         ["cannoli", 4, "filled", "sweet", "cake"]]],
@@ -5080,7 +5116,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["pizza", 18, "brick oven", "sig", "pizza"]]]
     ] },
 
-    "jersey city": { g: "tri", st: "new jersey", ab: "nj", look: "brick", spots: [
+    "jersey city": { g: "tri", st: "new jersey", ab: "nj", look: "brick", ll: [40.73, -74.08], spots: [
       ["razza", "downtown", "pizza", 2012, 2, 4.7, "dan richer's pizza, once called the best in new york", [
         ["margherita", 20, "house mozzarella", "sig", "pizza"],
         ["bread & butter", 9, "house-made", "veg", "bread"]]],
@@ -5097,7 +5133,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["focaccia", 6, "airy", "veg", "bread"]]]
     ] },
 
-    "montclair": { g: "tri", st: "new jersey", ab: "nj", look: "brick", spots: [
+    "montclair": { g: "tri", st: "new jersey", ab: "nj", look: "brick", ll: [40.82, -74.21], spots: [
       ["raymond's", "church street", "american", 1997, 2, 4.4, "a retro american café", [
         ["pancakes", 12, "fluffy", "sig", "pancake"],
         ["burger", 16, "classic", "", "burger"]]],
@@ -5113,7 +5149,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
       ["egan & sons", "montclair", "european", 2007, 2, 4.4, "an irish pub with a brewery", [
         ["fish & chips", 20, "beer-battered", "sig", "fish"]]]
     ] },
-    "charleston, sc": { g: "more", st: "south carolina", ab: "sc", look: "creole", spots: [
+    "charleston, sc": { g: "more", st: "south carolina", ab: "sc", look: "creole", ll: [32.78, -79.93], spots: [
       ["husk", "queen street", "southern", 2010, 3, 4.6, "sean brock's southern-ingredients-only restaurant", [
         ["husk cheeseburger", 20, "double patty, bacon in the beef", "sig", "burger"],
         ["skillet cornbread", 10, "with benton's bacon", "", "bread"]]],
@@ -5151,7 +5187,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["fried green tomatoes", 14, "tangy", "veg", "salad"]]]
     ] },
 
-    "savannah": { g: "more", st: "georgia", ab: "ga", look: "creole", spots: [
+    "savannah": { g: "more", st: "georgia", ab: "ga", look: "creole", ll: [32.08, -81.09], spots: [
       ["mrs. wilkes' dining room", "jones street", "southern", 1943, 2, 4.6, "family-style tables of fried chicken and sides", [
         ["family-style lunch", 30, "fried chicken and many sides, per person", "sig", "chicken"],
         ["banana pudding", "incl", "part of the spread", "sweet", "cake"]]],
@@ -5177,7 +5213,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["lowcountry boil", 26, "shrimp, sausage, corn, potatoes", "sig", "shrimp"]]]
     ] },
 
-    "asheville": { g: "more", st: "north carolina", ab: "nc", look: "brick", spots: [
+    "asheville": { g: "more", st: "north carolina", ab: "nc", look: "brick", ll: [35.6, -82.55], spots: [
       ["cúrate", "downtown", "spanish", 2011, 3, 4.7, "katie button's spanish tapas bar", [
         ["patatas bravas", 10, "spicy tomato, aioli", "veg", "fries"],
         ["jamón ibérico", 30, "hand-sliced", "sig", "bacon"]]],
@@ -5207,7 +5243,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["tasting", 75, "inventive filipino", "sig", "cloche"]]]
     ] },
 
-    "portland, me": { g: "more", st: "maine", ab: "me", look: "brick", spots: [
+    "portland, me": { g: "more", st: "maine", ab: "me", look: "brick", ll: [43.66, -70.26], spots: [
       ["eventide oyster co.", "old port", "seafood", 2012, 2, 4.7, "oysters and a brown butter lobster roll", [
         ["brown butter lobster roll", 32, "in a steamed bun", "sig", "sandwich"],
         ["oysters", 3, "maine and beyond", "", "oyster"]]],
@@ -5238,7 +5274,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["haddock chowder", 9, "creamy", "", "soup"]]]
     ] },
 
-    "napa valley": { g: "more", st: "california", ab: "ca", look: "stucco", spots: [
+    "napa valley": { g: "more", st: "california", ab: "ca", look: "stucco", ll: [38.4, -122.36], spots: [
       ["the french laundry", "yountville", "modern", 1994, 4, 4.7, "thomas keller's three-star country house", [
         ["chef's tasting", 390, "with oysters and pearls", "sig", "cloche"]]],
       ["bouchon bistro", "yountville", "french", 1998, 3, 4.6, "thomas keller's french bistro", [
@@ -5265,7 +5301,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["prime rib", 54, "from the hearth", "sig", "steak"]]]
     ] },
 
-    "durham": { g: "more", st: "north carolina", ab: "nc", look: "brick", spots: [
+    "durham": { g: "more", st: "north carolina", ab: "nc", look: "brick", ll: [35.99, -78.9], spots: [
       ["mateo bar de tapas", "downtown", "spanish", 2013, 3, 4.6, "spanish tapas with southern ingredients", [
         ["pan con tomate", 8, "classic", "veg", "bread"],
         ["fried chicken thigh", 12, "a signature", "sig", "chicken"]]],
@@ -5285,7 +5321,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["donut", 3, "creative flavors", "sig", "donut"]]]
     ] },
 
-    "birmingham": { g: "more", st: "alabama", ab: "al", look: "brick", spots: [
+    "birmingham": { g: "more", st: "alabama", ab: "al", look: "brick", ll: [33.52, -86.8], spots: [
       ["bottega", "highland avenue", "italian", 1988, 3, 4.6, "frank stitt's italian restaurant and café", [
         ["parmesan soufflé", 16, "a signature", "sig", "cake"],
         ["pasta", 28, "seasonal", "", "pasta"]]],
@@ -5306,7 +5342,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["slab of ribs", 30, "with white bread", "sig", "ribs"]]]
     ] },
 
-    "chattanooga": { g: "more", st: "tennessee", ab: "tn", look: "brick", spots: [
+    "chattanooga": { g: "more", st: "tennessee", ab: "tn", look: "brick", ll: [35.05, -85.31], spots: [
       ["champy's fried chicken", "martin luther king boulevard", "southern", 2008, 1, 4.5, "fried chicken and tamales", [
         ["fried chicken", 13, "crisp", "sig", "chicken"],
         ["tamales", 8, "delta-style", "spicy", "wrap"]]],
@@ -5323,7 +5359,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["fried chicken sandwich", 14, "crisp", "sig", "sandwich"]]]
     ] },
 
-    "lafayette": { g: "more", st: "louisiana", ab: "la", look: "creole", spots: [
+    "lafayette": { g: "more", st: "louisiana", ab: "la", look: "creole", ll: [30.22, -92.02], spots: [
       ["prejean's", "north lafayette", "southern", 1980, 2, 4.5, "cajun food and live music", [
         ["crawfish étouffée", 24, "smothered crawfish", "sig", "curry"],
         ["gumbo", 12, "dark roux", "", "soup"]]],
@@ -5346,7 +5382,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["fried chicken", 12, "crisp", "", "chicken"]]]
     ] },
 
-    "burlington": { g: "more", st: "vermont", ab: "vt", look: "clap", spots: [
+    "burlington": { g: "more", st: "vermont", ab: "vt", look: "clap", ll: [44.48, -73.21], spots: [
       ["hen of the wood", "downtown", "american", 2013, 3, 4.7, "farm-to-table in a vermont hotel", [
         ["hen of the wood mushrooms", 16, "the namesake", "sig", "salad"],
         ["local steak", 48, "vermont beef", "", "steak"]]],
@@ -5368,7 +5404,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
       ["misery loves co.", "winooski", "american", 2011, 3, 4.6, "creative small plates in winooski", [
         ["seasonal plates", 22, "creative", "sig", "cloche"]]]
     ] },
-    "scottsdale": { g: "more", st: "arizona", ab: "az", look: "adobe", spots: [
+    "scottsdale": { g: "more", st: "arizona", ab: "az", look: "adobe", ll: [33.49, -111.93], spots: [
       ["the mission", "old town", "latin", 2008, 3, 4.6, "modern latin with tableside guacamole", [
         ["tableside guacamole", 16, "made at your table", "sig", "dip"],
         ["pork shoulder tacos", 18, "slow-roasted", "", "taco"]]],
@@ -5387,7 +5423,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["agnolotti", 32, "handmade", "", "pasta"]]]
     ] },
 
-    "tucson": { g: "more", st: "arizona", ab: "az", look: "adobe", spots: [
+    "tucson": { g: "more", st: "arizona", ab: "az", look: "adobe", ll: [32.22, -110.97], spots: [
       ["el charro café", "el presidio", "mexican", 1922, 2, 4.4, "the oldest mexican restaurant in the us, says the family", [
         ["carne seca", 22, "sun-dried beef", "sig", "steak"],
         ["chimichanga", 18, "said to be invented here", "", "wrap"]]],
@@ -5410,7 +5446,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["president's plate", 18, "a big combination plate", "sig", "taco"]]]
     ] },
 
-    "albuquerque": { g: "more", st: "new mexico", ab: "nm", look: "adobe", spots: [
+    "albuquerque": { g: "more", st: "new mexico", ab: "nm", look: "adobe", ll: [35.08, -106.65], spots: [
       ["frontier restaurant", "near unm", "mexican", 1971, 1, 4.5, "sweet rolls and breakfast burritos by the university", [
         ["sweet roll", 3, "giant and buttery", "sig", "croissant"],
         ["breakfast burrito", 8, "with green chile", "spicy", "wrap"]]],
@@ -5432,7 +5468,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["breakfast burrito", 12, "smothered", "sig", "wrap"]]]
     ] },
 
-    "fort worth": { g: "more", st: "texas", ab: "tx", look: "brick", spots: [
+    "fort worth": { g: "more", st: "texas", ab: "tx", look: "brick", ll: [32.76, -97.33], spots: [
       ["goldee's barbecue", "southeast fort worth", "bbq", 2020, 2, 4.8, "once named texas monthly's best barbecue", [
         ["brisket", 30, "per pound", "sig", "ribs"],
         ["banana pudding", 6, "classic", "sweet", "cake"]]],
@@ -5455,7 +5491,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["brisket elote", 13, "corn and brisket", "sig", "ribs"]]]
     ] },
 
-    "oakland & berkeley": { g: "more", st: "california", ab: "ca", look: "clap", spots: [
+    "oakland & berkeley": { g: "more", st: "california", ab: "ca", look: "clap", ll: [37.83, -122.27], spots: [
       ["chez panisse", "berkeley", "american", 1971, 4, 4.6, "alice waters' california cuisine landmark", [
         ["prix fixe dinner", 175, "the day's menu", "sig", "cloche"],
         ["café menu", 40, "upstairs", "", "pizza"]]],
@@ -5475,7 +5511,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["jerk chicken", 20, "smoky and spicy", "sig", "chicken"]]]
     ] },
 
-    "buffalo": { g: "more", st: "new york", ab: "ny", look: "brick", spots: [
+    "buffalo": { g: "more", st: "new york", ab: "ny", look: "brick", ll: [42.89, -78.88], spots: [
       ["anchor bar", "main street", "american", 1935, 2, 4.2, "where buffalo wings were born", [
         ["buffalo wings", 18, "medium, with blue cheese", "sig", "chicken"]]],
       ["duff's famous wings", "amherst", "american", 1946, 2, 4.4, "the medium is hot, the hot is very hot", [
@@ -5495,7 +5531,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["spaghetti parm", 18, "baked under mozzarella", "sig", "pasta"]]]
     ] },
 
-    "cincinnati": { g: "more", st: "ohio", ab: "oh", look: "brick", spots: [
+    "cincinnati": { g: "more", st: "ohio", ab: "oh", look: "brick", ll: [39.1, -84.51], spots: [
       ["skyline chili", "clifton", "american", 1949, 1, 4.3, "cincinnati chili over spaghetti", [
         ["3-way", 10, "spaghetti, chili, cheese", "sig", "pasta"],
         ["cheese coney", 3, "small hot dog, chili, cheese", "", "hotdog"]]],
@@ -5519,7 +5555,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["goetta sandwich", 8, "a cincinnati breakfast sausage", "sig", "sandwich"]]]
     ] },
 
-    "omaha": { g: "more", st: "nebraska", ab: "ne", look: "brick", spots: [
+    "omaha": { g: "more", st: "nebraska", ab: "ne", look: "brick", ll: [41.26, -95.93], spots: [
       ["gorat's steak house", "south omaha", "steak", 1944, 3, 4.4, "warren buffett's favorite steakhouse", [
         ["t-bone", 48, "rare, like buffett orders it", "sig", "steak"]]],
       ["the drover", "omaha", "steak", 1970, 3, 4.6, "famous for whiskey-marinated steaks", [
@@ -5536,7 +5572,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["seasonal tasting", 95, "local", "sig", "cloche"]]]
     ] },
 
-    "tulsa": { g: "more", st: "oklahoma", ab: "ok", look: "brick", spots: [
+    "tulsa": { g: "more", st: "oklahoma", ab: "ok", look: "brick", ll: [36.15, -95.99], spots: [
       ["ike's chili", "tulsa", "american", 1908, 1, 4.5, "chili since 1908", [
         ["chili", 7, "over spaghetti or straight", "sig", "curry"]]],
       ["burn co. barbeque", "tulsa", "bbq", 2013, 2, 4.7, "grilled-then-smoked barbecue", [
@@ -5551,7 +5587,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["goldie burger", 9, "classic", "sig", "burger"]]]
     ] },
 
-    "boulder": { g: "more", st: "colorado", ab: "co", look: "brick", spots: [
+    "boulder": { g: "more", st: "colorado", ab: "co", look: "brick", ll: [40.01, -105.27], spots: [
       ["frasca food and wine", "pearl street", "italian", 2004, 4, 4.8, "friulian cooking from a master sommelier", [
         ["tasting menu", 150, "friulian", "sig", "cloche"],
         ["frico caldo", 16, "potato and cheese", "veg", "pancake"]]],
@@ -5573,7 +5609,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["burrito", 11, "big and fast", "sig", "wrap"]]]
     ] },
 
-    "park city": { g: "more", st: "utah", ab: "ut", look: "brick", spots: [
+    "park city": { g: "more", st: "utah", ab: "ut", look: "brick", ll: [40.65, -111.5], spots: [
       ["riverhorse on main", "main street", "american", 1987, 4, 4.6, "upscale mountain dining", [
         ["macadamia-crusted halibut", 52, "a signature", "sig", "fish"]]],
       ["handle", "main street", "american", 2014, 3, 4.6, "creative small plates", [
@@ -5589,7 +5625,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["breakfast", 16, "hearty", "sig", "egg"]]]
     ] },
 
-    "anchorage": { g: "more", st: "alaska", ab: "ak", look: "clap", spots: [
+    "anchorage": { g: "more", st: "alaska", ab: "ak", look: "clap", ll: [61.22, -149.9], spots: [
       ["moose's tooth pub & pizzeria", "midtown", "pizza", 1996, 2, 4.6, "alaska's favorite pizza", [
         ["avalanche pizza", 26, "barbecue chicken, peppers", "sig", "pizza"]]],
       ["snow city café", "downtown", "american", 1998, 2, 4.6, "breakfast with crab cakes benedict", [
@@ -5608,7 +5644,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["fireweed honey ice cream", 6, "local flavor", "sig", "icecream"]]]
     ] },
 
-    "maui": { g: "more", st: "hawaii", ab: "hi", look: "deco", spots: [
+    "maui": { g: "more", st: "hawaii", ab: "hi", look: "deco", ll: [20.8, -156.33], spots: [
       ["mama's fish house", "paia", "seafood", 1973, 4, 4.7, "fish caught by name, in a beachside garden", [
         ["fresh catch of the day", 70, "the menu names the fisherman", "sig", "fish"],
         ["polynesian black pearl", 16, "chocolate mousse dessert", "sweet", "cake"]]],
@@ -5631,7 +5667,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["manju", 2, "sweet bean pastry", "sweet", "dumpling"]]]
     ] },
 
-    "cape cod": { g: "more", st: "massachusetts", ab: "ma", look: "clap", spots: [
+    "cape cod": { g: "more", st: "massachusetts", ab: "ma", look: "clap", ll: [41.75, -70.15], spots: [
       ["the lobster pot", "provincetown", "seafood", 1943, 3, 4.5, "a provincetown landmark since 1943", [
         ["lobster", "mp", "steamed or baked stuffed", "sig", "claw"],
         ["clam chowder", 10, "award-winning", "", "soup"]]],
@@ -5653,7 +5689,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["burger", 10, "classic", "sig", "burger"],
         ["fried clams", 22, "crisp", "", "oyster"]]]
     ] },
-    "florence": { g: "world", st: "italy", ab: "it", look: "stucco", k: "€", spots: [
+    "florence": { g: "world", st: "italy", ab: "it", look: "stucco", k: "€", ll: [43.77, 11.26], spots: [
       ["all'antico vinaio", "via dei neri", "deli", 1989, 1, 4.6, "giant schiacciata sandwiches with a line", [
         ["la favolosa", 10, "salame, pecorino cream, artichokes, spicy eggplant", "sig", "sandwich"],
         ["schiacciata with mortadella", 9, "pistachio cream", "", "sandwich"]]],
@@ -5677,7 +5713,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["bistecca", 55, "for sharing", "sig", "steak"]]]
     ] },
 
-    "naples": { g: "world", st: "italy", ab: "it", look: "stucco", k: "€", spots: [
+    "naples": { g: "world", st: "italy", ab: "it", look: "stucco", k: "€", ll: [40.85, 14.27], spots: [
       ["l'antica pizzeria da michele", "forcella", "pizza", 1870, 1, 4.5, "just two pizzas, and a famous line", [
         ["margherita", 6, "the classic", "sig", "pizza"],
         ["marinara", 5, "tomato, garlic, oregano", "veg", "pizza"]]],
@@ -5701,7 +5737,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["ziti al ragù", 12, "rich, slow-cooked", "sig", "pasta"]]]
     ] },
 
-    "venice": { g: "world", st: "italy", ab: "it", look: "stucco", k: "€", spots: [
+    "venice": { g: "world", st: "italy", ab: "it", look: "stucco", k: "€", ll: [45.44, 12.32], spots: [
       ["cantina do mori", "rialto", "italian", 1462, 1, 4.4, "a bacaro said to date to 1462", [
         ["cicchetti", 2, "small bites, standing at the bar", "sig", "bread"],
         ["ombra", 2, "a small glass of wine", "drink", "cocktail"]]],
@@ -5722,7 +5758,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["crostini cicchetti", 2, "dozens of toppings", "sig", "bread"]]]
     ] },
 
-    "milan": { g: "world", st: "italy", ab: "it", look: "stone", k: "€", spots: [
+    "milan": { g: "world", st: "italy", ab: "it", look: "stone", k: "€", ll: [45.46, 9.19], spots: [
       ["luini", "duomo", "bakery", 1949, 1, 4.6, "panzerotti since 1949", [
         ["panzerotto", 4, "fried dough, tomato, mozzarella", "sig", "dumpling"]]],
       ["spontini", "corso buenos aires", "pizza", 1953, 1, 4.4, "thick pizza by the slice", [
@@ -5741,7 +5777,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["seafood pasta", 32, "fresh", "sig", "pasta"]]]
     ] },
 
-    "bologna": { g: "world", st: "italy", ab: "it", look: "stucco", k: "€", spots: [
+    "bologna": { g: "world", st: "italy", ab: "it", look: "stucco", k: "€", ll: [44.49, 11.34], spots: [
       ["trattoria anna maria", "university district", "italian", 1985, 2, 4.5, "handmade tortellini in brodo", [
         ["tortellini in brodo", 16, "in rich broth", "sig", "pasta"],
         ["tagliatelle al ragù", 14, "the real bolognese", "", "pasta"]]],
@@ -5760,7 +5796,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["gelato", 4, "creamy", "sig", "icecream"]]]
     ] },
 
-    "vienna": { g: "world", st: "austria", ab: "at", look: "stone", k: "€", spots: [
+    "vienna": { g: "world", st: "austria", ab: "at", look: "stone", k: "€", ll: [48.21, 16.37], spots: [
       ["figlmüller", "innere stadt", "european", 1905, 2, 4.4, "schnitzels bigger than the plate", [
         ["wiener schnitzel", 24, "pork, pounded thin, huge", "sig", "steak"],
         ["potato salad", 6, "vinegary", "veg", "salad"]]],
@@ -5782,7 +5818,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["falafel & mezze", 10, "from the stalls", "sig", "dip"]]]
     ] },
 
-    "prague": { g: "world", st: "czechia", ab: "cz", look: "stone", k: "kč", spots: [
+    "prague": { g: "world", st: "czechia", ab: "cz", look: "stone", k: "kč", ll: [50.08, 14.44], spots: [
       ["lokál", "old town", "european", 2009, 1, 4.5, "czech pub food and tank pilsner", [
         ["svíčková", 290, "beef in cream sauce with dumplings", "sig", "steak"],
         ["tank pilsner", 70, "unpasteurized", "drink", "drink"]]],
@@ -5801,7 +5837,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["breakfast", 300, "classic", "sig", "egg"]]]
     ] },
 
-    "budapest": { g: "world", st: "hungary", ab: "hu", look: "stone", k: "ft", spots: [
+    "budapest": { g: "world", st: "hungary", ab: "hu", look: "stone", k: "ft", ll: [47.5, 19.04], spots: [
       ["new york café", "erzsébetváros", "bakery", 1894, 3, 4.4, "a gilded café, sometimes called the world's most beautiful", [
         ["dobos torte", 4500, "caramel-topped layer cake", "sig", "cake"]]],
       ["gerbeaud", "vörösmarty square", "bakery", 1858, 2, 4.4, "a grand pastry house since 1858", [
@@ -5819,7 +5855,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["lángos burger", 3500, "burger on fried dough", "sig", "burger"]]]
     ] },
 
-    "athens": { g: "world", st: "greece", ab: "gr", look: "stucco", k: "€", spots: [
+    "athens": { g: "world", st: "greece", ab: "gr", look: "stucco", k: "€", ll: [37.98, 23.73], spots: [
       ["o thanasis", "monastiraki", "mediterranean", 1964, 1, 4.3, "kebab pita by the flea market", [
         ["kebab pita", 4, "minced meat, tomato, onion", "sig", "wrap"]]],
       ["kostas", "syntagma", "mediterranean", 1950, 1, 4.6, "souvlaki since 1950", [
@@ -5837,7 +5873,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["tasting menu", 180, "refined", "sig", "cloche"]]]
     ] },
 
-    "dublin": { g: "world", st: "ireland", ab: "ie", look: "brick", k: "€", spots: [
+    "dublin": { g: "world", st: "ireland", ab: "ie", look: "brick", k: "€", ll: [53.35, -6.26], spots: [
       ["chapter one", "parnell square", "modern", 1992, 4, 4.7, "irish ingredients, michelin stars", [
         ["tasting menu", 195, "seasonal irish", "sig", "cloche"]]],
       ["leo burdock", "christchurch", "seafood", 1913, 1, 4.3, "dublin's oldest chipper", [
@@ -5854,7 +5890,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["cardamom bun", 4, "sticky", "sig", "croissant"]]]
     ] },
 
-    "edinburgh": { g: "world", st: "scotland", ab: "uk", look: "stone", k: "£", spots: [
+    "edinburgh": { g: "world", st: "scotland", ab: "uk", look: "stone", k: "£", ll: [55.95, -3.19], spots: [
       ["the kitchin", "leith", "modern", 2006, 4, 4.7, "tom kitchin's 'from nature to plate'", [
         ["tasting menu", 160, "scottish seasons", "sig", "cloche"]]],
       ["the witchery by the castle", "royal mile", "european", 1979, 4, 4.5, "candlelit gothic dining by the castle", [
@@ -5873,7 +5909,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["hot chocolate float", 6, "gelato in hot chocolate", "sweet", "coffee"]]]
     ] },
 
-    "stockholm": { g: "world", st: "sweden", ab: "se", look: "clap", k: "kr", spots: [
+    "stockholm": { g: "world", st: "sweden", ab: "se", look: "clap", k: "kr", ll: [59.33, 18.07], spots: [
       ["östermalms saluhall", "östermalm", "european", 1888, 2, 4.4, "a grand food hall", [
         ["shrimp sandwich", 165, "räksmörgås", "sig", "sandwich"]]],
       ["pelikan", "södermalm", "european", 1904, 2, 4.5, "swedish meatballs in a beer hall", [
@@ -5890,7 +5926,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["tasting menu", 2200, "wood-fired", "sig", "cloche"]]]
     ] },
 
-    "munich": { g: "world", st: "germany", ab: "de", look: "stone", k: "€", spots: [
+    "munich": { g: "world", st: "germany", ab: "de", look: "stone", k: "€", ll: [48.14, 11.58], spots: [
       ["hofbräuhaus", "altstadt", "european", 1589, 2, 4.4, "the most famous beer hall in the world", [
         ["schweinshaxe", 22, "crispy pork knuckle", "sig", "ribs"],
         ["mass of beer", 12, "a liter", "drink", "drink"]]],
@@ -5910,7 +5946,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["tasting menu", 300, "in a retro-futurist room", "sig", "cloche"]]]
     ] },
 
-    "porto": { g: "world", st: "portugal", ab: "pt", look: "deco", k: "€", spots: [
+    "porto": { g: "world", st: "portugal", ab: "pt", look: "deco", k: "€", ll: [41.15, -8.61], spots: [
       ["café santiago", "baixa", "european", 1959, 1, 4.5, "the francesinha, porto's monster sandwich", [
         ["francesinha", 13, "meats, cheese, egg, beer sauce, fries", "sig", "sandwich"]]],
       ["conga", "baixa", "european", 1976, 1, 4.5, "spicy bifanas", [
@@ -5928,7 +5964,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["octopus", 22, "grilled", "sig", "fish"]]]
     ] },
 
-    "san sebastián": { g: "world", st: "spain", ab: "es", look: "stone", k: "€", spots: [
+    "san sebastián": { g: "world", st: "spain", ab: "es", look: "stone", k: "€", ll: [43.32, -1.98], spots: [
       ["la cuchara de san telmo", "parte vieja", "spanish", 2002, 2, 4.6, "hot pintxos cooked to order", [
         ["braised veal cheek", 6, "melt-in-your-mouth", "sig", "steak"],
         ["foie gras with apple", 6, "seared", "", "cloche"]]],
@@ -5951,7 +5987,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["tasting menu", 300, "with ocean views", "sig", "cloche"]]]
     ] },
 
-    "seville": { g: "world", st: "spain", ab: "es", look: "stucco", k: "€", spots: [
+    "seville": { g: "world", st: "spain", ab: "es", look: "stucco", k: "€", ll: [37.39, -5.98], spots: [
       ["el rinconcillo", "santa catalina", "spanish", 1670, 2, 4.4, "seville's oldest bar", [
         ["espinacas con garbanzos", 4, "spinach and chickpeas", "veg", "curry"],
         ["jamón", 18, "sliced to order", "sig", "bacon"]]],
@@ -5970,7 +6006,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["jamón ibérico", 20, "hand-sliced", "sig", "bacon"]]]
     ] },
 
-    "lyon": { g: "world", st: "france", ab: "fr", look: "stone", k: "€", spots: [
+    "lyon": { g: "world", st: "france", ab: "fr", look: "stone", k: "€", ll: [45.76, 4.84], spots: [
       ["paul bocuse — l'auberge du pont de collonges", "collonges", "french", 1965, 4, 4.6, "the temple of the late paul bocuse", [
         ["soupe aux truffes v.g.e.", 110, "under a puff pastry dome", "sig", "soup"],
         ["menu classique", 280, "the bocuse classics", "share", "cloche"]]],
@@ -5991,7 +6027,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
       ["takao takano", "6th arrondissement", "modern", 2010, 4, 4.7, "japanese precision with french cuisine", [
         ["tasting menu", 160, "seasonal", "sig", "cloche"]]]
     ] },
-    "kyoto": { g: "world", st: "japan", ab: "jp", look: "clap", k: "¥", spots: [
+    "kyoto": { g: "world", st: "japan", ab: "jp", look: "clap", k: "¥", ll: [35.01, 135.77], spots: [
       ["nishiki market", "nakagyo", "japanese", 1615, 1, 4.4, "'kyoto's kitchen', a narrow market street", [
         ["tamagoyaki", 300, "sweet rolled omelet", "sig", "egg"],
         ["baby octopus skewer", 500, "with a quail egg inside", "", "kebab"]]],
@@ -6014,7 +6050,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["kyoto latte", 600, "silky", "sig", "coffee"]]]
     ] },
 
-    "taipei": { g: "world", st: "taiwan", ab: "tw", look: "brick", k: "nt$", spots: [
+    "taipei": { g: "world", st: "taiwan", ab: "tw", look: "brick", k: "nt$", ll: [25.03, 121.57], spots: [
       ["din tai fung xinyi", "xinyi road", "chinese", 1972, 2, 4.5, "the original soup dumpling shop", [
         ["xiao long bao", 250, "ten pork soup dumplings", "sig", "dumpling"],
         ["shrimp fried rice", 250, "classic", "", "rice"]]],
@@ -6038,7 +6074,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["sashimi", 600, "very fresh", "sig", "sushi"]]]
     ] },
 
-    "shanghai": { g: "world", st: "china", ab: "cn", look: "stone", k: "¥", spots: [
+    "shanghai": { g: "world", st: "china", ab: "cn", look: "stone", k: "¥", ll: [31.23, 121.47], spots: [
       ["jia jia tang bao", "huangpu", "chinese", 1986, 1, 4.3, "soup dumplings made all day", [
         ["pork & crab tang bao", 40, "delicate, soupy", "sig", "dumpling"]]],
       ["yang's fried dumplings", "huanghe road", "chinese", 1994, 1, 4.3, "pan-fried sheng jian bao", [
@@ -6055,7 +6091,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["xiao long bao", 60, "crab and pork", "sig", "dumpling"]]]
     ] },
 
-    "hanoi": { g: "world", st: "vietnam", ab: "vn", look: "deco", k: "₫", spots: [
+    "hanoi": { g: "world", st: "vietnam", ab: "vn", look: "deco", k: "₫", ll: [21.03, 105.85], spots: [
       ["bún chả hương liên", "hai bà trưng", "vietnamese", 1966, 1, 4.3, "where obama and bourdain ate bún chả", [
         ["combo obama", 95000, "bún chả, nem, beer", "sig", "noodles"]]],
       ["phở gia truyền bát đàn", "old quarter", "vietnamese", 1979, 1, 4.4, "queue-for-it beef pho", [
@@ -6072,7 +6108,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["phở bò", 75000, "beef pho", "sig", "noodles"]]]
     ] },
 
-    "ho chi minh city": { g: "world", st: "vietnam", ab: "vn", look: "deco", k: "₫", spots: [
+    "ho chi minh city": { g: "world", st: "vietnam", ab: "vn", look: "deco", k: "₫", ll: [10.82, 106.63], spots: [
       ["bánh mì huỳnh hoa", "district 1", "deli", 1989, 1, 4.4, "the most stuffed bánh mì in saigon", [
         ["bánh mì đặc biệt", 75000, "loaded with meats and pâté", "sig", "sandwich"]]],
       ["phở hòa pasteur", "district 3", "vietnamese", 1968, 1, 4.3, "a saigon pho institution", [
@@ -6090,7 +6126,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["bún bò huế", 70000, "spicy beef noodle soup", "sig", "noodles"]]]
     ] },
 
-    "kuala lumpur": { g: "world", st: "malaysia", ab: "my", look: "deco", k: "rm", spots: [
+    "kuala lumpur": { g: "world", st: "malaysia", ab: "my", look: "deco", k: "rm", ll: [3.14, 101.69], spots: [
       ["jalan alor", "bukit bintang", "asian", 1960, 1, 4.3, "kl's street food strip", [
         ["chicken wings", 4, "grilled, sticky", "sig", "chicken"],
         ["satay", 1, "per stick", "", "kebab"]]],
@@ -6108,7 +6144,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["char kway teow", 12, "smoky fried noodles", "sig", "noodles"]]]
     ] },
 
-    "bali": { g: "world", st: "indonesia", ab: "id", look: "stucco", k: "rp", spots: [
+    "bali": { g: "world", st: "indonesia", ab: "id", look: "stucco", k: "rp", ll: [-8.6, 115.2], spots: [
       ["warung babi guling ibu oka", "ubud", "asian", 1990, 1, 4.3, "balinese suckling pig, bourdain-famous", [
         ["babi guling special", 75000, "suckling pig, crackling, rice", "sig", "ribs"]]],
       ["mozaic", "ubud", "modern", 2001, 4, 4.7, "chris salans' fine dining in a garden", [
@@ -6126,7 +6162,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["catch of the day", 300000, "local fish", "sig", "fish"]]]
     ] },
 
-    "delhi": { g: "world", st: "india", ab: "in", look: "deco", k: "₹", spots: [
+    "delhi": { g: "world", st: "india", ab: "in", look: "deco", k: "₹", ll: [28.61, 77.21], spots: [
       ["karim's", "jama masjid", "indian", 1913, 1, 4.2, "mughlai cooking by the jama masjid", [
         ["mutton korma", 400, "rich, slow-cooked", "sig", "curry"],
         ["seekh kebab", 300, "smoky", "", "kebab"]]],
@@ -6149,7 +6185,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["chicken tikka roll", 300, "smoky", "sig", "wrap"]]]
     ] },
 
-    "cape town": { g: "world", st: "south africa", ab: "za", look: "deco", k: "r", spots: [
+    "cape town": { g: "world", st: "south africa", ab: "za", look: "deco", k: "r", ll: [-33.92, 18.42], spots: [
       ["la colombe", "constantia", "modern", 1996, 4, 4.7, "fine dining in the winelands", [
         ["tasting menu", 2500, "theatrical", "sig", "cloche"]]],
       ["gold restaurant", "green point", "african", 2005, 3, 4.6, "a pan-african feast with drumming", [
@@ -6167,7 +6203,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["market stalls", 120, "everything", "sig", "cloche"]]]
     ] },
 
-    "marrakech": { g: "world", st: "morocco", ab: "ma", look: "adobe", k: "dh", spots: [
+    "marrakech": { g: "world", st: "morocco", ab: "ma", look: "adobe", k: "dh", ll: [31.63, -8.01], spots: [
       ["jemaa el-fnaa night stalls", "medina", "african", 0, 1, 4.3, "smoke and lanterns in the great square", [
         ["harira", 10, "lentil and tomato soup", "sig", "soup"],
         ["grilled brochettes", 60, "lamb and chicken skewers", "", "kebab"]]],
@@ -6187,7 +6223,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["couscous", 150, "with vegetables", "sig", "rice"]]]
     ] },
 
-    "tel aviv": { g: "world", st: "israel", ab: "il", look: "stucco", k: "₪", spots: [
+    "tel aviv": { g: "world", st: "israel", ab: "il", look: "stucco", k: "₪", ll: [32.09, 34.78], spots: [
       ["abu hassan", "jaffa", "mediterranean", 1959, 1, 4.6, "hummus until it runs out", [
         ["masabacha", 30, "warm chickpeas in hummus", "sig", "dip"],
         ["hummus ful", 30, "with fava beans", "veg", "dip"]]],
@@ -6209,7 +6245,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["eggs benedict", 72, "classic", "sig", "egg"]]]
     ] },
 
-    "rio de janeiro": { g: "world", st: "brazil", ab: "br", look: "deco", k: "r$", spots: [
+    "rio de janeiro": { g: "world", st: "brazil", ab: "br", look: "deco", k: "r$", ll: [-22.91, -43.17], spots: [
       ["confeitaria colombo", "centro", "bakery", 1894, 2, 4.5, "a belle époque tea room since 1894", [
         ["pastéis de nata", 12, "custard tarts", "sig", "cake"],
         ["café", 8, "brazilian coffee", "drink", "coffee"]]],
@@ -6230,7 +6266,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["açaí bowl", 30, "with granola and banana", "sig", "icecream"]]]
     ] },
 
-    "são paulo": { g: "world", st: "brazil", ab: "br", look: "stone", k: "r$", spots: [
+    "são paulo": { g: "world", st: "brazil", ab: "br", look: "stone", k: "r$", ll: [-23.55, -46.63], spots: [
       ["d.o.m.", "jardins", "modern", 1999, 4, 4.6, "alex atala's amazonian fine dining", [
         ["tasting menu", 1200, "brazilian ingredients", "sig", "cloche"]]],
       ["mocotó", "vila medeiros", "latin", 1973, 2, 4.7, "rodrigo oliveira's northeastern brazilian", [
@@ -6250,7 +6286,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["margherita", 90, "wood-fired", "sig", "pizza"]]]
     ] },
 
-    "oaxaca": { g: "world", st: "mexico", ab: "mx", look: "adobe", k: "mx$", spots: [
+    "oaxaca": { g: "world", st: "mexico", ab: "mx", look: "adobe", k: "mx$", ll: [17.07, -96.73], spots: [
       ["mercado 20 de noviembre", "centro", "mexican", 1862, 1, 4.5, "the smoky 'pasillo de humo' meat aisle", [
         ["tasajo & chorizo", 200, "grilled meats with tortillas", "sig", "steak"]]],
       ["casa oaxaca", "centro", "mexican", 1998, 3, 4.6, "alejandro ruiz's oaxacan cooking", [
@@ -6268,7 +6304,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["mezcal", 120, "artisanal", "drink", "cocktail"]]]
     ] },
 
-    "vancouver": { g: "world", st: "canada", ab: "ca", look: "clap", k: "c$", spots: [
+    "vancouver": { g: "world", st: "canada", ab: "ca", look: "clap", k: "c$", ll: [49.28, -123.12], spots: [
       ["vij's", "cambie", "indian", 1994, 3, 4.6, "vikram vij's famous lamb popsicles", [
         ["wine-marinated lamb popsicles", 42, "with fenugreek cream curry", "sig", "steak"]]],
       ["japadog", "downtown", "japanese", 2005, 1, 4.4, "japanese-style hot dogs from a cart", [
@@ -6289,7 +6325,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["whiskey hazelnut", 7, "a favorite", "sig", "icecream"]]]
     ] },
 
-    "melbourne": { g: "world", st: "australia", ab: "au", look: "brick", k: "a$", spots: [
+    "melbourne": { g: "world", st: "australia", ab: "au", look: "brick", k: "a$", ll: [-37.81, 144.96], spots: [
       ["attica", "ripponlea", "modern", 2005, 4, 4.7, "ben shewry's native australian tasting", [
         ["tasting menu", 380, "native ingredients", "sig", "cloche"]]],
       ["chin chin", "flinders lane", "thai", 2011, 2, 4.5, "loud, fun southeast asian", [
@@ -6313,7 +6349,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["madeleines", 14, "baked to order", "sig", "cake"]]]
     ] },
 
-    "san juan": { g: "world", st: "puerto rico", ab: "pr", look: "deco", k: "$", spots: [
+    "san juan": { g: "world", st: "puerto rico", ab: "pr", look: "deco", k: "$", ll: [18.47, -66.11], spots: [
       ["la placita de santurce", "santurce", "latin", 1910, 2, 4.5, "a market square that becomes a party", [
         ["alcapurrias", 3, "fritters filled with meat", "sig", "beignet"],
         ["piña colada", 10, "the island's drink", "drink", "cocktail"]]],
@@ -6803,7 +6839,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
     return o;
   }
   function persist() {
-    store.set({ city: state.city, cuisine: state.cuisine, live: newest(liveCache, 12), extra: newest(extraCache, 8), menus: newest(menuCache, 400) });
+    store.set({ city: state.city, cuisine: state.cuisine, near: state.near || null, live: newest(liveCache, 12), extra: newest(extraCache, 8), menus: newest(menuCache, 400) });
   }
 
   /* ---------- claude, for scouting new cities and cuisines ---------- */
@@ -6908,7 +6944,6 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
     prevBtn.disabled = nextBtn.disabled = true;
     $("#prevSpot").disabled = $("#nextSpot").disabled = true;
     $("#moreBtn").hidden = true;
-    $("#diceBtn").disabled = true;
     $("#live").textContent = `${title}. ${body}`;
   }
 
@@ -6937,7 +6972,6 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
     jump(0);
     setDish(0, true);
     $("#moreBtn").hidden = false;
-    $("#diceBtn").disabled = n < 2;
   }
 
   function renderSpotLine() {
@@ -7055,13 +7089,6 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
   nextBtn.addEventListener("click", () => go(state.mi + 1));
   $("#prevSpot").addEventListener("click", () => setSpot(state.ri - 1));
   $("#nextSpot").addEventListener("click", () => setSpot(state.ri + 1));
-  $("#diceBtn").addEventListener("click", () => {
-    const n = state.list.length;
-    if (n < 2) return;
-    let r = state.ri;
-    while (r === state.ri) r = Math.floor(Math.random() * n);
-    setSpot(r);
-  });
   document.addEventListener("keydown", (e) => {
     if (openSheet) { if (e.key === "Escape") closeSheet(); return; }
     if (e.target.closest && e.target.closest("input")) return;
@@ -7076,7 +7103,10 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
   function renderHeader() {
     $("#cityName").textContent = state.city.name;
     const n = state.list.length;
-    const place = state.src === "scouting" ? (n ? `(top ${n} so far)` : "(scouting…)") : state.src === "empty" ? "(nothing yet)" : state.src === "filter" ? `(${n} saved)` : `(top ${n})`;
+    const base = state.src === "scouting" ? (n ? `(top ${n} so far)` : "(scouting…)") : state.src === "empty" ? "(nothing yet)" : state.src === "filter" ? `(${n} saved)` : `(top ${n})`;
+    const nr = state.near && state.near.city === state.city.name ? state.near : null;
+    const nearTxt = !nr ? "" : nr.mi > 20 ? `closest to you, ${nr.mi} mi` : nr.place && nr.place !== state.city.name ? `near ${nr.place}` : "near you";
+    const place = nearTxt ? base.replace("(", `(${nearTxt} · `) : base;
     $("#cityPlace").textContent = place;
     $("#cityBtn").setAttribute("aria-label", `city: ${state.city.name}, ${place.replace(/[()]/g, "")}. change city`);
     $("#cuisineName").textContent = czShort(state.cuisine);
@@ -7542,6 +7572,7 @@ One item per line and nothing else, each a compact JSON array: ["dish name",18,"
   }
   function openCity() {
     citySearch.value = "";
+    $("#locBtn").hidden = !canLocate;
     cityRows();
     showSheet($("#citySheet"), "#citySearch");
   }
@@ -7553,9 +7584,114 @@ One item per line and nothing else, each a compact JSON array: ["dish name",18,"
     const name = b.dataset.city;
     closeSheet();
     state.city = { name, saved: !!SAVED_SPOTS[name] };
+    state.near = null;
     if (!SAVED_SPOTS[name] && state.cuisine !== "all" && !liveCache[`${name}|${state.cuisine}`] && liveCache[`${name}|all`]) state.cuisine = "all";
     persist();
     setTimeout(() => showView(), reduced ? 0 : 160);
+  });
+
+  /* ---------- your location: open the nearest saved city ----------
+     the precise spot if the browser allows it, otherwise a rough guess from the network (bigdatacloud).
+     inside a claude artifact the browser blocks both, so the button only shows on the standalone site. */
+  const framed = (() => { try { return window.top !== window.self; } catch (e) { return true; } })();
+  const canLocate = !framed && "geolocation" in navigator;
+  function preciseSpot() {
+    return new Promise((res) => {
+      const give = setTimeout(() => res(null), 15000);
+      navigator.geolocation.getCurrentPosition(
+        (p) => { clearTimeout(give); res({ lat: p.coords.latitude, lon: p.coords.longitude }); },
+        () => { clearTimeout(give); res(null); },
+        { timeout: 10000, maximumAge: 6e5 }
+      );
+    });
+  }
+  async function getJSONq(url, ms) {
+    const ac = new AbortController(), t = setTimeout(() => ac.abort(), ms);
+    try { const r = await fetch(url, { signal: ac.signal }); if (!r.ok) throw new Error("http " + r.status); return await r.json(); }
+    finally { clearTimeout(t); }
+  }
+  async function roughSpot() {
+    try {
+      const r = await getJSONq("https://api.bigdatacloud.net/data/reverse-geocode-client", 6000);
+      if (r.latitude != null && r.longitude != null) return { lat: +r.latitude, lon: +r.longitude, place: clean(r.locality || r.city || "", 40) };
+    } catch (e) {}
+    return null;
+  }
+  async function placeName(lat, lon) {
+    try {
+      const r = await getJSONq(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`, 6000);
+      return clean(r.locality || r.city || "", 40);
+    } catch (e) { return ""; }
+  }
+  function nearestCity(lat, lon) {
+    const rad = Math.PI / 180;
+    let best = null, bestKm = Infinity;
+    for (const [name, v] of Object.entries(SAVED)) {
+      if (!v.ll) continue;
+      const [la, lo] = v.ll;
+      const h = Math.sin(((la - lat) * rad) / 2) ** 2 + Math.cos(lat * rad) * Math.cos(la * rad) * Math.sin(((lo - lon) * rad) / 2) ** 2;
+      const km = 12742 * Math.asin(Math.sqrt(h));
+      if (km < bestKm) { bestKm = km; best = name; }
+    }
+    return { name: best, km: bestKm };
+  }
+  async function useMyLocation(quiet) {
+    const btn = $("#locBtn");
+    if (!quiet) { cityMsg.textContent = "finding you…"; btn.disabled = true; }
+    const spot = (await preciseSpot()) || (await roughSpot());
+    btn.disabled = false;
+    if (!spot) { if (!quiet) cityMsg.textContent = "couldn't find your location. allow location for this site, or search for your city."; return; }
+    const near = nearestCity(spot.lat, spot.lon);
+    if (!near.name) return;
+    const place = spot.place || (await placeName(spot.lat, spot.lon));
+    const mi = Math.round(near.km * 0.621);
+    if (!quiet) closeSheet();
+    const changed = near.name !== state.city.name;
+    state.city = { name: near.name, saved: true };
+    state.near = { city: near.name, place, mi };
+    if (state.cuisine !== "all" && !liveCache[viewKey()] && !SAVED_SPOTS[near.name].some((sp) => sp.c === state.cuisine)) state.cuisine = "all";
+    persist();
+    if (changed || !quiet) setTimeout(() => showView(), quiet || reduced ? 0 : 160);
+    else renderHeader();
+    $("#live").textContent = mi > 20 ? `the closest saved city to you is ${near.name}, about ${mi} miles away` : `showing ${near.name}, near you`;
+  }
+  $("#locBtn").addEventListener("click", () => useMyLocation(false));
+
+  /* ---------- add to home screen: android and chrome get the install prompt, everyone else gets steps ---------- */
+  const installBtn = $("#installBtn");
+  const installedApp = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  const isAndroid = /android/i.test(navigator.userAgent);
+  const isIOS = !isAndroid && (/iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1));
+  let installPrompt = null;
+  const updateInstall = () => { installBtn.hidden = installedApp(); };
+  window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); installPrompt = e; updateInstall(); });
+  window.addEventListener("appinstalled", () => { installPrompt = null; updateInstall(); if (openSheet === $("#installSheet")) closeSheet(); });
+  updateInstall();
+  const SHARE_IC = `<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></span>`;
+  const PLUS_IC = `<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8.5v7M8.5 12h7"/></svg></span>`;
+  const MENU_IC = `<span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5.5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="18.5" r="2"/></svg></span>`;
+  const INSTALL_IC = `<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 7.5v6M9.5 11l2.5 2.5 2.5-2.5M8 21h8"/></svg></span>`;
+  installBtn.addEventListener("click", async () => {
+    if (installPrompt) {
+      const p = installPrompt;
+      installPrompt = null;
+      p.prompt();
+      try { await p.userChoice; } catch (e) {}
+      updateInstall();
+      return;
+    }
+    const phone = isIOS || isAndroid;
+    const steps = isIOS
+      ? [`tap the share button ${SHARE_IC} in your browser's toolbar`, `scroll down and tap ${PLUS_IC} <b>add to home screen</b>`, `tap <b>add</b>. the crab lands on your home screen`]
+      : isAndroid
+        ? [`open your browser's menu ${MENU_IC}`, `tap <b>install app</b> or <b>add to home screen</b>`, `tap <b>install</b>. the crab lands on your home screen`]
+        : [`in chrome or edge, click the install icon ${INSTALL_IC} at the right end of the address bar`, `in safari on a mac, choose <b>file → add to dock</b>`, `or open this page on your phone and tap the crab`];
+    $("#installTitle").textContent = phone ? "put good food near me on your phone" : "install good food near me";
+    $("#installSteps").innerHTML = steps.map((t) => `<li><span>${t}</span></li>`).join("");
+    const note = $("#installNote");
+    note.hidden = !framed;
+    note.textContent = "inside claude this saves a shortcut to this page. the version on your own site installs as a full app that opens offline.";
+    showSheet($("#installSheet"));
   });
 
   /* ---------- boot ---------- */
@@ -7566,7 +7702,9 @@ One item per line and nothing else, each a compact JSON array: ["dish name",18,"
     if (!SAVED_SPOTS[want] && !liveCache[`${want}|${state.cuisine}`]) state.cuisine = "all";
   }
   if (state.city.saved && state.cuisine !== "all" && !liveCache[viewKey()] && !SAVED_SPOTS[state.city.name].some((sp) => sp.c === state.cuisine)) state.cuisine = "all";
+  if (saved.near && typeof saved.near === "object" && saved.near.city === state.city.name) state.near = { city: saved.near.city, place: clean(saved.near.place, 40), mi: +saved.near.mi || 0 };
   showView({ noScout: true });
+  if (canLocate && state.near) useMyLocation(true);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (state.list.length) { const mi = state.mi; setSpot(state.ri, true); if (mi) { jump(mi); setDish(mi); } } });
 })();
 </script>
