@@ -137,9 +137,12 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
 
 /* stage */
 .main {
-  position: relative; flex: 1; min-height: 0;
+  /* never shorter than its contents: on a tiny screen the page scrolls instead of the button covering the footer */
+  position: relative; flex: 1; min-height: auto;
   display: flex; flex-direction: column; justify-content: center;
-  --cat-h: clamp(150px, calc(100dvh - 530px), 320px);
+  /* fallback size for browsers without container units; the safe-area bars count against the screen height */
+  --cat-h: clamp(140px, calc(100vh - 530px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)), 320px);
+  --cat-h: clamp(140px, calc(100dvh - 530px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)), 320px);
 }
 .stage { position: relative; height: var(--cat-h); flex: none; display: grid; place-items: center; }
 .glow, .fx {
@@ -299,7 +302,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
   transition: background-color .2s, color .2s;
 }
 .pill:hover { background: var(--chip-hover); color: var(--ink); }
-.note { font-size: 11px; color: var(--faint); margin: 0; min-height: 15px; text-align: center; }
+.note { font-size: 11px; line-height: 15px; color: var(--faint); margin: 0; min-height: 15px; text-align: center; text-wrap: balance; }
 .note button { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; font-size: 11px; }
 .note button:hover { color: var(--ink); }
 
@@ -379,6 +382,12 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
 .linkish { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; font-size: 12px; }
 .linkish:hover { color: var(--ink); }
 
+/* the drawing takes whatever height is left after everything else, so nothing below it overlaps */
+@supports (height: 1cqh) {
+  .stage { height: auto; flex: 1 1 0; min-height: 120px; max-height: 320px; container-type: size; }
+  .scene-stack { height: 96cqh; }
+  .glow, .fx { width: min(100cqw, 125cqh); }
+}
 @media (max-height: 700px) { .dishes { height: 214px; } .desc { height: 20px; -webkit-line-clamp: 1; } .price .amt { font-size: 46px; } }
 @media (prefers-reduced-motion: reduce) {
   .holder *, .dots span { animation: none !important; }
