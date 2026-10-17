@@ -38,8 +38,9 @@ When the page is opened as a Claude artifact, Claude can scout cities that aren'
 | --- | --- |
 | `index.html` | The whole app |
 | `favicon.svg` | Browser tab icon |
-| `apple-touch-icon.png` | Icon when added to an iPhone home screen |
-| `icon-192.png`, `icon-512.png` | Icons for Android and installed web apps |
+| `goodfood-icon-180.png` | Icon when added to an iPhone home screen |
+| `goodfood-icon-192.png`, `goodfood-icon-512.png` | Icons for Android and installed web apps |
+| `apple-touch-icon.png`, `apple-touch-icon-precomposed.png`, `icon-192.png`, `icon-512.png` | The same white icons under older names, for browsers that look for them |
 | `site.webmanifest` | Lets the site be added to a home screen as an app |
 | `sw.js` | Service worker: makes the site installable on Android and lets it open offline |
 | `.gitignore` | Keeps `.DS_Store` and Vercel's local folder out of git |
