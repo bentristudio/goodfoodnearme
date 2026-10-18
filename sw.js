@@ -1,8 +1,8 @@
 /* good food near me service worker: makes the site installable and lets it open offline.
    Pages and icons come from the network first (so new deploys show up right away)
    and fall back to the last cached copy. Font requests go straight to the network. */
-const CACHE = "goodfood-v4";
-const SHELL = ["./", "index.html", "favicon.svg?v=4", "goodfood-icon-180.png", "goodfood-icon-192.png", "goodfood-icon-512.png", "site.webmanifest?v=4"];
+const CACHE = "goodfood-v5";
+const SHELL = ["./", "index.html", "favicon.svg?v=5", "goodfood-icon-180.png?v=5", "goodfood-icon-192.png?v=5", "goodfood-icon-512.png?v=5", "site.webmanifest?v=5"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
