@@ -3,7 +3,7 @@
 weathercrab's food-loving sibling: a little crab shows you the top restaurants in a city. Each spot is drawn as its own storefront with the crab out front in an apron, holding up the dish you're looking at.
 
 - **227 cities**: all five New York boroughs, Florida (Delray Beach, Boca Raton, Miami and more), Southern California (Mission Viejo, Irvine & Costa Mesa, Newport Beach, Laguna Beach and more), Connecticut & New Jersey, all 50 state capitals plus Washington, DC, the biggest US cities, more food towns like Wichita, Bozeman, Jackson Hole and Lexington, and 62 cities around the world, including Tel Aviv, Jerusalem, Beirut, Amman and Tbilisi.
-- **5,972 saved spots**: up to 25 per city, fewer in small towns. Each has a neighborhood, price level, star rating and its best-known dishes.
+- **6,167 saved spots**: 50 in each of the ten biggest US cities, up to 25 in other cities, fewer in small towns. Each has a neighborhood, price level, star rating and its best-known dishes.
 - **Whole states**: the city picker has a "whole states" tab that ranks the top 100 across every saved city in a state, plus more of the state's spots beyond each city's top 25. 23 states fill all 100; smaller states show what the crab is confident about (North Dakota has 32).
 - **Pick a cuisine** next to the city: pizza, tacos, sushi, bbq, delis and 20 more.
 - **Swipe the menu**: each dish has its price, a tag (the signature, spicy, vegetarian…) and a short description. The crab holds up each dish and reacts to it: it hops for the signature, sweats for spicy food and gets nervous holding crab claws.
