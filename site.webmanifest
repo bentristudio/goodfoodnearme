@@ -2,7 +2,7 @@
   "id": "./",
   "name": "good food near me",
   "short_name": "good food",
-  "description": "A little crab shows you the top restaurants in 193 cities, with storefront drawings and the dishes to order.",
+  "description": "A little crab shows you the top restaurants in 227 cities and every US state, with storefront drawings and the dishes to order.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
