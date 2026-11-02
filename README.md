@@ -2,14 +2,16 @@
 
 weathercrab's food-loving sibling: a little crab shows you the top restaurants in a city. Each spot is drawn as its own storefront with the crab out front in an apron, holding up the dish you're looking at.
 
-- **227 cities**: all five New York boroughs, Florida (Delray Beach, Boca Raton, Miami and more), Southern California (Mission Viejo, Irvine & Costa Mesa, Newport Beach, Laguna Beach and more), Connecticut & New Jersey, all 50 state capitals plus Washington, DC, the biggest US cities, more food towns like Wichita, Bozeman, Jackson Hole and Lexington, and 62 cities around the world, including Tel Aviv, Jerusalem, Beirut, Amman and Tbilisi.
-- **6,167 saved spots**: 50 in each of the ten biggest US cities, up to 25 in other cities, fewer in small towns. Each has a neighborhood, price level, star rating and its best-known dishes.
+- **231 cities**: all five New York boroughs, Florida (Delray Beach, Boca Raton, Miami and more), Southern California (Mission Viejo, Irvine & Costa Mesa, Newport Beach, Laguna Beach and more), Connecticut & New Jersey (including Darien, New Canaan, Ridgefield and Fairfield), all 50 state capitals plus Washington, DC, the biggest US cities, more food towns like Wichita, Bozeman, Jackson Hole and Lexington, and 62 cities around the world, including Tel Aviv, Jerusalem, Beirut, Amman and Tbilisi.
+- **6,221 saved spots**: 50 in each of the ten biggest US cities, up to 25 in other cities, fewer in small towns. Each has a neighborhood, price level, star rating and its best-known dishes.
 - **Whole states**: the city picker has a "whole states" tab that ranks the top 100 across every saved city in a state, plus more of the state's spots beyond each city's top 25. 23 states fill all 100; smaller states show what the crab is confident about (North Dakota has 32).
 - **Pick a cuisine** next to the city: pizza, tacos, sushi, bbq, delis and 20 more.
 - **Swipe the menu**: each dish has its price, a tag (the signature, spicy, vegetarian…) and a short description. The crab holds up each dish and reacts to it: it hops for the signature, sweats for spicy food and gets nervous holding crab claws.
 - **Every storefront is different**: brick in New York, pastel with a palm tree in Miami, iron balconies in New Orleans, stone in Paris, adobe in Santa Fe. Lanterns, string lights, a chimney for bbq or a life ring for seafood depend on the cuisine.
 - **Use my location** in the city picker finds where you are and opens the nearest saved city, labeled "near you" (or "closest to you, 40 mi" when you're far from all of them). It uses the browser's location if you allow it, otherwise a rough guess from your network via [BigDataCloud](https://www.bigdatacloud.com)'s free lookup. If you used it last time, the site opens near you again.
-- **View more top spots** opens a grid of mini storefronts.
+- **See the menu** opens an overlay with every dish the app knows for that spot: prices, descriptions and tags. Tap a dish to jump to it. It also has buttons for directions (Google Maps), the restaurant's official menu and reservations, since dishes and prices change.
+- **More top spots** opens a grid of mini storefronts, with a search box to find a spot or a dish in the list.
+- **Search a restaurant by name** in the city picker to jump straight to it in any city.
 - **The crab button** at the top left adds the app to your home screen: Android and Chrome show their install prompt, iPhone gets three quick steps (Share → Add to Home Screen → Add), and computers get the steps for Chrome, Edge and Safari. It opens full screen like an app and works offline.
 
 It is one static `index.html` with no build step and no dependencies.

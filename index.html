@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="A little crab shows you the top restaurants in 227 cities and every US state, with storefront drawings and the dishes to order.">
+<meta name="description" content="A little crab shows you the top restaurants in 231 cities and every US state, with storefront drawings and the dishes to order.">
 <meta name="theme-color" content="#1b1918">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="good food">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta property="og:title" content="good food near me">
-<meta property="og:description" content="A little crab shows you the top restaurants in 227 cities and every US state, with storefront drawings and the dishes to order.">
+<meta property="og:description" content="A little crab shows you the top restaurants in 231 cities and every US state, with storefront drawings and the dishes to order.">
 <meta property="og:type" content="website">
 <link rel="icon" href="favicon.svg?v=5" type="image/svg+xml">
 <link rel="icon" href="goodfood-icon-192.png?v=5" type="image/png" sizes="192x192">
@@ -294,6 +294,26 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
 .chip .cv { font-size: 12px; line-height: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
 
 .more { align-self: center; margin-top: 10px; white-space: nowrap; flex: none; }
+.acts { display: flex; justify-content: center; gap: 8px; margin-top: 10px; flex: none; }
+.acts .pill { margin-top: 0; white-space: nowrap; padding-inline: 18px; }
+.acts .pill.menu { background: var(--chip-hover); color: var(--ink); }
+.menu-head { display: flex; flex-direction: column; gap: 6px; flex: none; }
+.menu-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 13px; line-height: 18px; color: var(--muted); }
+.menu-blurb { margin: 0; font-size: 13px; line-height: 18px; color: var(--muted); text-wrap: pretty; }
+.menu-links { display: flex; flex-wrap: wrap; gap: 8px; flex: none; }
+.menu-links a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: var(--chip); color: var(--ink); font-size: 13px; font-weight: 700; text-decoration: none; }
+.menu-links a:hover { background: var(--chip-hover); }
+.menu-links svg { width: 14px; height: 14px; flex: none; }
+.menu-list { list-style: none; margin: 0; padding: 0; overflow-y: auto; min-height: 0; flex: 1 1 auto; }
+.menu-list li + li { border-top: 1px dashed var(--line); }
+.menu-item { width: 100%; text-align: left; display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 6px; border-radius: 12px; }
+.menu-item:hover, .menu-item.sel { background: var(--chip); }
+.menu-item svg { width: 40px; height: 30px; }
+.menu-item b { display: block; font-size: 15px; line-height: 20px; }
+.menu-item small { display: block; font-size: 12.5px; line-height: 17px; color: var(--muted); }
+.menu-item small.mi-tag { color: var(--tip); font-weight: 700; font-size: 11.5px; }
+.menu-item .mi-price { font-weight: 700; font-size: 15px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.spot-card[hidden] { display: none; }
 .foot { display: flex; justify-content: center; padding-top: 8px; flex: none; }
 .pill {
   background: var(--chip); color: var(--muted);
@@ -480,7 +500,10 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
     </div>
 
     <div class="strip" id="strip" role="group" aria-label="the whole menu"></div>
-    <button class="pill more" id="moreBtn" aria-haspopup="dialog">view more top spots</button>
+    <div class="acts" id="acts">
+      <button class="pill menu" id="menuBtn" aria-haspopup="dialog">see the menu</button>
+      <button class="pill" id="moreBtn" aria-haspopup="dialog">more top spots</button>
+    </div>
   </section>
 
   <footer class="foot">
@@ -494,9 +517,27 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="spotsTitle">
     <div class="grab"></div>
     <div class="sheet-head"><h2 id="spotsTitle">top spots<span class="sheet-sub" id="spotsSub"></span></h2><button class="round" data-close aria-label="close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <label class="search" for="spotSearch">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="spotSearch" type="search" placeholder="search these spots or a dish" autocomplete="off" spellcheck="false">
+    </label>
     <div class="spots" id="spotList"></div>
+    <p class="sheet-note" id="spotEmpty" hidden>no spot here matches that</p>
     <div class="sheet-actions" id="spotsActions"></div>
     <p class="sheet-note"><span id="spotsNote">tap a storefront to visit</span> · <button class="linkish" data-how>how the crab ranks</button></p>
+  </div>
+</div>
+
+<div class="sheet-wrap" id="menuSheet" hidden>
+  <div class="backdrop" data-close></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
+    <div class="grab"></div>
+    <div class="sheet-head"><h2 id="menuTitle">the menu</h2><button class="round" data-close aria-label="close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="menu-head"><div class="menu-meta" id="menuMeta"></div><p class="menu-blurb" id="menuBlurb"></p></div>
+    <div class="menu-links" id="menuLinks"></div>
+    <ul class="menu-list" id="menuList" aria-label="dishes"></ul>
+    <div class="sheet-actions" id="menuActions"></div>
+    <p class="sheet-note" id="menuNote"></p>
   </div>
 </div>
 
@@ -546,7 +587,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
     <div class="seg" role="tablist" aria-label="rank by" id="citySeg"><button role="tab" aria-selected="true" data-mode="cities">cities</button><button role="tab" aria-selected="false" data-mode="states">whole states</button></div>
     <label class="search" for="citySearch">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="citySearch" type="search" placeholder="search any city" autocomplete="off" spellcheck="false">
+      <input id="citySearch" type="search" placeholder="search a city or restaurant" autocomplete="off" spellcheck="false">
     </label>
     <button class="loc-btn" id="locBtn" hidden><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 3 3 10.5l7.6 2.9L13.5 21z"/></svg>use my location</button>
     <ul class="list" id="cityList"></ul>
@@ -1534,47 +1575,68 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["sushi rolls", 18, "fresh", "", "sushi"]]],
       ["max's harvest", "pineapple grove", "american", 2009, 3, 4.6, "farm-to-table dining with a garden patio", [
         ["seasonal small plates", 18, "from local farms", "sig", "cloche"],
-        ["pan-seared fish", 38, "local catch", "", "fish"]]],
+        ["pan-seared fish", 38, "local catch", "", "fish"],
+        ["burger", 21, "", "", "burger"],
+        ["deviled eggs", 12, "", "share", "egg"]]],
       ["akira back", "the ray hotel", "japanese", 2022, 4, 4.6, "michelin-starred chef akira back's japanese-korean", [
         ["tuna pizza", 28, "thin tortilla, tuna, truffle oil", "sig", "sushi"],
         ["wagyu tacos", 22, "a playful bite", "", "taco"],
-        ["omakase", 120, "chef's selection", "share", "sushi"]]],
+        ["omakase", 120, "chef's selection", "share", "sushi"],
+        ["crispy rice", 19, "spicy tuna", "spicy", "sushi"]]],
       ["le colonial", "atlantic avenue", "vietnamese", 2021, 3, 4.6, "french-vietnamese in a colonial-style room", [
         ["shaking beef", 46, "wok-seared filet, watercress", "sig", "steak"],
         ["crispy spring rolls", 16, "with nuoc cham", "", "wrap"],
-        ["chilean sea bass", 48, "caramelized", "", "fish"]]],
+        ["chilean sea bass", 48, "caramelized", "", "fish"],
+        ["pho", 21, "", "", "noodles"]]],
       ["city oyster & sushi bar", "atlantic avenue", "seafood", 2004, 3, 4.5, "oysters and sushi in the heart of the ave", [
         ["oysters on the half shell", 4, "raw bar, by the piece", "sig", "oyster"],
         ["sushi rolls", 16, "classic and creative", "", "sushi"],
-        ["lobster mac & cheese", 32, "rich and creamy", "share", "pasta"]]],
+        ["lobster mac & cheese", 32, "rich and creamy", "share", "pasta"],
+        ["crab cakes", 26, "", ""]]],
       ["caffe luna rosa", "beach (a1a)", "italian", 1993, 3, 4.5, "breakfast to dinner across from the beach", [
         ["lobster ravioli", 34, "in a pink sauce", "sig", "pasta"],
-        ["eggs benedict", 18, "with an ocean view", "", "egg"]]],
+        ["eggs benedict", 18, "with an ocean view", "", "egg"],
+        ["linguine with clams", 32, "", "", "pasta"],
+        ["tiramisu", 12, "", "sweet", "cake"]]],
       ["deck 84", "intracoastal", "american", 2010, 2, 4.4, "waterfront patio on the intracoastal", [
         ["fish tacos", 19, "with slaw", "sig", "taco"],
         ["burger", 18, "with fries", "", "burger"],
         ["key lime pie", 9, "tart and creamy", "sweet", "cake"]]],
       ["j&j seafood bar & grill", "atlantic avenue", "seafood", 2006, 3, 4.6, "a cozy, chef-owned seafood spot", [
         ["grouper", 38, "local, chef's preparation", "sig", "fish"],
-        ["crab cakes", 26, "lump crab", "", "claw"]]],
+        ["crab cakes", 26, "lump crab", "", "claw"],
+        ["fish tacos", 18, "", "", "taco"],
+        ["conch fritters", 13, "", "share", "beignet"]]],
       ["the office", "atlantic avenue", "american", 2011, 2, 4.4, "a gastropub known for burgers and brunch", [
         ["the office burger", 21, "thick patty, cheese, bacon", "sig", "burger"],
-        ["truffle fries", 10, "parmesan, herbs", "veg", "fries"]]],
+        ["truffle fries", 10, "parmesan, herbs", "veg", "fries"],
+        ["mac & cheese", 15, "", ""],
+        ["milkshake", 11, "", "drink", "drink"]]],
       ["lemongrass asian bistro", "atlantic avenue", "thai", 2006, 2, 4.4, "pan-asian and sushi on the ave", [
         ["pad thai", 18, "classic", "sig", "noodles"],
-        ["sushi rolls", 15, "creative", "", "sushi"]]],
+        ["sushi rolls", 15, "creative", "", "sushi"],
+        ["crispy duck", 32, "", ""],
+        ["green curry", 22, "", "spicy", "curry"]]],
       ["cut 432", "atlantic avenue", "steak", 2006, 4, 4.6, "a sleek, modern steakhouse", [
         ["bone-in ribeye", 72, "prime, dry-aged", "sig", "steak"],
-        ["tuna tartare", 22, "with avocado", "", "fish"]]],
+        ["tuna tartare", 22, "with avocado", "", "fish"],
+        ["filet mignon", 58, "", "", "steak"],
+        ["creamed corn", 12, "", "veg"]]],
       ["sazio", "atlantic avenue", "italian", 2000, 2, 4.4, "a casual italian with sidewalk seats", [
         ["penne alla vodka", 22, "creamy tomato", "sig", "pasta"],
-        ["chicken parmigiana", 26, "classic", "", "chicken"]]],
+        ["chicken parmigiana", 26, "classic", "", "chicken"],
+        ["margherita pizza", 17, "", "veg", "pizza"],
+        ["veal marsala", 32, "", ""]]],
       ["johnnie brown's", "atlantic avenue", "american", 2011, 2, 4.4, "a lively bar with live music and lobster rolls", [
         ["lobster roll", 32, "toasted bun", "sig", "sandwich"],
-        ["wings", 16, "crispy", "", "chicken"]]],
+        ["wings", 16, "crispy", "", "chicken"],
+        ["fish & chips", 22, "", "", "fish"],
+        ["burger", 17, "", "", "burger"]]],
       ["old school bakery", "west atlantic", "bakery", 2009, 1, 4.7, "a local bakery for bread and pastries", [
         ["croissant", 4, "buttery and flaky", "sig"],
-        ["sourdough loaf", 9, "crackly crust", "veg", "bread"]]],
+        ["sourdough loaf", 9, "crackly crust", "veg", "bread"],
+        ["almond croissant", 5, "", "sweet", "croissant"],
+        ["baguette", 6, "", "", "bread"]]],
       ["doc's all american", "atlantic & swinton", "burgers", 1951, 1, 4.5, "a 1951 walk-up for burgers and shakes", [
         ["cheeseburger", 9, "griddled, classic", "sig", "burger"],
         ["milkshake", 7, "thick and old-school", "sweet", "drink"],
@@ -1585,26 +1647,38 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["margarita", 13, "on the rocks", "drink", "cocktail"]]],
       ["salt7", "atlantic avenue", "steak", 2016, 4, 4.5, "steaks and seafood that turns into a lounge", [
         ["filet mignon", 62, "prime", "sig", "steak"],
-        ["seafood tower", 95, "for the table", "share", "oyster"]]],
+        ["seafood tower", 95, "for the table", "share", "oyster"],
+        ["tuna tartare", 22, "", "", "sushi"],
+        ["truffle mac & cheese", 16, "", "share"]]],
       ["sundy house", "south swinton", "american", 1902, 3, 4.5, "dining in an 1902 house with a tropical garden", [
         ["sunday brunch", 65, "a lavish garden brunch", "sig", "cloche"],
-        ["seasonal entrées", 36, "garden-to-table", "", "fish"]]],
+        ["seasonal entrées", 36, "garden-to-table", "", "fish"],
+        ["crab cakes", 24, "", ""],
+        ["key lime pie", 12, "", "sweet", "cake"]]],
       ["el camino", "pineapple grove", "mexican", 2015, 2, 4.5, "mexican street food and mezcal", [
         ["fish tacos", 15, "crispy, cabbage, crema", "sig", "taco"],
-        ["queso fundido", 13, "melted cheese and chorizo", "share", "dip"]]],
+        ["queso fundido", 13, "melted cheese and chorizo", "share", "dip"],
+        ["carne asada", 32, "", "", "steak"],
+        ["churros", 10, "", "sweet"]]],
       ["latitudes", "highland beach (delray sands)", "seafood", 2015, 3, 4.5, "oceanfront dining at the delray sands", [
         ["fresh catch", 42, "with an ocean view", "sig", "fish"],
-        ["sunset cocktail", 15, "on the deck", "drink", "cocktail"]]],
+        ["sunset cocktail", 15, "on the deck", "drink", "cocktail"],
+        ["crab cakes", 24, "", ""],
+        ["fish tacos", 19, "", "", "taco"]]],
       ["ziree thai & sushi", "west delray", "thai", 2008, 2, 4.7, "michelin-recognized thai from chef bee", [
         ["khao soi", 22, "curry noodle soup", "sig", "noodles"],
         ["crispy duck", 34, "tamarind sauce", "", "chicken"],
         ["omakase", 90, "sushi counter", "share", "sushi"]]],
       ["delray beach market", "downtown", "american", 2021, 2, 4.5, "a big food hall with two dozen vendors", [
         ["pick-and-mix food hall", 15, "sushi, pizza, tacos and more", "sig", "cloche"],
-        ["ice cream", 7, "from the dessert stalls", "sweet", "icecream"]]],
+        ["ice cream", 7, "from the dessert stalls", "sweet", "icecream"],
+        ["poke bowl", 16, "", "", "sushi"],
+        ["pizza", 14, "", "", "pizza"]]],
       ["ellie's 50's diner", "federal highway", "american", 1997, 1, 4.4, "a retro diner with jukebox nights", [
         ["pancakes", 10, "fluffy stack", "sig", "pancake"],
-        ["patty melt", 13, "on rye with onions", "", "sandwich"]]]
+        ["patty melt", 13, "on rye with onions", "", "sandwich"],
+        ["chicken & waffles", 17, "", "", "waffle"],
+        ["milkshake", 9, "", "drink", "drink"]]]
     ] },
     "boca raton": { g: "fl", st: "florida", ab: "fl", look: "deco", ll: [26.37, -80.13], spots: [
       ["trattoria romana", "east palmetto park", "italian", 0, 4, 4.7, "old-school roman dining with a fresh fish display and tuxedoed waiters", [
@@ -1615,77 +1689,120 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
       ["casa d'angelo", "federal highway", "italian", 2006, 4, 4.6, "angelo elia's polished tuscan dining room", [
         ["veal chop", 62, "grilled, with sage", "sig", "steak"],
         ["handmade pasta", 32, "seasonal", "", "pasta"],
-        ["tiramisu", 14, "classic", "sweet", "cake"]]],
+        ["tiramisu", 14, "classic", "sweet", "cake"],
+        ["carpaccio", 22, "thin beef, arugula, parmigiano", ""],
+        ["spaghetti pomodoro", 28, "", "veg", "pasta"],
+        ["branzino", 46, "", "", "fish"]]],
       ["abe & louie's", "glades road", "steak", 2001, 4, 4.6, "boca's classic boston-born steakhouse", [
         ["bone-in filet", 72, "prime, broiled", "sig", "steak"],
-        ["lobster bisque", 16, "rich", "", "soup"]]],
+        ["lobster bisque", 16, "rich", "", "soup"],
+        ["prime ribeye", 64, "", "", "steak"],
+        ["shrimp cocktail", 24, "", "", "shrimp"],
+        ["hash browns", 14, "", "share"],
+        ["cheesecake", 14, "", "sweet", "cake"]]],
       ["max's grille", "mizner park", "american", 1990, 3, 4.5, "the mizner park favorite since 1990", [
         ["meatloaf", 28, "a long-time signature", "sig", "cloche"],
-        ["chopped salad", 18, "loaded", "", "salad"]]],
+        ["chopped salad", 18, "loaded", "", "salad"],
+        ["tuna tartare", 21, "", "", "sushi"],
+        ["grilled salmon", 34, "", "", "fish"],
+        ["key lime pie", 11, "", "sweet", "cake"]]],
       ["taverna kyma", "federal highway", "mediterranean", 2014, 2, 4.6, "a lively greek taverna", [
         ["grilled octopus", 26, "charred, lemon", "sig", "fish"],
         ["lamb chops", 42, "grilled", "", "steak"],
-        ["greek salad", 16, "feta, olives", "veg", "salad"]]],
+        ["greek salad", 16, "feta, olives", "veg", "salad"],
+        ["spreads trio", 18, "tzatziki, taramosalata, melitzanosalata", "share", "dip"],
+        ["spanakopita", 14, "", "veg"]]],
       ["louie bossi's ristorante", "downtown", "italian", 2019, 3, 4.6, "pizza, pasta and a bocce court", [
         ["wood-fired pizza", 22, "neapolitan-style", "sig", "pizza"],
-        ["house-made pasta", 28, "made in house", "", "pasta"]]],
+        ["house-made pasta", 28, "made in house", "", "pasta"],
+        ["burrata", 19, "", "share"],
+        ["cacio e pepe", 26, "", "", "pasta"],
+        ["cannoli", 11, "", "sweet", "cookie"]]],
       ["farmer's table", "north federal", "american", 2013, 2, 4.5, "healthy farm-to-table comfort food", [
         ["grain bowl", 19, "seasonal vegetables", "veg", "rice"],
-        ["grilled salmon", 32, "with greens", "sig", "fish"]]],
+        ["grilled salmon", 32, "with greens", "sig", "fish"],
+        ["flatbread", 17, "", "veg", "pizza"],
+        ["turkey burger", 19, "", "", "burger"]]],
       ["ouzo bay", "mizner park", "mediterranean", 2016, 3, 4.5, "greek seafood with a big patio", [
         ["whole branzino", 46, "grilled, lemon, oregano", "sig", "fish"],
-        ["spreads", 16, "tzatziki, hummus, more", "share", "dip"]]],
+        ["spreads", 16, "tzatziki, hummus, more", "share", "dip"],
+        ["grilled octopus", 26, "", "sig"],
+        ["lamb chops", 52, "", "", "kebab"]]],
       ["arturo's ristorante", "north federal", "italian", 1983, 4, 4.6, "family-run italian fine dining since 1983", [
         ["veal piccata", 42, "lemon and capers", "sig", "steak"],
-        ["dover sole", 58, "deboned tableside", "", "fish"]]],
+        ["dover sole", 58, "deboned tableside", "", "fish"],
+        ["fettuccine alfredo", 34, "", "", "pasta"],
+        ["tiramisu", 14, "", "sweet", "cake"]]],
       ["kathy's gazebo cafe", "north federal", "french", 1986, 4, 4.6, "continental elegance since the 1980s", [
         ["dover sole", 60, "meunière", "sig", "fish"],
         ["soufflé", 16, "made to order", "sweet", "cake"]]],
       ["sushi simon", "west boca", "japanese", 2000, 3, 4.6, "a local sushi favorite", [
         ["omakase", 95, "chef's choice", "sig", "sushi"],
-        ["specialty rolls", 18, "creative", "", "sushi"]]],
+        ["specialty rolls", 18, "creative", "", "sushi"],
+        ["yellowtail jalapeño", 22, "", "spicy", "sushi"],
+        ["miso soup", 5, "", "", "soup"]]],
       ["twenty twenty grille", "royal palm place", "american", 2012, 4, 4.7, "chef ron weisheit's tiny, intimate grill", [
         ["tasting menu", 110, "seasonal", "sig", "cloche"],
         ["steak", 52, "prime", "", "steak"]]],
       ["uncle tai's", "boca center", "chinese", 1990, 3, 4.5, "hunan cooking since 1990", [
         ["orange beef", 30, "crispy and spicy", "sig", "steak"],
-        ["peking duck", 60, "for the table", "share", "chicken"]]],
+        ["peking duck", 60, "for the table", "share", "chicken"],
+        ["general tso's chicken", 26, "", "spicy", "chicken"],
+        ["hot & sour soup", 9, "", "", "soup"]]],
       ["gary woo asian bistro", "federal highway", "chinese", 2005, 2, 4.4, "pan-asian with dim sum", [
         ["dumplings", 12, "steamed or fried", "sig", "dumpling"],
-        ["lo mein", 18, "classic", "", "noodles"]]],
+        ["lo mein", 18, "classic", "", "noodles"],
+        ["peking duck", 52, "", "sig"],
+        ["fried rice", 16, "", "", "rice"]]],
       ["tucci's fire n coal pizza", "boca raton", "pizza", 2010, 2, 4.5, "coal-fired pies", [
         ["coal-fired pizza", 20, "crispy, charred", "sig", "pizza"],
-        ["wings", 15, "coal-roasted with onions", "", "chicken"]]],
+        ["wings", 15, "coal-roasted with onions", "", "chicken"],
+        ["meatballs", 15, "", ""],
+        ["caesar salad", 13, "", "veg", "salad"]]],
       ["nick's new haven-style pizzeria", "boca raton", "pizza", 2010, 2, 4.6, "new haven apizza in florida", [
         ["white clam pie", 26, "garlic, clams, olive oil", "sig", "pizza"],
         ["plain tomato pie", 18, "charred and thin", "veg", "pizza"]]],
       ["biergarten", "boca raton", "european", 2010, 2, 4.4, "german beer hall with giant pretzels", [
         ["giant pretzel", 16, "with beer cheese and mustard", "sig", "bread"],
-        ["schnitzel", 26, "crisp, with spaetzle", "", "steak"]]],
+        ["schnitzel", 26, "crisp, with spaetzle", "", "steak"],
+        ["bratwurst", 18, "", "", "hotdog"],
+        ["beer flight", 16, "", "drink", "drink"]]],
       ["sadelle's", "the boca raton", "american", 2022, 3, 4.5, "major food group's brunch at the boca raton resort", [
         ["bagel tower", 90, "smoked fish, bagels, spreads", "sig", "bagel"],
-        ["sticky buns", 12, "warm and gooey", "sweet", "croissant"]]],
+        ["sticky buns", 12, "warm and gooey", "sweet", "croissant"],
+        ["smoked salmon platter", 38, "", "share"],
+        ["french toast", 26, "", "sweet"]]],
       ["prezzo", "boca raton", "italian", 1991, 2, 4.4, "a casual italian classic since the 90s", [
         ["chopped salad", 16, "a house favorite", "sig", "salad"],
         ["pizza", 18, "wood-fired", "", "pizza"]]],
       ["ben's kosher deli", "boca raton", "deli", 1997, 2, 4.4, "new york-style kosher deli", [
         ["pastrami on rye", 22, "hot and stacked", "sig", "sandwich"],
-        ["matzo ball soup", 10, "classic", "", "soup"]]],
+        ["matzo ball soup", 10, "classic", "", "soup"],
+        ["corned beef sandwich", 22, "", "", "sandwich"],
+        ["potato latkes", 12, "", ""]]],
       ["flakowitz bagel inn", "boca raton", "deli", 1972, 1, 4.5, "boca's bagel and deli favorite", [
         ["bagel with lox", 15, "cream cheese, tomato, onion", "sig", "bagel"],
         ["black & white cookie", 4, "classic", "sweet", "cookie"]]],
       ["tap 42 craft kitchen & bar", "boca raton", "american", 2011, 2, 4.5, "craft beer and big burgers", [
         ["prohibition burger", 18, "with secret sauce", "sig", "burger"],
-        ["brussels sprouts", 12, "crispy", "veg", "salad"]]],
+        ["brussels sprouts", 12, "crispy", "veg", "salad"],
+        ["tuna poke nachos", 19, "", "share"],
+        ["wings", 17, "", "", "chicken"]]],
       ["rocco's tacos & tequila bar", "boca raton", "mexican", 2009, 2, 4.4, "tableside guac and tequila", [
         ["tableside guacamole", 16, "made at your table", "sig", "dip"],
-        ["fish tacos", 18, "crispy", "", "taco"]]],
+        ["fish tacos", 18, "crispy", "", "taco"],
+        ["birria tacos", 19, "", "", "taco"],
+        ["margarita", 13, "", "drink", "cocktail"]]],
       ["la nouvelle maison", "east palmetto park", "french", 2016, 4, 4.6, "french fine dining in a country-house setting", [
         ["dover sole", 62, "classic", "sig", "fish"],
-        ["soufflé", 16, "grand marnier", "sweet", "cake"]]],
+        ["soufflé", 16, "grand marnier", "sweet", "cake"],
+        ["escargots", 19, "", ""],
+        ["duck à l'orange", 46, "", ""]]],
       ["lucca", "the boca raton", "italian", 2017, 4, 4.4, "coastal italian at the boca raton", [
         ["pasta", 34, "handmade", "sig", "pasta"],
-        ["branzino", 48, "whole", "", "fish"]]]
+        ["branzino", 48, "whole", "", "fish"],
+        ["burrata", 19, "", "share"],
+        ["wood-fired pizza", 22, "", "", "pizza"]]]
     ] },
     "fort lauderdale": { g: "fl", st: "florida", ab: "fl", look: "deco", ll: [26.12, -80.14], spots: [
       ["the floridian", "las olas", "american", 1937, 1, 4.4, "a 24-hour diner on las olas since 1937", [
@@ -3886,7 +4003,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["steak", 34, "", "", "steak"]]],
       ["dan's supermarket", "bismarck", "deli", 1970, 1, 4.3, "a grocery with a deli everyone knows", [
         ["sandwich", 8, "", "sig", "sandwich"]]],
-      ["space aliens grill & bar", "bismarck", "american", 1997, 1, 4.0, "a sci-fi family restaurant from north dakota", [
+      ["space aliens grill & bar", "bismarck", "american", 1997, 1, 4, "a sci-fi family restaurant from north dakota", [
         ["ribs", 18, "", "sig", "ribs"]]],
       ["bistro 1100", "bismarck", "modern", 2005, 3, 4.4, "a bistro on main", [
         ["steak", 34, "", "sig", "steak"]]],
@@ -5005,7 +5122,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["roast pork", 14, "", "sig", "sandwich"]]],
       ["jim's south st.", "south street", "deli", 1976, 1, 4.4, "cheesesteaks on south street", [
         ["cheesesteak", 14, "", "sig", "sandwich"]]],
-      ["geno's steaks", "south philly", "deli", 1966, 1, 4.0, "the neon cheesesteak across from pat's", [
+      ["geno's steaks", "south philly", "deli", 1966, 1, 4, "the neon cheesesteak across from pat's", [
         ["cheesesteak", 15, "", "sig", "sandwich"]]],
       ["famous 4th street delicatessen", "queen village", "deli", 1923, 2, 4.4, "a jewish deli with huge cookies", [
         ["corned beef", 22, "", "sig", "sandwich"]]],
@@ -5846,7 +5963,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["flatbread", 16, "", "", "pizza"]]],
       ["the food market", "hampden", "modern", 2012, 2, 4.5, "a busy hampden spot", [
         ["brunch", 16, "", "sig", "egg"]]],
-      ["café hon", "hampden", "american", 1992, 2, 4.0, "hon culture in hampden", [
+      ["café hon", "hampden", "american", 1992, 2, 4, "hon culture in hampden", [
         ["crab cake", 26, "", "sig"]]],
       ["g&m restaurant", "linthicum", "seafood", 1990, 2, 4.5, "famously huge crab cakes", [
         ["crab cake", 32, "", "sig"]]],
@@ -7024,7 +7141,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["chicken", 18, "", "sig", "chicken"]]],
       ["bakers & roasters", "de pijp", "american", 2013, 2, 4.5, "brunch", [
         ["brunch", 15, "", "sig", "egg"]]],
-      ["sea palace", "centraal", "chinese", 1984, 2, 4.0, "a floating chinese pagoda", [
+      ["sea palace", "centraal", "chinese", 1984, 2, 4, "a floating chinese pagoda", [
         ["dim sum", 6, "", "sig", "dumpling"]]],
       ["café americain", "leidseplein", "european", 1902, 3, 4.2, "an art nouveau café", [
         ["coffee", 4, "", "sig", "coffee"]]],
@@ -8789,7 +8906,13 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
       ["the spread", "south norwalk", "modern", 2011, 2, 4.4, "small plates in sono", [
         ["small plates", 14, "", "sig"]]],
       ["harbor lights", "norwalk", "seafood", 1983, 3, 4.4, "seafood on the harbor", [
-        ["lobster", "mp", "", "sig", "claw"]]]
+        ["lobster", "mp", "", "sig", "claw"]]],
+      ["arden's", "rowayton", "mediterranean", 2018, 2, 4.5, "a mediterranean café", [
+        ["mezze plate", 16, "", "sig"]]],
+      ["the tavern at graybarns", "silvermine", "modern", 2018, 4, 4.6, "a hotel tavern with local produce", [
+        ["seasonal menu", 38, "", "sig"]]],
+      ["rowayton market", "rowayton", "deli", 1990, 1, 4.5, "sandwiches, salads and groceries", [
+        ["sandwich", 12, "", "sig", "sandwich"]]]
     ] },
     "hoboken": { g: "tri", st: "new jersey", ab: "nj", look: "brick", ll: [40.74, -74.03], spots: [
       ["carlo's bakery", "washington street", "bakery", 1910, 1, 4.3, "the cake boss bakery", [
@@ -12826,7 +12949,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["steak", 32, "", "sig", "steak"]]],
       ["wyoming's rib & chop house", "sheridan", "steak", 1998, 3, 4.4, "the original rib & chop house", [
         ["ribs", 28, "", "sig", "ribs"]]],
-      ["old faithful inn dining room", "yellowstone", "american", 1904, 3, 4.0, "dining in a 1904 log lodge", [
+      ["old faithful inn dining room", "yellowstone", "american", 1904, 3, 4, "dining in a 1904 log lodge", [
         ["bison burger", 19, "", "sig", "burger"]]]
     ] },
     "oxford": { g: "more", st: "mississippi", ab: "ms", look: "brick", ll: [34.37, -89.52], spots: [
@@ -14798,7 +14921,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["elk", 46, "", "sig", "steak"]]],
       ["jack-n-grill", "denver", "latin", 1995, 1, 4.4, "new mexican with a famous green chile", [
         ["green chile", 9, "", "sig", "soup"]]],
-      ["casa bonita", "lakewood", "mexican", 1974, 2, 4.0, "cliff divers and sopapillas, revived by the south park creators", [
+      ["casa bonita", "lakewood", "mexican", 1974, 2, 4, "cliff divers and sopapillas, revived by the south park creators", [
         ["sopapillas", "incl", "", "sig"]]],
       ["the cherry cricket", "cherry creek", "burgers", 1945, 1, 4.5, "a classic burger bar", [
         ["burger", 13, "", "sig", "burger"]]],
@@ -15749,6 +15872,182 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         ["mtsvadi", 28, "", "sig", "kebab"]]],
       ["funicular restaurant", "mtatsminda", "bakery", 1938, 2, 4.4, "ponchiki donuts on the mountain", [
         ["ponchiki", 3, "", "sig", "donut"]]]
+    ] },
+    "darien": { g: "tri", st: "connecticut", ab: "ct", look: "clap", ll: [41.08, -73.47], spots: [
+      ["restaurant l'ostal", "darien", "french", 2014, 4, 4.7, "southern french multi-course menus in a tiny dining room", [
+        ["tasting menu", 115, "several courses from the south of france", "sig", "cloche"],
+        ["duck breast", 44, "cherries, potato gratin", ""],
+        ["bouillabaisse", 48, "provençal fish stew, rouille", "", "soup"],
+        ["soufflé", 16, "made to order", "sweet", "cake"]]],
+      ["coromandel", "darien", "indian", 1998, 3, 4.6, "indian cooking named one of connecticut's best", [
+        ["chicken tikka masala", 24, "tomato cream, fenugreek", "sig", "curry"],
+        ["lamb rogan josh", 27, "kashmiri chili, yogurt", "spicy", "curry"],
+        ["palak paneer", 20, "spinach, house cheese", "veg", "curry"],
+        ["garlic naan", 5, "from the tandoor", "", "bread"],
+        ["mango lassi", 6, "", "drink", "drink"]]],
+      ["the water's edge at giovanni's", "darien", "steak", 1978, 4, 4.5, "a waterside steakhouse that cuts its own angus beef", [
+        ["porterhouse for two", 110, "dry-aged, cut in house", "sig", "steak"],
+        ["filet mignon", 56, "", "", "steak"],
+        ["lobster bisque", 14, "", "", "soup"],
+        ["creamed spinach", 12, "", "veg"]]],
+      ["the goose american bistro", "darien", "american", 2006, 3, 4.4, "a lively post road bistro and bar", [
+        ["burger", 22, "aged cheddar, bacon jam", "sig", "burger"],
+        ["pan-roasted salmon", 34, "", "", "fish"],
+        ["tuna tartare", 21, "avocado, wonton crisps", ""],
+        ["truffle fries", 11, "", "share", "fries"]]],
+      ["seamore's", "darien", "seafood", 2022, 3, 4.4, "a bright seafood spot with fish tacos and raw bar", [
+        ["fish tacos", 19, "catch of the day, cabbage, crema", "sig", "taco"],
+        ["oysters", 22, "half dozen", "", "oyster"],
+        ["lobster roll", 34, "warm, butter", "", "sandwich"],
+        ["poke bowl", 22, "", "", "sushi"]]],
+      ["bodega taco bar", "darien", "mexican", 2012, 2, 4.4, "tacos and a long tequila list", [
+        ["fish tacos", 16, "", "sig", "taco"],
+        ["carnitas tacos", 15, "", "", "taco"],
+        ["guacamole", 14, "", "share", "dip"],
+        ["margarita", 13, "", "drink", "cocktail"]]],
+      ["la taqueria", "darien", "mexican", 2010, 1, 4.6, "a small taco counter with a big following", [
+        ["tacos al pastor", 4, "", "sig", "taco"],
+        ["burrito", 13, "", "", "wrap"],
+        ["chips & salsa", 5, "", "share"]]],
+      ["barvida", "darien", "latin", 2019, 2, 4.5, "latin small plates and cocktails", [
+        ["empanadas", 12, "", "sig"],
+        ["ceviche", 18, "", "", "fish"],
+        ["churrasco", 34, "chimichurri", "", "steak"]]],
+      ["rory's restaurant", "darien", "american", 2008, 3, 4.6, "a neighborhood favorite with a big menu", [
+        ["crab cakes", 18, "", "sig"],
+        ["steak frites", 36, "", "", "steak"],
+        ["chicken paillard", 28, "", "", "chicken"]]],
+      ["cesco's trattoria", "darien", "italian", 2015, 2, 4.5, "a family italian trattoria", [
+        ["rigatoni bolognese", 24, "", "sig", "pasta"],
+        ["chicken parmigiana", 26, "", "", "chicken"],
+        ["margherita pizza", 18, "", "veg", "pizza"]]],
+      ["papa joe's", "darien", "italian", 1990, 2, 4.4, "house-made pasta and pizza", [
+        ["house-made pasta", 22, "", "sig", "pasta"],
+        ["pizza", 18, "", "", "pizza"],
+        ["eggplant rollatini", 18, "", "veg"]]],
+      ["scena wine bar", "darien", "italian", 2016, 3, 4.5, "an italian wine bar with small plates", [
+        ["burrata", 18, "", "share"],
+        ["cacio e pepe", 24, "", "sig", "pasta"],
+        ["wine flight", 24, "", "drink", "drink"]]],
+      ["little thai kitchen", "darien", "thai", 2005, 2, 4.4, "thai with famous lunch specials", [
+        ["pad thai", 17, "", "sig", "noodles"],
+        ["green curry", 18, "", "spicy", "curry"],
+        ["tom yum soup", 8, "", "", "soup"]]],
+      ["the granola bar", "darien", "american", 2012, 1, 4.4, "smoothies, parfaits and all-day breakfast", [
+        ["granola parfait", 11, "house granola, yogurt, fruit", "sig"],
+        ["avocado toast", 14, "", "veg", "bread"],
+        ["smoothie", 10, "", "drink", "drink"]]],
+      ["fjord fish market", "darien", "seafood", 2006, 3, 4.5, "a fish market with sushi and prepared seafood", [
+        ["sushi platter", 28, "", "sig", "sushi"],
+        ["lobster salad", 32, "", ""],
+        ["clam chowder", 9, "", "", "soup"]]],
+      ["zucchero cafe", "darien", "bakery", 2010, 1, 4.4, "a café for coffee and pastries", [
+        ["cappuccino", 5, "", "sig", "coffee"],
+        ["croissant", 4, "", "", "croissant"]]],
+      ["post corner pizza", "darien", "pizza", 1971, 1, 4.4, "a darien pizza standby", [
+        ["cheese pizza", 16, "", "sig", "pizza"],
+        ["grinder", 12, "", "", "sandwich"]]]
+    ] },
+    "new canaan": { g: "tri", st: "connecticut", ab: "ct", look: "clap", ll: [41.15, -73.49], spots: [
+      ["elm", "elm street", "modern", 2014, 4, 4.6, "new canaan's special-occasion restaurant", [
+        ["tasting menu", 125, "", "sig", "cloche"],
+        ["duck", 46, "", ""],
+        ["crudo", 22, "", "", "fish"]]],
+      ["gates restaurant", "forest street", "american", 1973, 2, 4.5, "a garden-room american restaurant", [
+        ["burger", 19, "", "sig", "burger"],
+        ["chicken pot pie", 26, "", ""],
+        ["salmon", 32, "", "", "fish"]]],
+      ["roger sherman inn", "oenoke ridge", "modern", 1740, 4, 4.6, "dining in a colonial inn", [
+        ["rack of lamb", 52, "", "sig", "steak"],
+        ["dover sole", "mp", "", "", "fish"]]],
+      ["blackbird", "downtown", "modern", 2021, 3, 4.5, "a sleek downtown bar and restaurant", [
+        ["steak", 46, "", "sig", "steak"],
+        ["burrata", 18, "", "share"]]],
+      ["cava wine bar & restaurant", "new canaan", "italian", 2004, 3, 4.5, "italian with a cellar wine bar", [
+        ["fried calamari", 17, "", "sig"],
+        ["pasta", 28, "", "", "pasta"]]],
+      ["chef luis", "new canaan", "modern", 2014, 3, 4.5, "luis lopez's global menu", [
+        ["seasonal menu", 36, "", "sig"]]],
+      ["the back end", "new canaan", "mexican", 2015, 2, 4.4, "modern mexican", [
+        ["tacos", 16, "", "sig", "taco"],
+        ["guacamole", 14, "", "share", "dip"]]],
+      ["chef prasad", "new canaan", "indian", 2017, 2, 4.5, "indian street food and curries", [
+        ["dosa", 16, "", "sig"],
+        ["butter chicken", 23, "", "", "curry"]]],
+      ["south end", "new canaan", "american", 2015, 3, 4.5, "a neighborhood american bistro", [
+        ["burger", 20, "", "sig", "burger"],
+        ["fried chicken", 28, "", "", "chicken"]]],
+      ["tequila mockingbird", "new canaan", "mexican", 2008, 2, 4.4, "mexican with a big margarita list", [
+        ["fajitas", 28, "", "sig"],
+        ["margarita", 13, "", "drink", "cocktail"]]],
+      ["ching's table", "new canaan", "chinese", 1995, 3, 4.5, "upscale chinese", [
+        ["peking duck", 48, "", "sig"],
+        ["dumplings", 12, "", "", "dumpling"]]],
+      ["hashi sushi", "new canaan", "japanese", 2010, 3, 4.5, "sashimi and hibachi", [
+        ["sashimi", 28, "", "sig", "sushi"],
+        ["hibachi", 30, "", "", "steak"]]],
+      ["pesca peruvian bistro", "new canaan", "latin", 2018, 3, 4.5, "peruvian small plates", [
+        ["ceviche", 19, "", "sig", "fish"],
+        ["lomo saltado", 32, "", "", "steak"]]],
+      ["sole ristorante", "elm street", "italian", 2000, 3, 4.5, "italian on elm street", [
+        ["pasta", 28, "", "sig", "pasta"],
+        ["branzino", 38, "", "", "fish"]]]
+    ] },
+    "ridgefield": { g: "tri", st: "connecticut", ab: "ct", look: "clap", ll: [41.28, -73.5], spots: [
+      ["the benjamin", "ridgefield", "french", 2018, 4, 4.5, "french-american dining", [
+        ["steak frites", 42, "", "sig", "steak"],
+        ["moules", 26, "", "", "shrimp"]]],
+      ["brasserie saint germain", "ridgefield", "french", 2020, 3, 4.7, "a french brasserie", [
+        ["onion soup", 14, "", "sig", "soup"],
+        ["duck confit", 34, "", ""]]],
+      ["bailey's backyard", "main street", "modern", 2000, 3, 4.6, "farm-to-table downtown", [
+        ["seasonal menu", 34, "", "sig"],
+        ["burger", 20, "", "", "burger"]]],
+      ["heibeck's stand", "ridgefield", "bbq", 1950, 1, 4.6, "texas-style barbecue at a roadside stand", [
+        ["brisket sandwich", 15, "", "sig", "sandwich"],
+        ["hot dog", 5, "", "", "hotdog"]]],
+      ["tablao wine bar & restaurant", "ridgefield", "spanish", 2015, 3, 4.4, "spanish tapas and live music", [
+        ["tapas", 12, "", "sig"],
+        ["paella", 38, "", "", "rice"]]],
+      ["gofer ice cream", "ridgefield", "bakery", 2004, 1, 4.7, "a beloved local ice cream shop", [
+        ["ice cream", 6, "", "sig", "icecream"]]],
+      ["ridgefield prime", "ridgefield", "steak", 2023, 4, 4.5, "a ridgefield steakhouse", [
+        ["filet", 58, "", "sig", "steak"]]],
+      ["luc's café", "main street", "french", 1998, 3, 4.5, "a little french café", [
+        ["croque monsieur", 18, "", "sig", "sandwich"],
+        ["steak frites", 36, "", "", "steak"]]]
+    ] },
+    "fairfield": { g: "tri", st: "connecticut", ab: "ct", look: "clap", ll: [41.14, -73.26], spots: [
+      ["taj indian cuisine", "fairfield", "indian", 2005, 2, 4.6, "the best-reviewed restaurant in town", [
+        ["chicken tikka masala", 21, "", "sig", "curry"],
+        ["saag paneer", 18, "", "veg", "curry"]]],
+      ["brick walk tavern", "fairfield", "american", 2002, 2, 4.4, "a tavern with great service", [
+        ["burger", 17, "", "sig", "burger"],
+        ["wings", 15, "", "", "chicken"]]],
+      ["esh modern mediterranean", "fairfield", "mediterranean", 2021, 3, 4.6, "modern mediterranean", [
+        ["mezze", 16, "", "sig"],
+        ["lamb chops", 38, "", "", "kebab"]]],
+      ["the stand", "fairfield", "american", 2010, 1, 4.5, "vegan juice bar and café", [
+        ["smoothie", 10, "", "drink", "drink"],
+        ["grain bowl", 14, "", "veg", "rice"]]],
+      ["brick + wood", "fairfield", "pizza", 2014, 2, 4.5, "wood-fired pizza", [
+        ["pizza", 18, "", "sig", "pizza"],
+        ["meatballs", 13, "", ""]]],
+      ["bar rosina", "fairfield", "italian", 2021, 3, 4.6, "italian with handmade pasta", [
+        ["pasta", 26, "", "sig", "pasta"],
+        ["burrata", 18, "", "share"]]],
+      ["shiki hana", "fairfield", "japanese", 2005, 2, 4.5, "sushi", [
+        ["sushi", 18, "", "sig", "sushi"]]],
+      ["rawley's drive-in", "fairfield", "american", 1946, 1, 4.5, "deep-fried then grilled hot dogs since 1946", [
+        ["hot dog", 6, "with bacon and sauerkraut", "sig", "hotdog"]]],
+      ["firehouse deli", "fairfield", "deli", 1983, 1, 4.6, "big sandwiches", [
+        ["sandwich", 13, "", "sig", "sandwich"]]],
+      ["flipside burgers", "fairfield", "burgers", 2011, 1, 4.4, "burgers and shakes", [
+        ["burger", 13, "", "sig", "burger"]]],
+      ["the chelsea", "fairfield", "american", 2011, 2, 4.5, "a gastropub and brunch spot", [
+        ["brunch", 16, "", "sig", "egg"]]],
+      ["wilson's barbecue", "fairfield", "bbq", 2013, 2, 4.6, "barbecue and live music", [
+        ["brisket", 22, "", "sig", "ribs"]]]
     ] }
   };
 
@@ -16388,6 +16687,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
     prevBtn.disabled = nextBtn.disabled = true;
     $("#prevSpot").disabled = $("#nextSpot").disabled = true;
     $("#moreBtn").hidden = true;
+    $("#menuBtn").hidden = true;
     $("#live").textContent = `${title}. ${body}`;
   }
 
@@ -16416,6 +16716,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
     jump(0);
     setDish(0, true);
     $("#moreBtn").hidden = false;
+    $("#menuBtn").hidden = false;
   }
 
   function renderSpotLine() {
@@ -16728,11 +17029,13 @@ One item per line and nothing else, each a compact JSON array: ["dish name",18,"
     const job = { key: menuKey(sp), sp, ctl: new AbortController(), items: [], pending: "" };
     menuJob = job;
     renderStrip();
+    if (openSheet === $("#menuSheet")) renderMenuSheet();
     const have = new Set(sp.m.map((d) => d.n));
     const refresh = () => {
       if (state.list[state.ri] !== sp) return;
       const mi = state.mi;
       renderSlides(); renderStrip(); jump(mi); markStrip(false);
+      if (openSheet === $("#menuSheet")) renderMenuSheet();
       prevBtn.disabled = mi === 0; nextBtn.disabled = mi === sp.m.length - 1;
     };
     const take = (line) => {
@@ -16935,6 +17238,7 @@ One item per line and nothing else, each a compact JSON array: ["dish name",18,"
         <span class="mini">${sceneSVG(sp, d, { flat: true })}</span>
         <span class="sr">#${i + 1}${sp.r ? ` · ★ ${sp.r.toFixed(1)}` : ""}</span><b>${esc(sp.n)}</b><small>${esc(czShort(sp.c))} · ${esc(isState(state.city.name) ? townOf(sp) : dollars(sp))}</small></button>`;
     }).join(""));
+    filterSpots();
     list.querySelectorAll(".spot-card").forEach((b) => { const on = +b.dataset.i === state.ri; b.classList.toggle("sel", on); if (on) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current"); });
     if (scouting) list.insertAdjacentHTML("beforeend", `<div class="spot-card ghost">the crab is still looking<span class="dots"><span>.</span><span>.</span><span>.</span></span></div>`);
     $("#spotsNote").textContent = isState(state.city.name) ? "the best of the state's saved cities" : state.src === "live" ? "scouted by claude. check hours before you go" : state.src === "filter" ? `just the ${what} spots from the saved picks` : "tap a storefront to visit";
@@ -16957,7 +17261,65 @@ One item per line and nothing else, each a compact JSON array: ["dish name",18,"
     else showSheet($("#howSheet"));
   });
   $("#howBtn").setAttribute("data-how", "");
+  function filterSpots() {
+    const q = clean($("#spotSearch").value, 40);
+    let shown = 0;
+    $("#spotList").querySelectorAll(".spot-card[data-i]").forEach((b) => {
+      const sp = state.list[+b.dataset.i];
+      const hay = sp ? [sp.n, sp.h, townOf(sp), CZ[sp.c] ? CZ[sp.c].label : sp.c].concat(sp.m.map((d) => `${d.n} ${d.d}`)).join(" ").toLowerCase() : "";
+      const on = !q || hay.includes(q);
+      b.hidden = !on;
+      if (on) shown++;
+    });
+    $("#spotEmpty").hidden = !q || shown > 0;
+  }
+  $("#spotSearch").addEventListener("input", filterSpots);
+
+  /* ---------- the menu: every dish the crab knows, and ways to check the real thing ---------- */
+  const whereOf = (sp) => (SAVED[sp.city] && SAVED[sp.city].g === "state" ? `${sp.h}, ${SAVED[sp.city].st}` : placeOf(sp.city));
+  const LINK_ICON = {
+    map: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>',
+    menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h4"/></svg>',
+    book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>'
+  };
+  function renderMenuSheet() {
+    const sp = state.list[state.ri];
+    if (!sp) return;
+    const where = whereOf(sp), town = townOf(sp);
+    $("#menuTitle").textContent = sp.n;
+    const bits = [CZ[sp.c] ? CZ[sp.c].label : sp.c, sp.h && sp.h !== town ? sp.h : "", isState(sp.city) ? "" : town, dollars(sp), sp.y ? `since ${sp.y}` : ""].filter(Boolean);
+    $("#menuMeta").innerHTML = (sp.r ? `<span class="rating" title="about ${sp.r} out of 5 in online reviews (estimated by claude)">${starsHTML(sp.r)}<b>${sp.r.toFixed(1)}</b></span>` : "") + `<span>${esc(bits.join(" · "))}</span>`;
+    $("#menuBlurb").textContent = sp.b || "";
+    const q = encodeURIComponent;
+    const link = (href, icon, label) => `<a href="${href}" target="_blank" rel="noopener noreferrer">${LINK_ICON[icon]}${label}</a>`;
+    $("#menuLinks").innerHTML =
+      link(`https://www.google.com/maps/search/?api=1&query=${q(`${sp.n}, ${where}`)}`, "map", "directions") +
+      link(`https://www.google.com/search?q=${q(`${sp.n} ${where} menu`)}`, "menu", "official menu") +
+      link(`https://www.google.com/search?q=${q(`${sp.n} ${where} reservations`)}`, "book", "reserve");
+    $("#menuList").innerHTML = sp.m.map((d, i) => {
+      const tag = [d.t ? TAGS[d.t] : "", d.x ? "added by claude" : ""].filter(Boolean).join(" · ");
+      return `<li><button class="menu-item${i === state.mi ? " sel" : ""}" data-i="${i}"${i === state.mi ? ' aria-current="true"' : ""}>${iconBox(iconFor(d, sp), d)}<span><b>${esc(d.n)}</b>${d.d ? `<small>${esc(d.d)}</small>` : ""}${tag ? `<small class="mi-tag">${esc(tag)}</small>` : ""}</span><span class="mi-price">${esc(priceShort(d, sp))}</span></button></li>`;
+    }).join("");
+    const mc = menuCache[menuKey(sp)], busy = menuJob && menuJob.sp === sp;
+    $("#menuActions").innerHTML = busy ? `<p class="sheet-note">asking claude for more of the menu…</p>`
+      : !mc && sampleState !== "off" && sp.m.length < 20 ? `<button class="pill" id="menuMore">ask claude for more dishes</button>` : "";
+    $("#menuNote").textContent = `${sp.m.length} dish${sp.m.length === 1 ? "" : "es"} the crab knows · ${PRICE_NOTE}. menus change, so check the official one before you go`;
+  }
+  $("#menuBtn").addEventListener("click", () => {
+    renderMenuSheet();
+    showSheet($("#menuSheet"), ".menu-item.sel");
+    requestAnimationFrame(() => { const sel = $("#menuList .sel"); if (sel) sel.scrollIntoView({ block: "nearest" }); });
+  });
+  $("#menuList").addEventListener("click", (e) => {
+    const b = e.target.closest(".menu-item[data-i]"); if (!b) return;
+    const i = +b.dataset.i;
+    closeSheet();
+    setTimeout(() => go(i), reduced ? 0 : 180);
+  });
+  $("#menuActions").addEventListener("click", (e) => { if (e.target.closest("#menuMore")) fetchMenu(); });
+
   $("#moreBtn").addEventListener("click", () => {
+    $("#spotSearch").value = "";
     renderSpots();
     showSheet($("#spotsSheet"), ".spot-card.sel");
     requestAnimationFrame(() => { const sel = $("#spotList .sel"); if (sel) sel.scrollIntoView({ block: "center" }); });
@@ -17007,7 +17369,7 @@ One item per line and nothing else, each a compact JSON array: ["dish name",18,"
     cityMode = m;
     $("#citySeg").querySelectorAll("button").forEach((b) => b.setAttribute("aria-selected", b.dataset.mode === m));
     $("#cityTitle").textContent = m === "states" ? "pick a state" : "pick a city";
-    citySearch.placeholder = m === "states" ? "search states" : "search any city";
+    citySearch.placeholder = m === "states" ? "search states" : "search a city or restaurant";
     $("#locBtn").hidden = m === "states" || !canLocate;
     cityRows();
   }
@@ -17032,6 +17394,16 @@ One item per line and nothing else, each a compact JSON array: ["dish name",18,"
       if (g === "cap") rows.sort((a, b) => (SAVED[a].ab === "dc" ? -1 : SAVED[b].ab === "dc" ? 1 : SAVED[a].st.localeCompare(SAVED[b].st)));
       else if (g !== "nyc") rows.sort((a, b) => a.localeCompare(b));
       if (rows.length) html += `<li class="sec" role="presentation">${label}</li>` + rows.map((c) => row(c, citySub(c), `${SAVED[c].spots.length} spots`)).join("");
+    }
+    if (q.length >= 3) {
+      const found = [];
+      for (const [c, list] of Object.entries(SAVED_SPOTS)) {
+        if (isState(c)) continue;
+        list.forEach((sp, i) => { if (found.length < 12 && sp.n.includes(q)) found.push([c, i, sp]); });
+        if (found.length >= 12) break;
+      }
+      if (found.length) html += `<li class="sec" role="presentation">restaurants</li>` + found.map(([c, i, sp]) =>
+        `<li><button class="row" data-city="${esc(c)}" data-spot="${i}"><span><b>${esc(sp.n)}</b><small>${esc(czShort(sp.c))} · ${esc(SAVED[c] && SAVED[c].g === "state" ? `${sp.h}, ${SAVED[c].st}` : c)}</small></span><span class="t">#${i + 1}</span></button></li>`).join("");
     }
     if (scoutHits.length) html += `<li class="sec" role="presentation">scouted before</li>` + scoutHits.map((c) => {
       const kinds = Object.keys(liveCache).filter((k) => k.startsWith(c + "|")).map((k) => czShort(k.split("|")[1]));
@@ -17058,6 +17430,8 @@ One item per line and nothing else, each a compact JSON array: ["dish name",18,"
     closeSheet();
     state.city = { name, saved: !!SAVED_SPOTS[name] };
     state.near = null;
+    const jumpTo = b.dataset.spot != null ? +b.dataset.spot : null;
+    if (jumpTo != null) { state.cuisine = "all"; persist(); setTimeout(() => { showView(); setSpot(jumpTo, true); }, reduced ? 0 : 160); return; }
     if (!SAVED_SPOTS[name] && state.cuisine !== "all" && !liveCache[`${name}|${state.cuisine}`] && liveCache[`${name}|all`]) state.cuisine = "all";
     persist();
     setTimeout(() => showView(), reduced ? 0 : 160);
