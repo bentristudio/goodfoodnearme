@@ -9,8 +9,8 @@ weathercrab's food-loving sibling: a little crab shows you the top restaurants i
 - **Swipe the menu**: each dish has its price, a tag (the signature, spicy, vegetarian…) and a short description. The crab holds up each dish and reacts to it: it hops for the signature, sweats for spicy food and gets nervous holding crab claws.
 - **Every storefront is different**: brick in New York, pastel with a palm tree in Miami, iron balconies in New Orleans, stone in Paris, adobe in Santa Fe. Lanterns, string lights, a chimney for bbq or a life ring for seafood depend on the cuisine.
 - **Use my location** in the city picker finds where you are and opens the nearest saved city, labeled "near you" (or "closest to you, 40 mi" when you're far from all of them). It uses the browser's location if you allow it, otherwise a rough guess from your network via [BigDataCloud](https://www.bigdatacloud.com)'s free lookup. If you used it last time, the site opens near you again.
-- **See the menu** opens an overlay with every dish the app knows for that spot: prices, descriptions and tags. Tap a dish to jump to it. It also has buttons for directions (Google Maps), the restaurant's official menu and reservations, since dishes and prices change.
-- **More top spots** opens a grid of mini storefronts, with a search box to find a spot or a dish in the list.
+- **Menu & delivery** opens an overlay with every dish the app knows for that spot: prices, descriptions and tags. Tap a dish to jump to it. It has buttons to order on Uber Eats and DoorDash (each opens a search for the restaurant, shown only in countries where the service runs), plus directions (Google Maps), the official menu and reservations.
+- **More spots** opens a grid of mini storefronts, with a search box to find a spot or a dish in the list.
 - **Search a restaurant by name** in the city picker to jump straight to it in any city.
 - **The crab button** at the top left adds the app to your home screen: Android and Chrome show their install prompt, iPhone gets three quick steps (Share → Add to Home Screen → Add), and computers get the steps for Chrome, Edge and Safari. It opens full screen like an app and works offline.
 
@@ -78,4 +78,4 @@ All the data lives in `index.html`, in the `SAVED` object near the top of the sc
 ]]
 ```
 
-Prices can also be `"mp"` (market price), `"set"` (part of a set menu) or `"incl"` (comes with the meal). Tags are `sig`, `spicy`, `veg`, `share`, `sweet`, `drink` or `""`.
+Prices can also be `"mp"` (market price), `"set"` (part of a set menu), `"incl"` (comes with the meal) or `"varies"` (use this when an entry is not one dish, like a seasonal menu). Tags are `sig`, `spicy`, `veg`, `share`, `sweet`, `drink` or `""`.
